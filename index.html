@@ -14,7 +14,7 @@ body{
 
 .widget{
   width:100%;
-  max-width:700px;
+  max-width:720px;
 }
 
 .header{
@@ -48,7 +48,7 @@ tbody tr:hover{
 }
 
 .rank{
-  width:25px;
+  width:28px;
   color:#888;
 }
 
@@ -79,7 +79,7 @@ tbody tr:hover{
 Regionalliga West – Tabelle
 </div>
 
-<table id="table">
+<table>
 
 <thead>
 <tr>
@@ -94,7 +94,7 @@ Regionalliga West – Tabelle
 </tr>
 </thead>
 
-<tbody></tbody>
+<tbody id="tablebody"></tbody>
 
 </table>
 
@@ -106,26 +106,35 @@ fetch("table.json")
 .then(r => r.json())
 .then(data => {
 
-const tbody = document.querySelector("tbody");
+const tbody = document.getElementById("tablebody");
 
-data.forEach((team,i)=>{
+data.forEach((team,index)=>{
 
-const row = document.createElement("tr");
+const row=document.createElement("tr");
+
+const games = team.sp || team.games || "";
+const wins = team.s || team.wins || "";
+const draws = team.u || team.draws || "";
+const losses = team.n || team.losses || "";
+const goals = team.tore || team.goals || "";
+const points = team.pkt || team.points || "";
 
 row.innerHTML = `
-<td class="rank">${i+1}</td>
+
+<td class="rank">${index+1}</td>
 
 <td class="team">
-<img src="${team.logo}" loading="lazy">
-${team.team}
+<img src="${team.logo || ""}" loading="lazy">
+${team.team || team.name}
 </td>
 
-<td>${team.sp}</td>
-<td>${team.s}</td>
-<td>${team.u}</td>
-<td>${team.n}</td>
-<td>${team.tore}</td>
-<td class="points">${team.pkt}</td>
+<td>${games}</td>
+<td>${wins}</td>
+<td>${draws}</td>
+<td>${losses}</td>
+<td>${goals}</td>
+<td class="points">${points}</td>
+
 `;
 
 tbody.appendChild(row);
@@ -138,12 +147,10 @@ resizeIframe();
 
 function resizeIframe(){
 
-const height = document.body.scrollHeight;
+const height=document.body.scrollHeight;
 
 if(window.parent){
-
 window.parent.postMessage(height,"*");
-
 }
 
 }
