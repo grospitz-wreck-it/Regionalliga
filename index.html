@@ -46,7 +46,7 @@ tbody tr:hover{
 }
 
 .rank{
-  width:30px;
+  width:28px;
   color:#888;
 }
 
@@ -64,6 +64,45 @@ tbody tr:hover{
 
 .points{
   font-weight:bold;
+}
+
+/* Aufstieg */
+
+.promoted{
+  border-left:4px solid #2ecc71;
+}
+
+/* Abstieg */
+
+.relegated{
+  border-left:4px solid #e74c3c;
+}
+
+.legend{
+  margin-top:10px;
+  font-size:12px;
+  color:#666;
+}
+
+.legend span{
+  display:inline-block;
+  margin-right:15px;
+}
+
+.legend .green{
+  width:10px;
+  height:10px;
+  background:#2ecc71;
+  display:inline-block;
+  margin-right:5px;
+}
+
+.legend .red{
+  width:10px;
+  height:10px;
+  background:#e74c3c;
+  display:inline-block;
+  margin-right:5px;
 }
 
 </style>
@@ -96,21 +135,38 @@ Regionalliga West – Tabelle
 
 </table>
 
+<div class="legend">
+<span><span class="green"></span>Aufstiegsrunde</span>
+<span><span class="red"></span>Abstiegsplätze</span>
+</div>
+
 </div>
 
 <script>
 
 fetch("table.json")
-.then(res => res.json())
-.then(data => {
+.then(res=>res.json())
+.then(data=>{
 
-const tbody = document.getElementById("table");
+const tbody=document.getElementById("table");
 
-data.forEach(team => {
+data.forEach(team=>{
 
-const tr = document.createElement("tr");
+const tr=document.createElement("tr");
 
-tr.innerHTML = `
+const pos=parseInt(team.position);
+
+/* Platz markieren */
+
+if(pos===1){
+tr.classList.add("promoted");
+}
+
+if(pos>=16){
+tr.classList.add("relegated");
+}
+
+tr.innerHTML=`
 <td class="rank">${team.position}</td>
 
 <td class="team">
@@ -136,7 +192,7 @@ resizeIframe();
 
 function resizeIframe(){
 
-const height = document.body.scrollHeight;
+const height=document.body.scrollHeight;
 
 if(window.parent){
 window.parent.postMessage(height,"*");
