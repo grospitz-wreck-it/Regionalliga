@@ -5,48 +5,60 @@ import fs from "fs";
 const url = "https://www.kicker.de/regionalliga-west/tabelle";
 
 async function scrape() {
-  try {
 
-    const { data } = await axios.get(url, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
-      }
-    });
+const { data } = await axios.get(url,{
+headers:{
+"User-Agent":"Mozilla/5.0"
+}
+});
 
-    const $ = cheerio.load(data);
+const $ = cheerio.load(data);
 
-    const table = [];
+const table=[];
 
-    $(".kick__table tbody tr").each((i, el) => {
+$("table tbody tr").each((i,row)=>{
 
-      const cells = $(el).find("td");
+const cells=$(row).find("td");
 
-      if (cells.length > 8) {
-        table.push({
-          position: parseInt($(cells[0]).text().trim()),
-          team: $(cells[1]).text().trim(),
-          games: parseInt($(cells[2]).text().trim()),
-          wins: parseInt($(cells[3]).text().trim()),
-          draws: parseInt($(cells[4]).text().trim()),
-          losses: parseInt($(cells[5]).text().trim()),
-          goals: $(cells[6]).text().trim(),
-          points: parseInt($(cells[8]).text().trim())
-        });
-      }
+if(cells.length < 9) return;
 
-    });
+const position=parseInt($(cells[0]).text().trim());
 
-    fs.writeFileSync("table.json", JSON.stringify(table, null, 2));
+const team=$(cells[2]).text().trim();
 
-    console.log("table.json updated successfully");
+const games=parseInt($(cells[3]).text().trim());
 
-  } catch (err) {
+const wins=parseInt($(cells[4]).text().trim());
 
-    console.error("Scraper error:", err);
-    process.exit(1);
+const draws=parseInt($(cells[5]).text().trim());
 
-  }
+const losses=parseInt($(cells[6]).text().trim());
+
+const goals=$(cells[7]).text().trim();
+
+const points=parseInt($(cells[9]).text().trim());
+
+if(position && team){
+
+table.push({
+position,
+team,
+games,
+wins,
+draws,
+losses,
+goals,
+points
+});
+
+}
+
+});
+
+fs.writeFileSync("table.json",JSON.stringify(table,null,2));
+
+console.log("Tabelle aktualisiert:",table.length,"Teams");
+
 }
 
 scrape();
