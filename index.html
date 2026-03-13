@@ -9,55 +9,55 @@
 
 body{
 font-family:Arial;
-margin:0;
-background:#f2f2f2;
+background:#f4f6fa;
+padding:40px;
 }
 
-.container{
-max-width:850px;
-margin:auto;
-background:white;
-padding:20px;
+h1{
+text-align:center;
 }
 
 table{
 width:100%;
+max-width:900px;
+margin:auto;
 border-collapse:collapse;
-}
-
-th,td{
-padding:8px;
-border-bottom:1px solid #eee;
-font-size:14px;
+background:white;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
 th{
-background:#222;
+background:#1e293b;
 color:white;
+padding:12px;
+}
+
+td{
+padding:10px;
+border-bottom:1px solid #eee;
+text-align:center;
 }
 
 .team{
 display:flex;
 align-items:center;
-gap:8px;
+gap:10px;
+text-align:left;
 }
 
-.logo{
-width:22px;
-height:22px;
-object-fit:contain;
+.team img{
+width:26px;
+height:26px;
 }
 
-.promote{
-background:#e6f6e6;
+tr:nth-child(1){
+background:#d1fae5;
 }
 
-.relegate{
-background:#fdeaea;
-}
-
-.points{
-font-weight:bold;
+tr:nth-child(16),
+tr:nth-child(17),
+tr:nth-child(18){
+background:#fee2e2;
 }
 
 </style>
@@ -66,11 +66,9 @@ font-weight:bold;
 
 <body>
 
-<div class="container">
+<h1>Regionalliga West Tabelle</h1>
 
-<h2>Regionalliga West</h2>
-
-<table id="table">
+<table>
 
 <thead>
 <tr>
@@ -81,64 +79,33 @@ font-weight:bold;
 <th>U</th>
 <th>N</th>
 <th>Tore</th>
-<th>P</th>
+<th>Pkt</th>
 </tr>
 </thead>
 
-<tbody></tbody>
+<tbody id="table"></tbody>
 
 </table>
 
-</div>
-
 <script>
 
-const logos={
-
-"MSV Duisburg":"https://crests.football-data.org/5.svg",
-"Rot-Weiß Oberhausen":"https://upload.wikimedia.org/wikipedia/en/6/6b/Rot-Weiss_Oberhausen_logo.svg",
-"Fortuna Köln":"https://upload.wikimedia.org/wikipedia/en/5/5b/SC_Fortuna_Koeln_logo.svg",
-"Wuppertaler SV":"https://upload.wikimedia.org/wikipedia/en/6/63/Wuppertaler_SV_logo.svg",
-"SV Rödinghausen":"https://upload.wikimedia.org/wikipedia/en/b/bc/SV_Roedinghausen_logo.svg",
-"Sportfreunde Lotte":"https://upload.wikimedia.org/wikipedia/en/4/49/Sportfreunde_Lotte_logo.svg",
-"1. FC Bocholt":"https://upload.wikimedia.org/wikipedia/en/6/64/1._FC_Bocholt_logo.svg",
-"SC Wiedenbrück":"https://upload.wikimedia.org/wikipedia/en/0/0f/SC_Wiedenbrueck_logo.svg",
-"Fortuna Düsseldorf II":"https://upload.wikimedia.org/wikipedia/en/8/8a/Fortuna_Duesseldorf_logo.svg",
-"1. FC Köln II":"https://upload.wikimedia.org/wikipedia/en/5/5f/1._FC_Koeln_logo.svg",
-"Borussia Mönchengladbach II":"https://upload.wikimedia.org/wikipedia/en/8/81/Borussia_Monchengladbach_logo.svg",
-"SC Paderborn II":"https://upload.wikimedia.org/wikipedia/en/7/7e/SC_Paderborn_07_logo.svg"
-
-};
-
 fetch("table.json")
-.then(res=>res.json())
+.then(r=>r.json())
 .then(data=>{
 
-const tbody=document.querySelector("#table tbody");
+const tbody=document.getElementById("table");
 
 data.forEach(team=>{
 
-let tr=document.createElement("tr");
-
-if(team.position===1){
-tr.classList.add("promote");
-}
-
-if(team.position>=16){
-tr.classList.add("relegate");
-}
-
-let logo=logos[team.team]||"";
+const tr=document.createElement("tr");
 
 tr.innerHTML=`
 
 <td>${team.position}</td>
 
-<td>
-<div class="team">
-<img class="logo" src="${logo}">
-<span>${team.team}</span>
-</div>
+<td class="team">
+<img src="${team.logo}">
+${team.team}
 </td>
 
 <td>${team.games}</td>
@@ -146,7 +113,7 @@ tr.innerHTML=`
 <td>${team.draws}</td>
 <td>${team.losses}</td>
 <td>${team.goals}</td>
-<td class="points">${team.points}</td>
+<td><b>${team.points}</b></td>
 
 `;
 
