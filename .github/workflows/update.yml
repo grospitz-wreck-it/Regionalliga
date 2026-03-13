@@ -1,0 +1,19 @@
+name: Update Table
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install puppeteer
+      - run: node update.js
+      - run: |
+          git config --global user.name "bot"
+          git config --global user.email "bot@example.com"
+          git add table.json
+          git commit -m "update table" || exit 0
+          git push
