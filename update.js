@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 import fs from "fs";
 
 const url =
-"https://www.transfermarkt.de/regionalliga-west/startseite/wettbewerb/RLW3";
+"https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
 
 async function updateTable(){
 
