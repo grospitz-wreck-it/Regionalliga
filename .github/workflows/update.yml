@@ -15,21 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Node installieren
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Dependencies installieren
-        run: npm install axios cheerio
+      - run: npm install axios cheerio
 
-      - name: Tabelle aktualisieren
-        run: node update.js
+      - run: node update.js
 
-      - name: Änderungen committen
+      - name: Commit wenn geändert
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add table.json
-          git commit -m "update table" || echo "no changes"
+          git diff --staged --quiet || git commit -m "update table"
           git push
