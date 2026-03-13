@@ -13,7 +13,7 @@
   {
     "position": 2,
     "team": "RW Oberhausen",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/rwo.png",
     "games": 24,
     "wins": 13,
     "draws": 6,
@@ -24,7 +24,7 @@
   {
     "position": 3,
     "team": "Schalke 04 II",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/schalke2.png",
     "games": 23,
     "wins": 13,
     "draws": 4,
@@ -46,7 +46,7 @@
   {
     "position": 5,
     "team": "B. Dortmund II",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/dortmund.png",
     "games": 23,
     "wins": 10,
     "draws": 8,
@@ -57,7 +57,7 @@
   {
     "position": 6,
     "team": "M'gladbach II",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/gladbach.png",
     "games": 24,
     "wins": 11,
     "draws": 5,
@@ -68,7 +68,7 @@
   {
     "position": 7,
     "team": "1.FC Köln II",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/fckoeln.png",
     "games": 24,
     "wins": 11,
     "draws": 4,
@@ -79,7 +79,7 @@
   {
     "position": 8,
     "team": "Spfr. Siegen",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/siegen.png",
     "games": 22,
     "wins": 9,
     "draws": 9,
@@ -90,7 +90,7 @@
   {
     "position": 9,
     "team": "SF Lotte",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/lotte.png",
     "games": 23,
     "wins": 8,
     "draws": 8,
@@ -123,7 +123,7 @@
   {
     "position": 12,
     "team": "1.FC Bocholt",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/bocholt.png",
     "games": 24,
     "wins": 7,
     "draws": 6,
@@ -134,7 +134,7 @@
   {
     "position": 13,
     "team": "Düsseldorf II",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/f95.png",
     "games": 24,
     "wins": 8,
     "draws": 3,
@@ -167,7 +167,7 @@
   {
     "position": 16,
     "team": "SSVg Velbert 02",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/velbert.png",
     "games": 25,
     "wins": 5,
     "draws": 5,
@@ -189,7 +189,7 @@
   {
     "position": 18,
     "team": "SC Wiedenbrück",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/tmp",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/wiedenbrueck.png",
     "games": 23,
     "wins": 4,
     "draws": 6,
