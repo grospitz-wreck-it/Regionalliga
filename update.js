@@ -4,65 +4,82 @@ import fs from "fs";
 
 const url = "https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
 
+/*
+Mapping: Teamname -> Logo-Datei
+Die Dateien müssen im Repo liegen:
+Regionalliga/logos/
+*/
+const logos = {
+  "Fortuna Köln": "fortuna-koeln.png",
+  "RW Oberhausen": "rwo.png",
+  "Wuppertaler SV": "wuppertal.png",
+  "Sportfreunde Lotte": "lotte.png",
+  "Borussia Mönchengladbach II": "gladbach.png",
+  "SC Paderborn II": "paderborn.png",
+  "SV Rödinghausen": "roedinghausen.png",
+  "1. FC Bocholt": "bocholt.png",
+  "Fortuna Düsseldorf II": "f95.png",
+  "FC Gütersloh": "guetersloh.png",
+  "Bonner SC": "bonn.png",
+  "Borussia Dortmund II": "dortmund.png",
+  "SSVg Velbert": "velbert.png",
+  "SV Wiedenbrück": "wiedenbrueck.png",
+  "FC Schalke 04 II": "schalke2.png",
+  "Sportfreunde Siegen": "siegen.png"
+};
+
 async function updateTable() {
-  try {
-    const { data } = await axios.get(url, {
-      headers: { "User-Agent": "Mozilla/5.0" }
+
+  const { data } = await axios.get(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0"
+    }
+  });
+
+  const $ = cheerio.load(data);
+
+  const table = [];
+
+  $("table.items tbody tr").each((i, row) => {
+
+    const position = $(row).find("td").eq(0).text().trim();
+    if (!position) return;
+
+    const team = $(row).find(".hauptlink a").text().trim();
+
+    const logoFile = logos[team] || "default.png";
+
+    const logo =
+      `https://grospitz-wreck-it.github.io/Regionalliga/logos/${logoFile}`;
+
+    const games = $(row).find("td").eq(3).text().trim();
+    const wins = $(row).find("td").eq(4).text().trim();
+    const draws = $(row).find("td").eq(5).text().trim();
+    const losses = $(row).find("td").eq(6).text().trim();
+    const goals = $(row).find("td").eq(7).text().trim();
+    const points = $(row).find("td").eq(8).text().trim();
+
+    table.push({
+      position: Number(position),
+      team,
+      logo,
+      games: Number(games),
+      wins: Number(wins),
+      draws: Number(draws),
+      losses: Number(losses),
+      goals,
+      points: Number(points)
     });
 
-    const $ = cheerio.load(data);
-    const table = [];
+  });
 
-    // Tabelle mit Spalte "Platz" auswählen (sicherstellen, dass es die Ligatabelle ist)
-    const tableRows = $("table.items").filter((i, el) => {
-      return $(el).find("th").first().text().trim() === "Platz";
-    }).find("tbody tr");
+  fs.writeFileSync(
+    "table.json",
+    JSON.stringify(table, null, 2)
+  );
 
-    tableRows.each((i, row) => {
-      const position = $(row).find("td").eq(0).text().trim();
-      if (!position) return; // leere Zeilen überspringen
+  console.log("Regionalliga West Teams:", table.length);
 
-      const team = $(row).find(".hauptlink a").text().trim();
-      const logo = $(row).find("img").attr("src") || "";
-
-      const games = Number($(row).find("td").eq(3).text().trim());
-      const wins = Number($(row).find("td").eq(4).text().trim());
-      const draws = Number($(row).find("td").eq(5).text().trim());
-      const losses = Number($(row).find("td").eq(6).text().trim());
-
-      // Tore parsen: "GF:GA"
-      const goalsText = $(row).find("td").eq(7).text().trim();
-      const [goalsFor, goalsAgainst] = goalsText.split(":").map(Number);
-
-      const points = Number($(row).find("td").eq(8).text().trim());
-
-      table.push({
-        position: Number(position),
-        team,
-        logo,
-        games,
-        wins,
-        draws,
-        losses,
-        goals: { for: goalsFor, against: goalsAgainst },
-        points
-      });
-    });
-
-    // JSON speichern
-    fs.writeFileSync("table.json", JSON.stringify(table, null, 2));
-
-    // Markdown für GitHub README
-    const mdHeader = `| # | Team | Spiele | S | U | N | Tore | Punkte |\n|---|------|-------|---|---|---|------|--------|`;
-    const mdRows = table.map(t => 
-      `| ${t.position} | ${t.team} | ${t.games} | ${t.wins} | ${t.draws} | ${t.losses} | ${t.goals.for}:${t.goals.against} | ${t.points} |`
-    ).join("\n");
-    fs.writeFileSync("README.md", `${mdHeader}\n${mdRows}`);
-
-    console.log(`Regionalliga West Teams: ${table.length}`);
-  } catch (err) {
-    console.error("Fehler beim Laden der Tabelle:", err.message);
-  }
 }
 
 updateTable();
