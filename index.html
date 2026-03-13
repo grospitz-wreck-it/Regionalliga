@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
-
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Regionalliga West Tabelle</title>
@@ -8,66 +7,48 @@
 <style>
 
 body{
-font-family:Arial, Helvetica, sans-serif;
-margin:0;
-background:#ffffff;
-}
-
-.container{
-padding:10px;
-}
-
-h2{
-margin:0 0 10px 0;
-font-size:18px;
+font-family: Arial;
+background:#f5f5f5;
 }
 
 table{
-width:100%;
 border-collapse:collapse;
-font-size:14px;
+width:100%;
+background:white;
 }
 
 th,td{
-padding:6px;
+padding:8px;
 border-bottom:1px solid #ddd;
 text-align:left;
 }
 
 th{
-background:#f3f3f3;
-font-weight:bold;
+background:#222;
+color:white;
 }
 
-.position{
-font-weight:bold;
-width:30px;
+.logo{
+width:22px;
+height:22px;
+margin-right:8px;
+vertical-align:middle;
 }
 
-.points{
-font-weight:bold;
-}
-
-.promo{
-background:#e8f5e9;
-}
-
-.relegation{
-background:#ffebee;
+.team{
+display:flex;
+align-items:center;
 }
 
 </style>
-</head>
 
+</head>
 
 <body>
 
-<div class="container">
+<h2>Tabelle Regionalliga West</h2>
 
-<h2>Regionalliga West</h2>
-
-<table>
-
+<table id="table">
 <thead>
 <tr>
 <th>#</th>
@@ -81,52 +62,59 @@ background:#ffebee;
 </tr>
 </thead>
 
-<tbody id="table-body"></tbody>
+<tbody></tbody>
 
 </table>
 
-</div>
-
 <script>
 
+const logos = {
+
+"MSV Duisburg":"https://upload.wikimedia.org/wikipedia/en/7/7c/MSV_Duisburg_logo.svg",
+"Rot-Weiß Oberhausen":"https://upload.wikimedia.org/wikipedia/en/6/6b/Rot-Weiss_Oberhausen_logo.svg",
+"Fortuna Köln":"https://upload.wikimedia.org/wikipedia/en/5/5b/SC_Fortuna_Koeln_logo.svg",
+"Sportfreunde Lotte":"https://upload.wikimedia.org/wikipedia/en/4/49/Sportfreunde_Lotte_logo.svg",
+"SV Rödinghausen":"https://upload.wikimedia.org/wikipedia/en/b/bc/SV_Roedinghausen_logo.svg",
+"Wuppertaler SV":"https://upload.wikimedia.org/wikipedia/en/6/63/Wuppertaler_SV_logo.svg",
+"1. FC Bocholt":"https://upload.wikimedia.org/wikipedia/en/6/64/1._FC_Bocholt_logo.svg",
+"SC Wiedenbrück":"https://upload.wikimedia.org/wikipedia/en/0/0f/SC_Wiedenbrueck_logo.svg",
+"Fortuna Düsseldorf II":"https://upload.wikimedia.org/wikipedia/en/8/8a/Fortuna_Duesseldorf_logo.svg",
+"1. FC Köln II":"https://upload.wikimedia.org/wikipedia/en/5/5f/1._FC_Koeln_logo.svg",
+"Borussia Mönchengladbach II":"https://upload.wikimedia.org/wikipedia/en/8/81/Borussia_Monchengladbach_logo.svg",
+"SC Paderborn II":"https://upload.wikimedia.org/wikipedia/en/7/7e/SC_Paderborn_07_logo.svg"
+
+};
+
 fetch("table.json")
-.then(response => response.json())
-.then(data => {
+.then(res=>res.json())
+.then(data=>{
 
-const tbody = document.getElementById("table-body");
+const tbody=document.querySelector("#table tbody");
 
-data.forEach(team => {
+data.forEach(team=>{
 
-let rowClass = "";
+let tr=document.createElement("tr");
 
-if(team.position == 1){
-rowClass = "promo";
-}
+let logo=logos[team.team] || "";
 
-if(team.position >= 17){
-rowClass = "relegation";
-}
-
-const row = `
-<tr class="${rowClass}">
-<td class="position">${team.position}</td>
-<td>${team.team}</td>
+tr.innerHTML=`
+<td>${team.position}</td>
+<td class="team">
+<img class="logo" src="${logo}">
+${team.team}
+</td>
 <td>${team.games}</td>
 <td>${team.wins}</td>
 <td>${team.draws}</td>
 <td>${team.losses}</td>
 <td>${team.goals}</td>
-<td class="points">${team.points}</td>
-</tr>
+<td>${team.points}</td>
 `;
 
-tbody.innerHTML += row;
+tbody.appendChild(tr);
 
 });
 
-})
-.catch(error => {
-console.error("Fehler beim Laden der Tabelle:", error);
 });
 
 </script>
