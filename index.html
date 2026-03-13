@@ -7,20 +7,31 @@
 <style>
 
 body{
-font-family: Arial;
-background:#f5f5f5;
+font-family:Arial;
+margin:0;
+background:#f3f3f3;
+}
+
+.wrapper{
+max-width:800px;
+margin:auto;
+background:white;
+padding:20px;
+}
+
+h2{
+margin-top:0;
 }
 
 table{
-border-collapse:collapse;
 width:100%;
-background:white;
+border-collapse:collapse;
 }
 
 th,td{
 padding:8px;
-border-bottom:1px solid #ddd;
-text-align:left;
+border-bottom:1px solid #eee;
+font-size:14px;
 }
 
 th{
@@ -28,27 +39,57 @@ background:#222;
 color:white;
 }
 
-.logo{
-width:22px;
-height:22px;
-margin-right:8px;
-vertical-align:middle;
+tr:hover{
+background:#f8f8f8;
 }
 
 .team{
 display:flex;
 align-items:center;
+gap:8px;
+}
+
+.logo{
+width:22px;
+height:22px;
+}
+
+.promote{
+background:#e7f6e7;
+}
+
+.relegate{
+background:#fdeaea;
+}
+
+.points{
+font-weight:bold;
+}
+
+@media(max-width:600px){
+
+th:nth-child(4),
+th:nth-child(5),
+th:nth-child(6),
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(6){
+display:none;
+}
+
 }
 
 </style>
-
 </head>
 
 <body>
 
-<h2>Tabelle Regionalliga West</h2>
+<div class="wrapper">
+
+<h2>Regionalliga West</h2>
 
 <table id="table">
+
 <thead>
 <tr>
 <th>#</th>
@@ -66,9 +107,11 @@ align-items:center;
 
 </table>
 
+</div>
+
 <script>
 
-const logos = {
+const logos={
 
 "MSV Duisburg":"https://upload.wikimedia.org/wikipedia/en/7/7c/MSV_Duisburg_logo.svg",
 "Rot-Weiß Oberhausen":"https://upload.wikimedia.org/wikipedia/en/6/6b/Rot-Weiss_Oberhausen_logo.svg",
@@ -95,20 +138,32 @@ data.forEach(team=>{
 
 let tr=document.createElement("tr");
 
-let logo=logos[team.team] || "";
+if(team.position===1){
+tr.classList.add("promote");
+}
+
+if(team.position>=16){
+tr.classList.add("relegate");
+}
+
+let logo=logos[team.team]||"";
 
 tr.innerHTML=`
+
 <td>${team.position}</td>
+
 <td class="team">
 <img class="logo" src="${logo}">
 ${team.team}
 </td>
+
 <td>${team.games}</td>
 <td>${team.wins}</td>
 <td>${team.draws}</td>
 <td>${team.losses}</td>
 <td>${team.goals}</td>
-<td>${team.points}</td>
+<td class="points">${team.points}</td>
+
 `;
 
 tbody.appendChild(tr);
