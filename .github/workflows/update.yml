@@ -1,35 +1,32 @@
 name: Update Regionalliga Table
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: "0 */6 * * *"
+  workflow_dispatch:
 
 jobs:
   update:
-
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
     steps:
+      - uses: actions/checkout@v4
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node
+      - name: Node installieren
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
 
-      - name: Install dependencies
-        run: npm install
+      - name: Dependencies installieren
+        run: npm install axios cheerio
 
-      - name: Run scraper
+      - name: Tabelle aktualisieren
         run: node update.js
 
-      - name: Commit updated table
+      - name: Änderungen committen
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
