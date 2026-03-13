@@ -1,1 +1,200 @@
-[]
+[
+  {
+    "position": "1",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "F. Köln\n                                        Fortuna Köln",
+    "draws": "24",
+    "losses": "15-8-1\n                                        15",
+    "goals": "8",
+    "points": "1"
+  },
+  {
+    "position": "2",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Oberhausen\n                                        Rot-Weiß Oberhausen",
+    "draws": "24",
+    "losses": "13-6-5\n                                        13",
+    "goals": "6",
+    "points": "5"
+  },
+  {
+    "position": "3",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Schalke II\n                                        FC Schalke 04 II",
+    "draws": "23",
+    "losses": "13-4-6\n                                        13",
+    "goals": "4",
+    "points": "6"
+  },
+  {
+    "position": "4",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Gütersloh\n                                        FC Gütersloh",
+    "draws": "24",
+    "losses": "11-8-5\n                                        11",
+    "goals": "8",
+    "points": "5"
+  },
+  {
+    "position": "5",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Dortmund II (A)\n                                        Borussia Dortmund II (A)",
+    "draws": "23",
+    "losses": "10-8-5\n                                        10",
+    "goals": "8",
+    "points": "5"
+  },
+  {
+    "position": "6",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Gladbach II\n                                        Bor. Mönchengladbach II",
+    "draws": "24",
+    "losses": "11-5-8\n                                        11",
+    "goals": "5",
+    "points": "8"
+  },
+  {
+    "position": "7",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Köln II\n                                        1. FC Köln II",
+    "draws": "24",
+    "losses": "11-4-9\n                                        11",
+    "goals": "4",
+    "points": "9"
+  },
+  {
+    "position": "8",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Siegen (N)\n                                        Sportfreunde Siegen (N)",
+    "draws": "22",
+    "losses": "9-9-4\n                                        9",
+    "goals": "9",
+    "points": "4"
+  },
+  {
+    "position": "9",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Lotte\n                                        Sportfreunde Lotte",
+    "draws": "23",
+    "losses": "8-8-7\n                                        8",
+    "goals": "8",
+    "points": "7"
+  },
+  {
+    "position": "10",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Paderborn II\n                                        SC Paderborn 07 II",
+    "draws": "24",
+    "losses": "8-7-9\n                                        8",
+    "goals": "7",
+    "points": "9"
+  },
+  {
+    "position": "11",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Bonn (N)\n                                        Bonner SC (N)",
+    "draws": "22",
+    "losses": "8-6-8\n                                        8",
+    "goals": "6",
+    "points": "8"
+  },
+  {
+    "position": "12",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Bocholt\n                                        1. FC Bocholt",
+    "draws": "24",
+    "losses": "7-6-11\n                                        7",
+    "goals": "6",
+    "points": "11"
+  },
+  {
+    "position": "13",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Düsseldorf II\n                                        Fortuna Düsseldorf II",
+    "draws": "24",
+    "losses": "8-3-13\n                                        8",
+    "goals": "3",
+    "points": "13"
+  },
+  {
+    "position": "14",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Bochum II (N)\n                                        VfL Bochum II (N)",
+    "draws": "24",
+    "losses": "6-7-11\n                                        6",
+    "goals": "7",
+    "points": "11"
+  },
+  {
+    "position": "15",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Wuppertal\n                                        Wuppertaler SV",
+    "draws": "24",
+    "losses": "5-6-13\n                                        5",
+    "goals": "6",
+    "points": "13"
+  },
+  {
+    "position": "16",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Velbert (N)\n                                        SSVg Velbert (N)",
+    "draws": "25",
+    "losses": "5-5-15\n                                        5",
+    "goals": "5",
+    "points": "15"
+  },
+  {
+    "position": "17",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Rödinghausen\n                                        SV Rödinghausen",
+    "draws": "23",
+    "losses": "5-4-14\n                                        5",
+    "goals": "4",
+    "points": "14"
+  },
+  {
+    "position": "18",
+    "team": "",
+    "logo": "",
+    "games": "",
+    "wins": "Wiedenbrück\n                                        SC Wiedenbrück",
+    "draws": "23",
+    "losses": "4-6-13\n                                        4",
+    "goals": "6",
+    "points": "13"
+  }
+]
