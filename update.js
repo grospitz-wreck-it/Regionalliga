@@ -1,38 +1,36 @@
-
-import puppeteer from "puppeteer";
+import axios from "axios";
+import cheerio from "cheerio";
 import fs from "fs";
 
-const url =
-"https://www.fussball.de/spieltag/regionalliga-west-deutschland-regionalliga-west-herren/";
+const url = "https://www.kicker.de/regionalliga-west/tabelle";
 
-const browser = await puppeteer.launch({ headless: true });
-const page = await browser.newPage();
+async function scrape() {
 
-await page.goto(url, { waitUntil: "networkidle2" });
+const { data } = await axios.get(url);
 
-const table = await page.evaluate(() => {
+const $ = cheerio.load(data);
 
-const rows = document.querySelectorAll("table tbody tr");
+let table = [];
 
-return Array.from(rows).map(row => {
+$("table tbody tr").each((i, el) => {
 
-const cells = row.querySelectorAll("td");
+const cells = $(el).find("td");
 
-return {
-position: parseInt(cells[0].innerText),
-team: cells[2].innerText.trim(),
-games: parseInt(cells[3].innerText),
-wins: parseInt(cells[4].innerText),
-draws: parseInt(cells[5].innerText),
-losses: parseInt(cells[6].innerText),
-goals: cells[7].innerText,
-points: parseInt(cells[9].innerText)
-};
-
+table.push({
+position: parseInt($(cells[0]).text().trim()),
+team: $(cells[1]).text().trim(),
+games: parseInt($(cells[2]).text().trim()),
+wins: parseInt($(cells[3]).text().trim()),
+draws: parseInt($(cells[4]).text().trim()),
+losses: parseInt($(cells[5]).text().trim()),
+goals: $(cells[6]).text().trim(),
+points: parseInt($(cells[8]).text().trim())
 });
 
 });
 
 fs.writeFileSync("table.json", JSON.stringify(table, null, 2));
 
-await browser.close();
+}
+
+scrape();
