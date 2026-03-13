@@ -8,10 +8,7 @@ const url =
 const LOGO_BASE =
 "https://grospitz-wreck-it.github.io/Regionalliga/logos/";
 
-/*
-Teamnamen normalisieren → Dateiname
-*/
-function normalizeTeamName(name) {
+function normalizeTeamName(name){
 
 return name
 .toLowerCase()
@@ -25,12 +22,9 @@ return name
 
 }
 
-/*
-Logo automatisch bestimmen
-*/
 function getLogo(team){
 
-const normalized = normalizeTeamName(team);
+const normalized=normalizeTeamName(team);
 
 return `${LOGO_BASE}${normalized}.png`;
 
@@ -46,9 +40,9 @@ headers:{ "User-Agent":"Mozilla/5.0" }
 
 const $=cheerio.load(data);
 
-const table=[];
-
 const rows=$("table.items tbody tr");
+
+const table=[];
 
 rows.each((i,row)=>{
 
@@ -67,7 +61,6 @@ const games=Number(cols.eq(3).text().trim());
 const wins=Number(cols.eq(4).text().trim());
 const draws=Number(cols.eq(5).text().trim());
 const losses=Number(cols.eq(6).text().trim());
-
 const goals=cols.eq(7).text().trim();
 const points=Number(cols.eq(8).text().trim());
 
@@ -85,12 +78,33 @@ points
 
 });
 
+let oldTable=[];
+
+if(fs.existsSync("table.json")){
+
+oldTable=JSON.parse(
+fs.readFileSync("table.json","utf8")
+);
+
+}
+
+const changed=
+JSON.stringify(oldTable)!==JSON.stringify(table);
+
+if(!changed){
+
+console.log("Keine Änderung der Tabelle");
+
+return;
+
+}
+
 fs.writeFileSync(
 "table.json",
 JSON.stringify(table,null,2)
 );
 
-console.log("Regionalliga West Teams:",table.length);
+console.log("Tabelle aktualisiert");
 
 }catch(err){
 
