@@ -8,7 +8,7 @@
 <style>
 
 body{
-font-family:Arial, Helvetica, sans-serif;
+font-family:Arial;
 margin:0;
 background:#f2f2f2;
 }
@@ -20,10 +20,6 @@ background:white;
 padding:20px;
 }
 
-h2{
-margin-top:0;
-}
-
 table{
 width:100%;
 border-collapse:collapse;
@@ -31,7 +27,6 @@ border-collapse:collapse;
 
 th,td{
 padding:8px;
-text-align:left;
 border-bottom:1px solid #eee;
 font-size:14px;
 }
@@ -39,10 +34,6 @@ font-size:14px;
 th{
 background:#222;
 color:white;
-}
-
-tr:hover{
-background:#f8f8f8;
 }
 
 .team{
@@ -54,32 +45,18 @@ gap:8px;
 .logo{
 width:22px;
 height:22px;
-object-fit:contain;
-}
-
-.points{
-font-weight:bold;
 }
 
 .promote{
-background:#e6f6e6;
+background:#e7f6e7;
 }
 
 .relegate{
 background:#fdeaea;
 }
 
-@media(max-width:600px){
-
-th:nth-child(4),
-th:nth-child(5),
-th:nth-child(6),
-td:nth-child(4),
-td:nth-child(5),
-td:nth-child(6){
-display:none;
-}
-
+.points{
+font-weight:bold;
 }
 
 </style>
@@ -90,7 +67,7 @@ display:none;
 
 <div class="container">
 
-<h2>Regionalliga West Tabelle</h2>
+<h2>Regionalliga West</h2>
 
 <table id="table">
 
@@ -115,37 +92,33 @@ display:none;
 
 <script>
 
-function getLogo(team){
-
 const logos={
 
-"MSV Duisburg":"msv-duisburg",
-"Rot-Weiß Oberhausen":"rot-weiss-oberhausen",
-"Fortuna Köln":"fortuna-koeln",
-"Wuppertaler SV":"wuppertaler-sv",
-"SV Rödinghausen":"sv-roedinghausen",
-"Sportfreunde Lotte":"sportfreunde-lotte",
-"1. FC Bocholt":"1-fc-bocholt",
-"SC Wiedenbrück":"sc-wiedenbrueck",
-"Fortuna Düsseldorf II":"fortuna-duesseldorf-ii",
-"1. FC Köln II":"1-fc-koeln-ii",
-"Borussia Mönchengladbach II":"borussia-moenchengladbach-ii",
-"SC Paderborn II":"sc-paderborn-ii",
-"Alemannia Aachen":"alemannia-aachen",
-"Schalke 04 II":"schalke-04-ii",
-"Preußen Münster II":"preussen-muenster-ii",
-"KFC Uerdingen":"kfc-uerdingen",
-"FC Gütersloh":"fc-guetersloh"
+"MSV Duisburg":"https://upload.wikimedia.org/wikipedia/en/7/7c/MSV_Duisburg_logo.svg",
+
+"Rot-Weiß Oberhausen":"https://upload.wikimedia.org/wikipedia/en/6/6b/Rot-Weiss_Oberhausen_logo.svg",
+
+"Fortuna Köln":"https://upload.wikimedia.org/wikipedia/en/5/5b/SC_Fortuna_Koeln_logo.svg",
+
+"Sportfreunde Lotte":"https://upload.wikimedia.org/wikipedia/en/4/49/Sportfreunde_Lotte_logo.svg",
+
+"SV Rödinghausen":"https://upload.wikimedia.org/wikipedia/en/b/bc/SV_Roedinghausen_logo.svg",
+
+"Wuppertaler SV":"https://upload.wikimedia.org/wikipedia/en/6/63/Wuppertaler_SV_logo.svg",
+
+"1. FC Bocholt":"https://upload.wikimedia.org/wikipedia/en/6/64/1._FC_Bocholt_logo.svg",
+
+"SC Wiedenbrück":"https://upload.wikimedia.org/wikipedia/en/0/0f/SC_Wiedenbrueck_logo.svg",
+
+"Fortuna Düsseldorf II":"https://upload.wikimedia.org/wikipedia/en/8/8a/Fortuna_Duesseldorf_logo.svg",
+
+"1. FC Köln II":"https://upload.wikimedia.org/wikipedia/en/5/5f/1._FC_Koeln_logo.svg",
+
+"Borussia Mönchengladbach II":"https://upload.wikimedia.org/wikipedia/en/8/81/Borussia_Monchengladbach_logo.svg",
+
+"SC Paderborn II":"https://upload.wikimedia.org/wikipedia/en/7/7e/SC_Paderborn_07_logo.svg"
 
 };
-
-if(logos[team]){
-return "https://assets.kicker.de/team/logos/" + logos[team] + ".png";
-}
-
-return "";
-
-}
 
 fetch("table.json")
 .then(res=>res.json())
@@ -155,7 +128,7 @@ const tbody=document.querySelector("#table tbody");
 
 data.forEach(team=>{
 
-const tr=document.createElement("tr");
+let tr=document.createElement("tr");
 
 if(team.position===1){
 tr.classList.add("promote");
@@ -165,17 +138,15 @@ if(team.position>=16){
 tr.classList.add("relegate");
 }
 
-const logo=getLogo(team.team);
+let logo=logos[team.team]||"";
 
 tr.innerHTML=`
 
 <td>${team.position}</td>
 
-<td>
-<div class="team">
-<img class="logo" src="${logo}" onerror="this.style.display='none'">
-<span>${team.team}</span>
-</div>
+<td class="team">
+<img class="logo" src="${logo}">
+${team.team}
 </td>
 
 <td>${team.games}</td>
