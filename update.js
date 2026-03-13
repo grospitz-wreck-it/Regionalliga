@@ -6,14 +6,20 @@ const url = "https://www.kicker.de/regionalliga-west/tabelle";
 
 async function scrape() {
   try {
+
     const { data } = await axios.get(url, {
-    headers: {
-      "User-Agent":
-       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
+      }
+    });
+
+    const $ = cheerio.load(data);
 
     const table = [];
 
     $(".kick__table tbody tr").each((i, el) => {
+
       const cells = $(el).find("td");
 
       if (cells.length > 8) {
@@ -28,14 +34,18 @@ async function scrape() {
           points: parseInt($(cells[8]).text().trim())
         });
       }
+
     });
 
     fs.writeFileSync("table.json", JSON.stringify(table, null, 2));
 
-    console.log("table.json updated");
+    console.log("table.json updated successfully");
+
   } catch (err) {
-    console.error(err);
+
+    console.error("Scraper error:", err);
     process.exit(1);
+
   }
 }
 
