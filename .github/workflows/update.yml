@@ -10,16 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Repository laden
+        uses: actions/checkout@v4
 
       - name: Node installieren
-  uses: actions/setup-node@v4
-  with:
-    node-version: 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - run: npm install axios cheerio
+      - name: Pakete installieren
+        run: npm install axios cheerio
 
-      - run: node update.js
+      - name: Scraper starten
+        run: node update.js
 
       - name: Änderungen committen
         run: |
