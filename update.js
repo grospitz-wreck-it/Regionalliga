@@ -1,36 +1,40 @@
 import axios from "axios";
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import fs from "fs";
 
 const url = "https://www.kicker.de/regionalliga-west/tabelle";
 
 async function scrape() {
+  try {
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
 
-const { data } = await axios.get(url);
+    const table = [];
 
-const $ = cheerio.load(data);
+    $(".kick__table tbody tr").each((i, el) => {
+      const cells = $(el).find("td");
 
-let table = [];
+      if (cells.length > 8) {
+        table.push({
+          position: parseInt($(cells[0]).text().trim()),
+          team: $(cells[1]).text().trim(),
+          games: parseInt($(cells[2]).text().trim()),
+          wins: parseInt($(cells[3]).text().trim()),
+          draws: parseInt($(cells[4]).text().trim()),
+          losses: parseInt($(cells[5]).text().trim()),
+          goals: $(cells[6]).text().trim(),
+          points: parseInt($(cells[8]).text().trim())
+        });
+      }
+    });
 
-$("table tbody tr").each((i, el) => {
+    fs.writeFileSync("table.json", JSON.stringify(table, null, 2));
 
-const cells = $(el).find("td");
-
-table.push({
-position: parseInt($(cells[0]).text().trim()),
-team: $(cells[1]).text().trim(),
-games: parseInt($(cells[2]).text().trim()),
-wins: parseInt($(cells[3]).text().trim()),
-draws: parseInt($(cells[4]).text().trim()),
-losses: parseInt($(cells[5]).text().trim()),
-goals: $(cells[6]).text().trim(),
-points: parseInt($(cells[8]).text().trim())
-});
-
-});
-
-fs.writeFileSync("table.json", JSON.stringify(table, null, 2));
-
+    console.log("table.json updated");
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 }
 
 scrape();
