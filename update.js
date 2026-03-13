@@ -8,28 +8,42 @@ const url =
 const LOGO_BASE =
 "https://grospitz-wreck-it.github.io/Regionalliga/logos/";
 
-const logos = {
+function normalize(text){
 
-"Wuppertaler SV": "wuppertal.png",
-"Rot-Weiß Oberhausen": "rwo.png",
-"SV Rödinghausen": "roedinghausen.png",
-"Sportfreunde Lotte": "lotte.png",
-"SC Paderborn II": "paderborn.png",
-"Borussia Mönchengladbach II": "gladbach.png",
-"Borussia Dortmund II": "dortmund.png",
-"Fortuna Düsseldorf II": "f95.png",
-"1. FC Köln II": "fckoeln.png",
-"FC Gütersloh": "guetersloh.png",
-"SV Wiedenbrück": "wiedenbrueck.png",
-"SSVg Velbert": "velbert.png",
-"FC Schalke 04 II": "schalke2.png",
-"Sportfreunde Siegen": "siegen.png",
-"Bonner SC": "bonn.png",
-"VfL Bochum II": "bochum.png",
-"1. FC Bocholt": "bocholt.png",
-"Fortuna Köln": "fortuna-koeln.png"
+return text
+.toLowerCase()
+.replace(/ä/g,"ae")
+.replace(/ö/g,"oe")
+.replace(/ü/g,"ue")
+.replace(/ß/g,"ss");
 
-};
+}
+
+function findLogo(team){
+
+const t = normalize(team);
+
+if(t.includes("wuppertal")) return "wuppertal.png";
+if(t.includes("oberhausen")) return "rwo.png";
+if(t.includes("roedinghausen")) return "roedinghausen.png";
+if(t.includes("lotte")) return "lotte.png";
+if(t.includes("paderborn")) return "paderborn.png";
+if(t.includes("gladbach")) return "gladbach.png";
+if(t.includes("dortmund")) return "dortmund.png";
+if(t.includes("duesseldorf")) return "f95.png";
+if(t.includes("koeln ii")) return "fckoeln.png";
+if(t.includes("fortuna koeln")) return "fortuna-koeln.png";
+if(t.includes("guetersloh")) return "guetersloh.png";
+if(t.includes("wiedenbrueck")) return "wiedenbrueck.png";
+if(t.includes("velbert")) return "velbert.png";
+if(t.includes("schalke")) return "schalke2.png";
+if(t.includes("siegen")) return "siegen.png";
+if(t.includes("bonn")) return "bonn.png";
+if(t.includes("bochum")) return "bochum.png";
+if(t.includes("bocholt")) return "bocholt.png";
+
+return "tmp";
+}
 
 async function updateTable(){
 
@@ -52,7 +66,7 @@ if(!position) return;
 
 const team=$(row).find(".hauptlink a").text().trim();
 
-const logoFile=logos[team] || "tmp";
+const logoFile=findLogo(team);
 
 const logo=LOGO_BASE+logoFile;
 
