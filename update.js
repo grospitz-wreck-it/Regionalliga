@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 import fs from "fs";
 
 const url =
-"https://www.transfermarkt.de/regionalliga-west/startseite/wettbewerb/RLW";
+"https://www.transfermarkt.de/regionalliga-west/startseite/wettbewerb/RLW3";
 
 async function updateTable(){
 
