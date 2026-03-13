@@ -1,64 +1,61 @@
 import axios from "axios";
-import * as cheerio from "cheerio";
+import cheerio from "cheerio";
 import fs from "fs";
 
-const url = "https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3";
+const url =
+"https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW";
 
-async function updateTable() {
+async function updateTable(){
 
-try {
-
-const res = await axios.get(url,{
+const {data} = await axios.get(url,{
 headers:{
-"User-Agent":"Mozilla/5.0",
-"Accept-Language":"de-DE,de;q=0.9"
+"User-Agent":"Mozilla/5.0"
 }
 });
 
-const $ = cheerio.load(res.data);
+const $ = cheerio.load(data);
 
-const table = [];
+const table=[];
 
-$(".items tbody tr").each((i,row)=>{
+$("table.items tbody tr").each((i,el)=>{
 
-const cells=$(row).find("td");
+const position=$(el).find("td").eq(0).text().trim();
 
-if(cells.length < 10) return;
+const team=$(el).find(".hauptlink a").text().trim();
 
-const position=$(cells[0]).text().trim();
-const team=$(cells[2]).text().trim();
-const games=$(cells[3]).text().trim();
-const wins=$(cells[4]).text().trim();
-const draws=$(cells[5]).text().trim();
-const losses=$(cells[6]).text().trim();
-const goals=$(cells[7]).text().trim();
-const points=$(cells[9]).text().trim();
+const logo=$(el)
+.find("img")
+attr("src");
 
-const logo=$(row).find("img").attr("src");
+const games=$(el).find("td").eq(3).text().trim();
+
+const wins=$(el).find("td").eq(4).text().trim();
+
+const draws=$(el).find("td").eq(5).text().trim();
+
+const losses=$(el).find("td").eq(6).text().trim();
+
+const goals=$(el).find("td").eq(7).text().trim();
+
+const points=$(el).find("td").eq(8).text().trim();
 
 table.push({
-position,
+position:Number(position),
 team,
 logo,
-games,
-wins,
-draws,
-losses,
+games:Number(games),
+wins:Number(wins),
+draws:Number(draws),
+losses:Number(losses),
 goals,
-points
+points:Number(points)
 });
 
 });
 
-fs.writeFileSync("table.json", JSON.stringify(table,null,2));
+fs.writeFileSync("table.json",JSON.stringify(table,null,2));
 
-console.log("Teams gefunden:",table.length);
-
-} catch(err) {
-
-console.error(err);
-
-}
+console.log("Tabelle aktualisiert:",table.length,"Teams");
 
 }
 
