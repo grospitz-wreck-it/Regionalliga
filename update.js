@@ -6,8 +6,10 @@ const url = "https://www.kicker.de/regionalliga-west/tabelle";
 
 async function scrape() {
   try {
-    const { data } = await axios.get(url);
-    const $ = cheerio.load(data);
+    const { data } = await axios.get(url, {
+    headers: {
+      "User-Agent":
+       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
 
     const table = [];
 
