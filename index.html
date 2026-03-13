@@ -14,14 +14,10 @@ background:#f2f2f2;
 }
 
 .container{
-max-width:900px;
+max-width:850px;
 margin:auto;
 background:white;
 padding:20px;
-}
-
-h2{
-margin-top:0;
 }
 
 table{
@@ -53,7 +49,7 @@ object-fit:contain;
 }
 
 .promote{
-background:#e7f6e7;
+background:#e6f6e6;
 }
 
 .relegate{
@@ -97,43 +93,32 @@ font-weight:bold;
 
 <script>
 
-async function getLogo(team){
+const logos={
 
-try{
+"MSV Duisburg":"https://crests.football-data.org/5.svg",
+"Rot-Weiß Oberhausen":"https://upload.wikimedia.org/wikipedia/en/6/6b/Rot-Weiss_Oberhausen_logo.svg",
+"Fortuna Köln":"https://upload.wikimedia.org/wikipedia/en/5/5b/SC_Fortuna_Koeln_logo.svg",
+"Wuppertaler SV":"https://upload.wikimedia.org/wikipedia/en/6/63/Wuppertaler_SV_logo.svg",
+"SV Rödinghausen":"https://upload.wikimedia.org/wikipedia/en/b/bc/SV_Roedinghausen_logo.svg",
+"Sportfreunde Lotte":"https://upload.wikimedia.org/wikipedia/en/4/49/Sportfreunde_Lotte_logo.svg",
+"1. FC Bocholt":"https://upload.wikimedia.org/wikipedia/en/6/64/1._FC_Bocholt_logo.svg",
+"SC Wiedenbrück":"https://upload.wikimedia.org/wikipedia/en/0/0f/SC_Wiedenbrueck_logo.svg",
+"Fortuna Düsseldorf II":"https://upload.wikimedia.org/wikipedia/en/8/8a/Fortuna_Duesseldorf_logo.svg",
+"1. FC Köln II":"https://upload.wikimedia.org/wikipedia/en/5/5f/1._FC_Koeln_logo.svg",
+"Borussia Mönchengladbach II":"https://upload.wikimedia.org/wikipedia/en/8/81/Borussia_Monchengladbach_logo.svg",
+"SC Paderborn II":"https://upload.wikimedia.org/wikipedia/en/7/7e/SC_Paderborn_07_logo.svg"
 
-const search=team+" logo";
+};
 
-const url=`https://commons.wikimedia.org/w/api.php?action=query&origin=*&generator=search&gsrsearch=${encodeURIComponent(search)}&gsrlimit=1&prop=imageinfo&iiprop=url&format=json`;
-
-const res=await fetch(url);
-
-const data=await res.json();
-
-const pages=data.query.pages;
-
-const page=Object.values(pages)[0];
-
-return page.imageinfo[0].url;
-
-}catch{
-
-return "";
-
-}
-
-}
-
-async function loadTable(){
-
-const res=await fetch("table.json");
-
-const data=await res.json();
+fetch("table.json")
+.then(res=>res.json())
+.then(data=>{
 
 const tbody=document.querySelector("#table tbody");
 
-for(const team of data){
+data.forEach(team=>{
 
-const tr=document.createElement("tr");
+let tr=document.createElement("tr");
 
 if(team.position===1){
 tr.classList.add("promote");
@@ -143,7 +128,7 @@ if(team.position>=16){
 tr.classList.add("relegate");
 }
 
-const logo=await getLogo(team.team);
+let logo=logos[team.team]||"";
 
 tr.innerHTML=`
 
@@ -167,11 +152,9 @@ tr.innerHTML=`
 
 tbody.appendChild(tr);
 
-}
+});
 
-}
-
-loadTable();
+});
 
 </script>
 
