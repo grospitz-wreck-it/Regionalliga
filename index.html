@@ -9,7 +9,6 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
   margin:0;
-  background:transparent;
 }
 
 .widget{
@@ -35,7 +34,6 @@ thead th{
   padding:8px 6px;
   border-bottom:2px solid #e5e5e5;
   color:#666;
-  font-weight:600;
 }
 
 tbody td{
@@ -48,7 +46,7 @@ tbody tr:hover{
 }
 
 .rank{
-  width:28px;
+  width:30px;
   color:#888;
 }
 
@@ -65,7 +63,7 @@ tbody tr:hover{
 }
 
 .points{
-  font-weight:700;
+  font-weight:bold;
 }
 
 </style>
@@ -94,7 +92,7 @@ Regionalliga West – Tabelle
 </tr>
 </thead>
 
-<tbody id="tablebody"></tbody>
+<tbody id="table"></tbody>
 
 </table>
 
@@ -103,41 +101,32 @@ Regionalliga West – Tabelle
 <script>
 
 fetch("table.json")
-.then(r => r.json())
+.then(res => res.json())
 .then(data => {
 
-const tbody = document.getElementById("tablebody");
+const tbody = document.getElementById("table");
 
-data.forEach((team,index)=>{
+data.forEach(team => {
 
-const row=document.createElement("tr");
+const tr = document.createElement("tr");
 
-const games = team.sp || team.games || "";
-const wins = team.s || team.wins || "";
-const draws = team.u || team.draws || "";
-const losses = team.n || team.losses || "";
-const goals = team.tore || team.goals || "";
-const points = team.pkt || team.points || "";
-
-row.innerHTML = `
-
-<td class="rank">${index+1}</td>
+tr.innerHTML = `
+<td class="rank">${team.position}</td>
 
 <td class="team">
-<img src="${team.logo || ""}" loading="lazy">
-${team.team || team.name}
+<img src="${team.logo}" loading="lazy">
+${team.team}
 </td>
 
-<td>${games}</td>
-<td>${wins}</td>
-<td>${draws}</td>
-<td>${losses}</td>
-<td>${goals}</td>
-<td class="points">${points}</td>
-
+<td>${team.games}</td>
+<td>${team.wins}</td>
+<td>${team.draws}</td>
+<td>${team.losses}</td>
+<td>${team.goals}</td>
+<td class="points">${team.points}</td>
 `;
 
-tbody.appendChild(row);
+tbody.appendChild(tr);
 
 });
 
@@ -147,7 +136,7 @@ resizeIframe();
 
 function resizeIframe(){
 
-const height=document.body.scrollHeight;
+const height = document.body.scrollHeight;
 
 if(window.parent){
 window.parent.postMessage(height,"*");
