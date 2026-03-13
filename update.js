@@ -4,60 +4,47 @@ import fs from "fs";
 
 const url = "https://www.kicker.de/regionalliga-west/tabelle";
 
-async function scrape() {
+async function scrape(){
 
-const { data } = await axios.get(url,{
+const {data}=await axios.get(url,{
 headers:{
 "User-Agent":"Mozilla/5.0"
 }
 });
 
-const $ = cheerio.load(data);
+const $=cheerio.load(data);
 
 const table=[];
 
-$("table tbody tr").each((i,row)=>{
+$(".kick__table tbody tr").each((i,row)=>{
+
+const pos=$(row).find(".kick__data--rank").text().trim();
+const team=$(row).find(".kick__data--team a").text().trim();
 
 const cells=$(row).find("td");
 
-if(cells.length < 9) return;
-
-const position=parseInt($(cells[0]).text().trim());
-
-const team=$(cells[2]).text().trim();
-
-const games=parseInt($(cells[3]).text().trim());
-
-const wins=parseInt($(cells[4]).text().trim());
-
-const draws=parseInt($(cells[5]).text().trim());
-
-const losses=parseInt($(cells[6]).text().trim());
-
-const goals=$(cells[7]).text().trim();
-
-const points=parseInt($(cells[9]).text().trim());
-
-if(position && team){
+if(!pos || !team) return;
 
 table.push({
-position,
-team,
-games,
-wins,
-draws,
-losses,
-goals,
-points
-});
 
-}
+position:parseInt(pos),
+
+team:team,
+
+games:$(cells[3]).text().trim(),
+wins:$(cells[4]).text().trim(),
+draws:$(cells[5]).text().trim(),
+losses:$(cells[6]).text().trim(),
+goals:$(cells[7]).text().trim(),
+points:$(cells[9]).text().trim()
+
+});
 
 });
 
 fs.writeFileSync("table.json",JSON.stringify(table,null,2));
 
-console.log("Tabelle aktualisiert:",table.length,"Teams");
+console.log("Regionalliga Tabelle aktualisiert:",table.length,"Teams");
 
 }
 
