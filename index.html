@@ -14,10 +14,14 @@ background:#f2f2f2;
 }
 
 .container{
-max-width:850px;
+max-width:900px;
 margin:auto;
 background:white;
 padding:20px;
+}
+
+h2{
+margin-top:0;
 }
 
 table{
@@ -45,6 +49,7 @@ gap:8px;
 .logo{
 width:22px;
 height:22px;
+object-fit:contain;
 }
 
 .promote{
@@ -92,43 +97,43 @@ font-weight:bold;
 
 <script>
 
-const logos={
+async function getLogo(team){
 
-"MSV Duisburg":"https://upload.wikimedia.org/wikipedia/en/7/7c/MSV_Duisburg_logo.svg",
+try{
 
-"Rot-Weiß Oberhausen":"https://upload.wikimedia.org/wikipedia/en/6/6b/Rot-Weiss_Oberhausen_logo.svg",
+const search=team+" logo";
 
-"Fortuna Köln":"https://upload.wikimedia.org/wikipedia/en/5/5b/SC_Fortuna_Koeln_logo.svg",
+const url=`https://commons.wikimedia.org/w/api.php?action=query&origin=*&generator=search&gsrsearch=${encodeURIComponent(search)}&gsrlimit=1&prop=imageinfo&iiprop=url&format=json`;
 
-"Sportfreunde Lotte":"https://upload.wikimedia.org/wikipedia/en/4/49/Sportfreunde_Lotte_logo.svg",
+const res=await fetch(url);
 
-"SV Rödinghausen":"https://upload.wikimedia.org/wikipedia/en/b/bc/SV_Roedinghausen_logo.svg",
+const data=await res.json();
 
-"Wuppertaler SV":"https://upload.wikimedia.org/wikipedia/en/6/63/Wuppertaler_SV_logo.svg",
+const pages=data.query.pages;
 
-"1. FC Bocholt":"https://upload.wikimedia.org/wikipedia/en/6/64/1._FC_Bocholt_logo.svg",
+const page=Object.values(pages)[0];
 
-"SC Wiedenbrück":"https://upload.wikimedia.org/wikipedia/en/0/0f/SC_Wiedenbrueck_logo.svg",
+return page.imageinfo[0].url;
 
-"Fortuna Düsseldorf II":"https://upload.wikimedia.org/wikipedia/en/8/8a/Fortuna_Duesseldorf_logo.svg",
+}catch{
 
-"1. FC Köln II":"https://upload.wikimedia.org/wikipedia/en/5/5f/1._FC_Koeln_logo.svg",
+return "";
 
-"Borussia Mönchengladbach II":"https://upload.wikimedia.org/wikipedia/en/8/81/Borussia_Monchengladbach_logo.svg",
+}
 
-"SC Paderborn II":"https://upload.wikimedia.org/wikipedia/en/7/7e/SC_Paderborn_07_logo.svg"
+}
 
-};
+async function loadTable(){
 
-fetch("table.json")
-.then(res=>res.json())
-.then(data=>{
+const res=await fetch("table.json");
+
+const data=await res.json();
 
 const tbody=document.querySelector("#table tbody");
 
-data.forEach(team=>{
+for(const team of data){
 
-let tr=document.createElement("tr");
+const tr=document.createElement("tr");
 
 if(team.position===1){
 tr.classList.add("promote");
@@ -138,15 +143,17 @@ if(team.position>=16){
 tr.classList.add("relegate");
 }
 
-let logo=logos[team.team]||"";
+const logo=await getLogo(team.team);
 
 tr.innerHTML=`
 
 <td>${team.position}</td>
 
-<td class="team">
+<td>
+<div class="team">
 <img class="logo" src="${logo}">
-${team.team}
+<span>${team.team}</span>
+</div>
 </td>
 
 <td>${team.games}</td>
@@ -160,9 +167,11 @@ ${team.team}
 
 tbody.appendChild(tr);
 
-});
+}
 
-});
+}
+
+loadTable();
 
 </script>
 
