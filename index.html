@@ -1,46 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
 
 <meta charset="UTF-8">
+<title>Regionalliga West Tabelle</title>
 
 <style>
 
 body{
-font-family:system-ui;
-background:#0f172a;
-color:white;
+font-family: Arial, Helvetica, sans-serif;
+background:#eeeeee;
 padding:30px;
 }
 
-table{
-width:900px;
+.widget{
+max-width:850px;
 margin:auto;
-border-collapse:collapse;
-background:#1e293b;
-border-radius:10px;
+background:white;
+border-radius:6px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 overflow:hidden;
 }
 
+.header{
+background:#cc0c00;
+color:white;
+padding:14px;
+font-size:18px;
+font-weight:bold;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
 th{
-background:#020617;
-padding:12px;
+background:#f4f4f4;
+color:#333;
+padding:10px;
+font-size:13px;
+text-align:center;
+border-bottom:1px solid #ddd;
 }
 
 td{
 padding:10px;
-border-bottom:1px solid #334155;
+border-bottom:1px solid #eee;
+font-size:14px;
 text-align:center;
 }
 
 .team{
 display:flex;
 align-items:center;
-gap:10px;
+gap:8px;
+text-align:left;
 }
 
 .team img{
-width:28px;
+width:22px;
+height:22px;
+}
+
+tr:hover{
+background:#f7f7f7;
+}
+
+/* Aufstiegsplatz */
+
+tr:nth-child(1){
+border-left:4px solid #00a651;
+}
+
+/* Abstiegsplätze */
+
+tr:nth-child(16),
+tr:nth-child(17),
+tr:nth-child(18){
+border-left:4px solid #cc0c00;
+}
+
+.points{
+font-weight:bold;
+color:#cc0c00;
 }
 
 </style>
@@ -49,14 +92,18 @@ width:28px;
 
 <body>
 
-<h1 style="text-align:center">Regionalliga West</h1>
+<div class="widget">
+
+<div class="header">
+Regionalliga West – Tabelle
+</div>
 
 <table>
 
 <thead>
 <tr>
 <th>#</th>
-<th>Team</th>
+<th style="text-align:left">Team</th>
 <th>Sp</th>
 <th>S</th>
 <th>U</th>
@@ -69,6 +116,8 @@ width:28px;
 <tbody id="table"></tbody>
 
 </table>
+
+</div>
 
 <script>
 
@@ -96,7 +145,7 @@ ${team.team}
 <td>${team.draws}</td>
 <td>${team.losses}</td>
 <td>${team.goals}</td>
-<td><b>${team.points}</b></td>
+<td class="points">${team.points}</td>
 
 `;
 
