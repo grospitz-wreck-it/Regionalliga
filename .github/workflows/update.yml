@@ -7,31 +7,29 @@ on:
 
 jobs:
   update:
+
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
 
-      - name: Repository auschecken
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Node installieren
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Dependencies installieren
+      - name: Install dependencies
         run: npm install
 
-      - name: Scraper starten
+      - name: Run scraper
         run: node update.js
 
-      - name: Änderungen committen
+      - name: Commit updated table
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
