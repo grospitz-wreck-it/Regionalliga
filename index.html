@@ -1,93 +1,74 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
 <meta charset="UTF-8">
 <title>Regionalliga West Tabelle</title>
 
 <style>
 
 body{
-font-family: Arial, Helvetica, sans-serif;
-background:#eeeeee;
-padding:30px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+  background:transparent;
 }
 
 .widget{
-max-width:850px;
-margin:auto;
-background:white;
-border-radius:6px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-overflow:hidden;
+  width:100%;
+  max-width:700px;
 }
 
 .header{
-background:#cc0c00;
-color:white;
-padding:14px;
-font-size:18px;
-font-weight:bold;
+  font-weight:700;
+  font-size:18px;
+  color:#c40000;
+  margin-bottom:12px;
 }
 
 table{
-width:100%;
-border-collapse:collapse;
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
 }
 
-th{
-background:#f4f4f4;
-color:#333;
-padding:10px;
-font-size:13px;
-text-align:center;
-border-bottom:1px solid #ddd;
+thead th{
+  text-align:left;
+  padding:8px 6px;
+  border-bottom:2px solid #e5e5e5;
+  color:#666;
+  font-weight:600;
 }
 
-td{
-padding:10px;
-border-bottom:1px solid #eee;
-font-size:14px;
-text-align:center;
+tbody td{
+  padding:8px 6px;
+  border-bottom:1px solid #eee;
+}
+
+tbody tr:hover{
+  background:#fafafa;
+}
+
+.rank{
+  width:25px;
+  color:#888;
 }
 
 .team{
-display:flex;
-align-items:center;
-gap:8px;
-text-align:left;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
 .team img{
-width:22px;
-height:22px;
-}
-
-tr:hover{
-background:#f7f7f7;
-}
-
-/* Aufstiegsplatz */
-
-tr:nth-child(1){
-border-left:4px solid #00a651;
-}
-
-/* Abstiegsplätze */
-
-tr:nth-child(16),
-tr:nth-child(17),
-tr:nth-child(18){
-border-left:4px solid #cc0c00;
+  width:18px;
+  height:18px;
+  object-fit:contain;
 }
 
 .points{
-font-weight:bold;
-color:#cc0c00;
+  font-weight:700;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -98,12 +79,12 @@ color:#cc0c00;
 Regionalliga West – Tabelle
 </div>
 
-<table>
+<table id="table">
 
 <thead>
 <tr>
 <th>#</th>
-<th style="text-align:left">Team</th>
+<th>Team</th>
 <th>Sp</th>
 <th>S</th>
 <th>U</th>
@@ -113,7 +94,7 @@ Regionalliga West – Tabelle
 </tr>
 </thead>
 
-<tbody id="table"></tbody>
+<tbody></tbody>
 
 </table>
 
@@ -122,38 +103,50 @@ Regionalliga West – Tabelle
 <script>
 
 fetch("table.json")
-.then(r=>r.json())
-.then(data=>{
+.then(r => r.json())
+.then(data => {
 
-const tbody=document.getElementById("table");
+const tbody = document.querySelector("tbody");
 
-data.forEach(team=>{
+data.forEach((team,i)=>{
 
-const tr=document.createElement("tr");
+const row = document.createElement("tr");
 
-tr.innerHTML=`
-
-<td>${team.position}</td>
+row.innerHTML = `
+<td class="rank">${i+1}</td>
 
 <td class="team">
-<img src="${team.logo}">
+<img src="${team.logo}" loading="lazy">
 ${team.team}
 </td>
 
-<td>${team.games}</td>
-<td>${team.wins}</td>
-<td>${team.draws}</td>
-<td>${team.losses}</td>
-<td>${team.goals}</td>
-<td class="points">${team.points}</td>
-
+<td>${team.sp}</td>
+<td>${team.s}</td>
+<td>${team.u}</td>
+<td>${team.n}</td>
+<td>${team.tore}</td>
+<td class="points">${team.pkt}</td>
 `;
 
-tbody.appendChild(tr);
+tbody.appendChild(row);
 
 });
 
+resizeIframe();
+
 });
+
+function resizeIframe(){
+
+const height = document.body.scrollHeight;
+
+if(window.parent){
+
+window.parent.postMessage(height,"*");
+
+}
+
+}
 
 </script>
 
