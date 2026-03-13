@@ -1,8 +1,8 @@
-name: Update Regionalliga Table
+name: Update Table
 
 on:
   schedule:
-    - cron: "0 */3 * * *"
+    - cron: "0 */6 * * *"
 
 jobs:
   update:
@@ -11,19 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Node
+      - name: Node installieren
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - run: npm install puppeteer
+      - run: npm install axios cheerio
 
       - run: node update.js
 
-      - name: Commit updated table
+      - name: Änderungen committen
         run: |
-          git config --global user.name "bot"
-          git config --global user.email "bot@github.com"
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
           git add table.json
           git commit -m "update table" || exit 0
           git push
