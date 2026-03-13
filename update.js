@@ -8,39 +8,33 @@ const url =
 const LOGO_BASE =
 "https://grospitz-wreck-it.github.io/Regionalliga/logos/";
 
-/*
-Teamname → Logo-Datei
-(diese Namen entsprechen deinen Dateien im logos-Ordner)
-*/
 const logos = {
 
-"1. FC Bocholt": "bocholt.png",
-"1. FC Düren": "dueren.png",
-"1. FC Köln II": "koeln2.png",
-"Borussia Dortmund II": "bvb2.png",
-"Borussia Mönchengladbach II": "gladbach2.png",
-"FC Gütersloh": "guetersloh.png",
-"FC Schalke 04 II": "schalke2.png",
-"Fortuna Düsseldorf II": "f95.png",
-"Fortuna Köln": "fortuna-koeln.png",
-"Rot-Weiß Oberhausen": "rwo.png",
-"SC Paderborn II": "paderborn2.png",
-"Sportfreunde Lotte": "lotte.png",
-"SV Rödinghausen": "roedinghausen.png",
-"SV Wiedenbrück": "wiedenbrueck.png",
 "Wuppertaler SV": "wuppertal.png",
-"SSVg Velbert": "velbert.png"
+"Rot-Weiß Oberhausen": "rwo.png",
+"SV Rödinghausen": "roedinghausen.png",
+"Sportfreunde Lotte": "lotte.png",
+"SC Paderborn II": "paderborn.png",
+"Borussia Mönchengladbach II": "gladbach.png",
+"Borussia Dortmund II": "dortmund.png",
+"Fortuna Düsseldorf II": "f95.png",
+"1. FC Köln II": "fckoeln.png",
+"FC Gütersloh": "guetersloh.png",
+"SV Wiedenbrück": "wiedenbrueck.png",
+"SSVg Velbert": "velbert.png",
+"FC Schalke 04 II": "schalke2.png",
+"Sportfreunde Siegen": "siegen.png",
+"Bonner SC": "bonn.png",
+"VfL Bochum II": "bochum.png",
+"1. FC Bocholt": "bocholt.png",
+"Fortuna Köln": "fortuna-koeln.png"
 
 };
 
 async function updateTable(){
 
-try{
-
 const {data}=await axios.get(url,{
-headers:{
-"User-Agent":"Mozilla/5.0"
-}
+headers:{ "User-Agent":"Mozilla/5.0" }
 });
 
 const $=cheerio.load(data);
@@ -58,9 +52,9 @@ if(!position) return;
 
 const team=$(row).find(".hauptlink a").text().trim();
 
-const logoFile=logos[team] || "default.png";
+const logoFile=logos[team] || "tmp";
 
-const logo=LOGO_BASE + logoFile;
+const logo=LOGO_BASE+logoFile;
 
 const games=Number(cols.eq(3).text().trim());
 const wins=Number(cols.eq(4).text().trim());
@@ -89,12 +83,6 @@ JSON.stringify(table,null,2)
 );
 
 console.log("Regionalliga West Teams:",table.length);
-
-}catch(err){
-
-console.error("Fehler:",err.message);
-
-}
 
 }
 
