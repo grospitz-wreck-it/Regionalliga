@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
 
 <meta charset="UTF-8">
-<title>Regionalliga West Tabelle</title>
 
 <style>
 
@@ -14,28 +13,18 @@ color:white;
 padding:30px;
 }
 
-h1{
-text-align:center;
-margin-bottom:30px;
-}
-
-.table-box{
-max-width:950px;
+table{
+width:900px;
 margin:auto;
+border-collapse:collapse;
 background:#1e293b;
 border-radius:10px;
 overflow:hidden;
 }
 
-table{
-width:100%;
-border-collapse:collapse;
-}
-
 th{
 background:#020617;
 padding:12px;
-font-size:14px;
 }
 
 td{
@@ -48,26 +37,10 @@ text-align:center;
 display:flex;
 align-items:center;
 gap:10px;
-text-align:left;
 }
 
 .team img{
 width:28px;
-height:28px;
-}
-
-tr:nth-child(1){
-background:#14532d;
-}
-
-tr:nth-child(16),
-tr:nth-child(17),
-tr:nth-child(18){
-background:#7f1d1d;
-}
-
-tr:hover{
-background:#334155;
 }
 
 </style>
@@ -76,16 +49,14 @@ background:#334155;
 
 <body>
 
-<h1>Regionalliga West</h1>
-
-<div class="table-box">
+<h1 style="text-align:center">Regionalliga West</h1>
 
 <table>
 
 <thead>
 <tr>
 <th>#</th>
-<th style="text-align:left">Team</th>
+<th>Team</th>
 <th>Sp</th>
 <th>S</th>
 <th>U</th>
@@ -98,8 +69,6 @@ background:#334155;
 <tbody id="table"></tbody>
 
 </table>
-
-</div>
 
 <script>
 
