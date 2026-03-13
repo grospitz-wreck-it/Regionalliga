@@ -1,5 +1,5 @@
 import axios from "axios";
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import fs from "fs";
 
 const url =
@@ -23,9 +23,7 @@ const position=$(el).find("td").eq(0).text().trim();
 
 const team=$(el).find(".hauptlink a").text().trim();
 
-const logo=$(el)
-.find("img")
-attr("src");
+const logo=$(el).find("img").attr("src");
 
 const games=$(el).find("td").eq(3).text().trim();
 
@@ -55,7 +53,7 @@ points:Number(points)
 
 fs.writeFileSync("table.json",JSON.stringify(table,null,2));
 
-console.log("Tabelle aktualisiert:",table.length,"Teams");
+console.log("Teams gefunden:",table.length);
 
 }
 
