@@ -3,12 +3,12 @@
     "position": 1,
     "team": "Fortuna Köln",
     "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/fortuna-koeln.png",
-    "games": 24,
-    "wins": 15,
+    "games": 25,
+    "wins": 16,
     "draws": 8,
     "losses": 1,
-    "goals": "55:19",
-    "points": 36
+    "goals": "57:19",
+    "points": 38
   },
   {
     "position": 2,
@@ -34,6 +34,17 @@
   },
   {
     "position": 4,
+    "team": "B. Dortmund II",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/dortmund.png",
+    "games": 24,
+    "wins": 11,
+    "draws": 8,
+    "losses": 5,
+    "goals": "55:37",
+    "points": 18
+  },
+  {
+    "position": 5,
     "team": "FC Gütersloh",
     "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/guetersloh.png",
     "games": 24,
@@ -44,29 +55,29 @@
     "points": 10
   },
   {
-    "position": 5,
-    "team": "B. Dortmund II",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/dortmund.png",
-    "games": 23,
-    "wins": 10,
-    "draws": 8,
-    "losses": 5,
-    "goals": "51:36",
-    "points": 15
-  },
-  {
     "position": 6,
     "team": "M'gladbach II",
     "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/gladbach.png",
-    "games": 24,
-    "wins": 11,
+    "games": 25,
+    "wins": 12,
     "draws": 5,
     "losses": 8,
-    "goals": "41:36",
-    "points": 5
+    "goals": "43:36",
+    "points": 7
   },
   {
     "position": 7,
+    "team": "Spfr. Siegen",
+    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/siegen.png",
+    "games": 23,
+    "wins": 10,
+    "draws": 9,
+    "losses": 4,
+    "goals": "44:29",
+    "points": 15
+  },
+  {
+    "position": 8,
     "team": "1.FC Köln II",
     "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/fckoeln.png",
     "games": 24,
@@ -75,17 +86,6 @@
     "losses": 9,
     "goals": "42:44",
     "points": -2
-  },
-  {
-    "position": 8,
-    "team": "Spfr. Siegen",
-    "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/siegen.png",
-    "games": 22,
-    "wins": 9,
-    "draws": 9,
-    "losses": 4,
-    "goals": "42:29",
-    "points": 13
   },
   {
     "position": 9,
@@ -135,12 +135,12 @@
     "position": 13,
     "team": "Düsseldorf II",
     "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/f95.png",
-    "games": 24,
+    "games": 25,
     "wins": 8,
     "draws": 3,
-    "losses": 13,
-    "goals": "35:46",
-    "points": -11
+    "losses": 14,
+    "goals": "36:50",
+    "points": -14
   },
   {
     "position": 14,
@@ -157,23 +157,23 @@
     "position": 15,
     "team": "Wuppertaler SV",
     "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/wuppertal.png",
-    "games": 24,
+    "games": 25,
     "wins": 5,
     "draws": 6,
-    "losses": 13,
-    "goals": "30:53",
-    "points": -23
+    "losses": 14,
+    "goals": "30:55",
+    "points": -25
   },
   {
     "position": 16,
     "team": "SSVg Velbert 02",
     "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/velbert.png",
-    "games": 25,
+    "games": 26,
     "wins": 5,
     "draws": 5,
-    "losses": 15,
-    "goals": "24:54",
-    "points": -30
+    "losses": 16,
+    "goals": "24:56",
+    "points": -32
   },
   {
     "position": 17,
@@ -190,11 +190,11 @@
     "position": 18,
     "team": "SC Wiedenbrück",
     "logo": "https://grospitz-wreck-it.github.io/Regionalliga/logos/wiedenbrueck.png",
-    "games": 23,
+    "games": 24,
     "wins": 4,
     "draws": 6,
-    "losses": 13,
-    "goals": "29:48",
-    "points": -19
+    "losses": 14,
+    "goals": "29:50",
+    "points": -21
   }
 ]
