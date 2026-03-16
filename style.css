@@ -1,7 +1,7 @@
 body{
 margin:0;
 font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
-background:#fff;
+background:#ffffff;
 color:#333;
 }
 
@@ -10,15 +10,11 @@ max-width:720px;
 margin:auto;
 }
 
-/* Tabelle */
-
 .rl-table{
 width:100%;
 border-collapse:collapse;
 font-size:14px;
 }
-
-/* Header */
 
 .rl-table thead{
 background:#e3000f;
@@ -32,40 +28,15 @@ font-weight:600;
 font-size:13px;
 }
 
-/* Zellen */
-
 .rl-table td{
 padding:8px 6px;
 border-bottom:1px solid #e6e6e6;
 font-size:13px;
 }
 
-/* Zebra */
-
 .rl-table tbody tr:nth-child(even){
-background:#f4f4f4;
+background:#f3f3f3;
 }
-
-/* Hover Effekt */
-
-.rl-table tbody tr:hover{
-background:#fff3f3;
-}
-
-/* Position */
-
-.rl-table td:first-child{
-font-weight:700;
-width:32px;
-}
-
-/* Punkte */
-
-.rl-table td:last-child{
-font-weight:700;
-}
-
-/* Team */
 
 .team{
 display:flex;
@@ -80,56 +51,23 @@ height:18px;
 object-fit:contain;
 }
 
-/* Aufstieg */
-
 .promoted{
 border-left:4px solid #2e7d32;
 background:#eef7ef;
 }
-
-/* Abstieg */
 
 .relegated{
 border-left:4px solid #e3000f;
 background:#fdeeee;
 }
 
-/* Legende */
-
-.legend{
-display:flex;
-gap:16px;
-margin-top:8px;
-font-size:11px;
-color:#666;
+.rl-table td:last-child{
+font-weight:700;
 }
-
-.legend-item{
-display:flex;
-align-items:center;
-gap:6px;
-}
-
-.legend-color{
-width:10px;
-height:10px;
-display:inline-block;
-border-radius:2px;
-}
-
-.legend-color.promoted{
-background:#2e7d32;
-}
-
-.legend-color.relegated{
-background:#e3000f;
-}
-
-/* Quelle */
 
 .source{
 font-size:10px;
 color:#888;
-margin-top:4px;
+margin-top:6px;
 text-align:right;
 }
