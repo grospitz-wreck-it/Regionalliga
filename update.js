@@ -1,7 +1,7 @@
 import axios from "axios";
 import fs from "fs";
 
-const API_URL =
+const API =
 "https://www.fussball.de/ajax.spielplan.page/-/mode/PAGE/staffel/02T93S3NHC000004VS5489BTVVQ0O654-G";
 
 const LOGO_BASE =
@@ -44,49 +44,46 @@ return "tmp";
 
 async function updateTable(){
 
-const {data}=await axios.get(API_URL,{
+const {data}=await axios.get(API,{
 headers:{ "User-Agent":"Mozilla/5.0" }
 });
 
-/*
-API liefert HTML-Fragmente
-Wir extrahieren daraus die Spiele
-*/
+/* Ergebnisse aus HTML extrahieren */
 
-const matchRegex =
-/data-home-team="([^"]+)".+?data-away-team="([^"]+)".+?data-result="([^"]+)"/g;
+const regex =
+/data-home="([^"]+)".+?data-away="([^"]+)".+?data-result="([^"]+)"/g;
 
 const matches=[];
 
 let m;
 
-while((m=matchRegex.exec(data))!==null){
+while((m=regex.exec(data))!==null){
 
 const home=m[1];
 const away=m[2];
-const score=m[3];
+const result=m[3];
 
-if(!score.includes(":")) continue;
+if(!result.includes(":")) continue;
 
-const [homeGoals,awayGoals]=score.split(":");
+const [hg,ag]=result.split(":");
 
 matches.push({
 home,
 away,
-homeGoals:Number(homeGoals),
-awayGoals:Number(awayGoals)
+hg:Number(hg),
+ag:Number(ag)
 });
 
 }
 
 const teams={};
 
-function init(team){
+function init(name){
 
-if(!teams[team]){
+if(!teams[name]){
 
-teams[team]={
-team,
+teams[name]={
+team:name,
 games:0,
 wins:0,
 draws:0,
@@ -108,13 +105,13 @@ init(m.away);
 teams[m.home].games++;
 teams[m.away].games++;
 
-teams[m.home].goalsFor+=m.homeGoals;
-teams[m.home].goalsAgainst+=m.awayGoals;
+teams[m.home].goalsFor+=m.hg;
+teams[m.home].goalsAgainst+=m.ag;
 
-teams[m.away].goalsFor+=m.awayGoals;
-teams[m.away].goalsAgainst+=m.homeGoals;
+teams[m.away].goalsFor+=m.ag;
+teams[m.away].goalsAgainst+=m.hg;
 
-if(m.homeGoals>m.awayGoals){
+if(m.hg>m.ag){
 
 teams[m.home].wins++;
 teams[m.away].losses++;
@@ -122,7 +119,7 @@ teams[m.home].points+=3;
 
 }
 
-else if(m.homeGoals<m.awayGoals){
+else if(m.hg<m.ag){
 
 teams[m.away].wins++;
 teams[m.home].losses++;
@@ -160,7 +157,15 @@ t.position=i+1;
 t.logo=LOGO_BASE+findLogo(t.team);
 t.goals=`${t.goalsFor}:${t.goalsAgainst}`;
 
+delete t.goalsFor;
+delete t.goalsAgainst;
+
 });
+
+if(table.length===0){
+console.log("ERROR: Keine Spiele gefunden");
+process.exit(1);
+}
 
 fs.writeFileSync(
 "table.json",
