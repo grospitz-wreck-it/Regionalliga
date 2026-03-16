@@ -1,46 +1,91 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
+body{
+margin:0;
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
+background:#ffffff;
+color:#333;
+}
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+.table-wrapper{
+max-width:720px;
+margin:auto;
+}
 
-<title>Regionalliga West Tabelle</title>
+/* Tabelle */
 
-<link rel="stylesheet" href="style.css">
+.rl-table{
+width:100%;
+border-collapse:collapse;
+font-size:14px;
+}
 
-</head>
+/* Header */
 
-<body>
+.rl-table thead{
+background:#e3000f;
+color:white;
+}
 
-<div class="table-wrapper">
+.rl-table th{
+padding:9px 6px;
+text-align:left;
+font-weight:600;
+font-size:13px;
+}
 
-<table class="rl-table">
+/* Zellen */
 
-<thead>
-<tr>
-<th>#</th>
-<th>Team</th>
-<th>Sp</th>
-<th>S</th>
-<th>U</th>
-<th>N</th>
-<th>Tore</th>
-<th>Pkt</th>
-</tr>
-</thead>
+.rl-table td{
+padding:8px 6px;
+border-bottom:1px solid #e6e6e6;
+font-size:13px;
+}
 
-<tbody id="table-body"></tbody>
+/* Zebra rows */
 
-</table>
+.rl-table tbody tr:nth-child(even){
+background:#f3f3f3;
+}
 
-<div class="source">
-Datenquelle: Transfermarkt • Logos: Vereine
-</div>
+/* Team */
 
-</div>
+.team{
+display:flex;
+align-items:center;
+gap:8px;
+font-weight:500;
+}
 
-<script src="script.js"></script>
+.team img{
+width:18px;
+height:18px;
+object-fit:contain;
+}
 
-</body>
-</html>
+/* Aufsteiger */
+
+.promoted{
+border-left:4px solid #2e7d32;
+background:#eef7ef;
+}
+
+/* Absteiger */
+
+.relegated{
+border-left:4px solid #e3000f;
+background:#fdeeee;
+}
+
+/* Punkte hervorheben */
+
+.rl-table td:last-child{
+font-weight:700;
+}
+
+/* Quelle */
+
+.source{
+font-size:10px;
+color:#888;
+margin-top:6px;
+text-align:right;
+}
