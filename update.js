@@ -52,9 +52,9 @@ const draws = Number($(row).find("td").eq(5).text().trim());
 
 const losses = Number($(row).find("td").eq(6).text().trim());
 
-const goals = $(row).find("td").eq(7).text().trim();
+const goals=$(row).find("td").eq(7).text().trim();
 
-const points = wins * 3 + draws;
+const points=$(row).find("td").eq(9).text().trim();
 
 table.push({
 position,
