@@ -1,3 +1,4 @@
+console.log("Starte Logo-Optimierung...")
 import fs from "fs"
 import sharp from "sharp"
 
@@ -6,7 +7,7 @@ const folder = "./logos"
 async function optimize(){
 
 const files = fs.readdirSync(folder)
-
+console.log(files)
 for(const file of files){
 
 if(!file.endsWith(".png") && !file.endsWith(".jpg")) continue
