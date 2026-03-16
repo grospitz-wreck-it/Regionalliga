@@ -1,34 +1,46 @@
-<div class="rlw-widget">
+<!DOCTYPE html>
+<html lang="de">
+<head>
 
-<iframe
-src="https://grospitz-wreck-it.github.io/Regionalliga/"
-title="Regionalliga West Tabelle"
-loading="lazy"
-></iframe>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Regionalliga West Tabelle</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="table-wrapper">
+
+<table class="rl-table">
+
+<thead>
+<tr>
+<th>#</th>
+<th>Team</th>
+<th>Sp</th>
+<th>S</th>
+<th>U</th>
+<th>N</th>
+<th>Tore</th>
+<th>Pkt</th>
+</tr>
+</thead>
+
+<tbody id="table-body"></tbody>
+
+</table>
+
+<div class="source">
+Datenquelle: Transfermarkt • Logos: Vereine
+</div>
 
 </div>
 
-<style>
+<script src="script.js"></script>
 
-.rlw-widget{
-width:100%;
-max-width:720px;
-margin:20px auto;
-}
-
-.rlw-widget iframe{
-width:100%;
-height:850px;
-border:0;
-display:block;
-}
-
-@media (max-width:600px){
-
-.rlw-widget iframe{
-height:950px;
-}
-
-}
-
-</style>
+</body>
+</html>
