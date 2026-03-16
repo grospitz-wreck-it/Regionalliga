@@ -1,0 +1,44 @@
+body{
+margin:0;
+font-family:system-ui,Arial;
+}
+
+.table-wrapper{
+max-width:720px;
+margin:auto;
+}
+
+.rl-table{
+width:100%;
+border-collapse:collapse;
+font-size:14px;
+}
+
+.rl-table th,
+.rl-table td{
+padding:6px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+.rl-table th{
+font-weight:600;
+}
+
+.team{
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.team img{
+width:18px;
+height:18px;
+object-fit:contain;
+}
+
+.source{
+font-size:10px;
+opacity:.6;
+margin-top:6px;
+}
