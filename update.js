@@ -14,7 +14,7 @@ const logos = {
 "Bonner SC":"logos/bonn.png",
 "B. Dortmund II":"logos/dortmund.png",
 "Düsseldorf II":"logos/duesseldorf.png",
-"1.FC Köln II":"logos/fckoeln.png",
+"1.FC Köln II":"logos/fortuna-koeln.png",
 "Fortuna Köln":"logos/fortuna-koeln.png",
 "M'gladbach II":"logos/gladbach.png",
 "FC Gütersloh":"logos/guetersloh.png",
