@@ -2,83 +2,115 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import fs from "fs";
 
-const url = "https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
+const url =
+"https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
 
-/*
-Mapping: Teamname -> Logo-Datei
-Die Dateien müssen im Repo liegen:
-Regionalliga/logos/
-*/
-const logos = {
-  "Fortuna Köln": "fortuna-koeln.png",
-  "RW Oberhausen": "rwo.png",
-  "Wuppertaler SV": "wuppertal.png",
-  "Sportfreunde Lotte": "lotte.png",
-  "Borussia Mönchengladbach II": "gladbach.png",
-  "SC Paderborn II": "paderborn.png",
-  "SV Rödinghausen": "roedinghausen.png",
-  "1. FC Bocholt": "bocholt.png",
-  "Fortuna Düsseldorf II": "f95.png",
-  "FC Gütersloh": "guetersloh.png",
-  "Bonner SC": "bonn.png",
-  "Borussia Dortmund II": "dortmund.png",
-  "SSVg Velbert": "velbert.png",
-  "SV Wiedenbrück": "wiedenbrueck.png",
-  "FC Schalke 04 II": "schalke2.png",
-  "Sportfreunde Siegen": "siegen.png"
-};
+const LOGO_BASE =
+"https://grospitz-wreck-it.github.io/Regionalliga/logos/";
 
-async function updateTable() {
+function normalizeTeamName(name){
 
-  const { data } = await axios.get(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0"
-    }
-  });
+return name
+.toLowerCase()
+.replace(/ä/g,"ae")
+.replace(/ö/g,"oe")
+.replace(/ü/g,"ue")
+.replace(/ß/g,"ss")
+.replace(/[^a-z0-9 ]/g,"")
+.trim()
+.replace(/\s+/g,"-");
 
-  const $ = cheerio.load(data);
+}
 
-  const table = [];
+function getLogo(team){
 
-  $("table.items tbody tr").each((i, row) => {
+const normalized=normalizeTeamName(team);
 
-    const position = $(row).find("td").eq(0).text().trim();
-    if (!position) return;
+return `${LOGO_BASE}${normalized}.png`;
 
-    const team = $(row).find(".hauptlink a").text().trim();
+}
 
-    const logoFile = logos[team] || "default.png";
+async function updateTable(){
 
-    const logo =
-      `https://grospitz-wreck-it.github.io/Regionalliga/logos/${logoFile}`;
+try{
 
-    const games = $(row).find("td").eq(3).text().trim();
-    const wins = $(row).find("td").eq(4).text().trim();
-    const draws = $(row).find("td").eq(5).text().trim();
-    const losses = $(row).find("td").eq(6).text().trim();
-    const goals = $(row).find("td").eq(7).text().trim();
-    const points = $(row).find("td").eq(8).text().trim();
+const {data}=await axios.get(url,{
+headers:{ "User-Agent":"Mozilla/5.0" }
+});
 
-    table.push({
-      position: Number(position),
-      team,
-      logo,
-      games: Number(games),
-      wins: Number(wins),
-      draws: Number(draws),
-      losses: Number(losses),
-      goals,
-      points: Number(points)
-    });
+const $=cheerio.load(data);
 
-  });
+const rows=$("table.items tbody tr");
 
-  fs.writeFileSync(
-    "table.json",
-    JSON.stringify(table, null, 2)
-  );
+const table=[];
 
-  console.log("Regionalliga West Teams:", table.length);
+rows.each((i,row)=>{
+
+const cols=$(row).find("td");
+
+if(cols.length<9) return;
+
+const position=cols.eq(0).text().trim();
+if(!position) return;
+
+const team=$(row).find(".hauptlink a").text().trim();
+
+const logo=getLogo(team);
+
+const games=Number(cols.eq(3).text().trim());
+const wins=Number(cols.eq(4).text().trim());
+const draws=Number(cols.eq(5).text().trim());
+const losses=Number(cols.eq(6).text().trim());
+const goals=cols.eq(7).text().trim();
+const points=Number(cols.eq(8).text().trim());
+
+table.push({
+position:Number(position),
+team,
+logo,
+games,
+wins,
+draws,
+losses,
+goals,
+points
+});
+
+});
+
+let oldTable=[];
+
+if(fs.existsSync("table.json")){
+
+oldTable=JSON.parse(
+fs.readFileSync("table.json","utf8")
+);
+
+}
+
+const changed=
+JSON.stringify(oldTable)!==JSON.stringify(table);
+
+if(!changed){
+
+console.log("Keine Änderung der Tabelle");
+
+return;
+
+}
+
+fs.writeFileSync(
+"table.json",
+JSON.stringify(table,null,2)
+);
+
+console.log("Tabelle aktualisiert");
+
+}catch(err){
+
+console.error("Fehler:",err.message);
+
+}
 
 }
 
