@@ -44,44 +44,41 @@ function findLogo(team){
 
 async function updateTable(){
 
-  const {data}=await axios.get(API,{
-    headers:{ "User-Agent":"Mozilla/5.0" }
+  const response = await axios.get(API,{
+    headers:{
+      "User-Agent":"Mozilla/5.0",
+      "Accept":"application/json, text/javascript, */*; q=0.01",
+      "X-Requested-With":"XMLHttpRequest"
+    }
   });
+
+  const data=response.data;
+
+  if(!data || !data.rows){
+
+    console.log("API Antwort:",data);
+    console.log("ERROR: Tabelle nicht gefunden");
+    process.exit(1);
+
+  }
 
   const table=[];
 
   data.rows.forEach((team,i)=>{
 
     table.push({
-
       position:i+1,
-
       team:team.teamName,
-
       logo:LOGO_BASE+findLogo(team.teamName),
-
       games:team.matches,
-
       wins:team.wins,
-
       draws:team.draws,
-
       losses:team.losses,
-
       goals:`${team.goalsFor}:${team.goalsAgainst}`,
-
       points:team.points
-
     });
 
   });
-
-  if(table.length===0){
-
-    console.log("ERROR: Tabelle leer");
-    process.exit(1);
-
-  }
 
   fs.writeFileSync(
     "table.json",
