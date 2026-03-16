@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Regionalliga West Tabelle</title>
 
@@ -41,74 +41,7 @@ Datenquelle: Transfermarkt • Logos: Vereine
 
 </div>
 
-<script>
-
-async function loadTable(){
-
-const res = await fetch("table.json");
-const data = await res.json();
-
-const tbody = document.getElementById("table-body");
-
-tbody.innerHTML="";
-
-data.forEach((t,index)=>{
-
-const row=document.createElement("tr");
-
-/* Aufstieg */
-
-if(t.position===1){
-row.classList.add("promoted");
-}
-
-/* Abstieg */
-
-if(index>=data.length-3){
-row.classList.add("relegated");
-}
-
-row.innerHTML=`
-<td>${t.position}</td>
-
-<td class="team">
-<img src="${t.logo}" alt="">
-<span>${t.team}</span>
-</td>
-
-<td>${t.games}</td>
-<td>${t.wins}</td>
-<td>${t.draws}</td>
-<td>${t.losses}</td>
-<td>${t.goals}</td>
-<td>${t.points}</td>
-`;
-
-tbody.appendChild(row);
-
-});
-
-}
-
-loadTable();
-
-</script>
-
-<!-- automatische iframe-Höhe -->
-
-<script>
-function sendHeight(){
-const height=document.body.scrollHeight;
-
-window.parent.postMessage(
-{ type:"rlw-height", height },
-"*"
-);
-}
-
-window.addEventListener("load",sendHeight);
-window.addEventListener("resize",sendHeight);
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
