@@ -1,32 +1,49 @@
-async function loadTable(){
+async function loadTable() {
 
-const res=await fetch("table.json");
-const data=await res.json();
+try {
 
-const tbody=document.getElementById("table-body");
+const response = await fetch("./table.json");
+const data = await response.json();
 
-data.forEach(t=>{
+const tbody = document.getElementById("table-body");
 
-const row=document.createElement("tr");
+if (!tbody) {
+console.error("table-body nicht gefunden");
+return;
+}
 
-row.innerHTML=`
-<td>${t.position}</td>
+tbody.innerHTML = "";
+
+data.forEach(team => {
+
+const row = document.createElement("tr");
+
+row.innerHTML = `
+<td>${team.position}</td>
+
 <td class="team">
-<img src="${t.logo}">
-${t.team}
+<img src="${team.logo}" alt="">
+<span>${team.team}</span>
 </td>
-<td>${t.games}</td>
-<td>${t.wins}</td>
-<td>${t.draws}</td>
-<td>${t.losses}</td>
-<td>${t.goals}</td>
-<td>${t.points}</td>
+
+<td>${team.games}</td>
+<td>${team.wins}</td>
+<td>${team.draws}</td>
+<td>${team.losses}</td>
+<td>${team.goals}</td>
+<td>${team.points}</td>
 `;
 
 tbody.appendChild(row);
 
 });
 
+} catch (error) {
+
+console.error("Fehler beim Laden der Tabelle:", error);
+
 }
 
-loadTable();
+}
+
+document.addEventListener("DOMContentLoaded", loadTable);
