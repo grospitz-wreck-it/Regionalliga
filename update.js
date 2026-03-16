@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as cheerio from "cheerio";
 import fs from "fs";
 
 const API =
@@ -48,22 +49,18 @@ const {data}=await axios.get(API,{
 headers:{ "User-Agent":"Mozilla/5.0" }
 });
 
-/* Ergebnisse aus HTML extrahieren */
-
-const regex =
-/data-home="([^"]+)".+?data-away="([^"]+)".+?data-result="([^"]+)"/g;
+const $=cheerio.load(data);
 
 const matches=[];
 
-let m;
+$(".match-row").each((i,row)=>{
 
-while((m=regex.exec(data))!==null){
+const home=$(row).find(".home-team").text().trim();
+const away=$(row).find(".away-team").text().trim();
 
-const home=m[1];
-const away=m[2];
-const result=m[3];
+const result=$(row).find(".result").text().trim();
 
-if(!result.includes(":")) continue;
+if(!result.includes(":")) return;
 
 const [hg,ag]=result.split(":");
 
@@ -74,7 +71,7 @@ hg:Number(hg),
 ag:Number(ag)
 });
 
-}
+});
 
 const teams={};
 
@@ -163,8 +160,10 @@ delete t.goalsAgainst;
 });
 
 if(table.length===0){
+
 console.log("ERROR: Keine Spiele gefunden");
 process.exit(1);
+
 }
 
 fs.writeFileSync(
