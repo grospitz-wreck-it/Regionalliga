@@ -5,28 +5,37 @@ import fs from "fs";
 const url =
 "https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
 
-const logos = {
+/* Teamnamen normalisieren */
 
-"1. FC Bocholt":"logos/bocholt.png",
-"VfL Bochum II":"logos/bochum.png",
-"Bonner SC":"logos/bonn.png",
-"Borussia Dortmund II":"logos/dortmund.png",
-"Fortuna Düsseldorf II":"logos/f95.png",
-"1. FC Köln II":"logos/fckoeln.png",
-"Fortuna Köln":"logos/fortuna-koeln.png",
-"Borussia Mönchengladbach II":"logos/gladbach.png",
-"FC Gütersloh":"logos/guetersloh.png",
-"Sportfreunde Lotte":"logos/lotte.png",
-"SC Paderborn II":"logos/paderborn.png",
-"SV Rödinghausen":"logos/roedinghausen.png",
-"Rot-Weiß Oberhausen":"logos/rwo.png",
-"FC Schalke 04 II":"logos/schalke2.png",
-"Sportfreunde Siegen":"logos/siege.png",
-"SSVg Velbert":"logos/velbert.png",
-"SC Wiedenbrück":"logos/wiedenbrueck.png",
-"Wuppertaler SV":"logos/wuppertal.png"
+function normalize(name){
 
-};
+return name
+.toLowerCase()
+.replace(/ä/g,"ae")
+.replace(/ö/g,"oe")
+.replace(/ü/g,"ue")
+.replace(/ß/g,"ss")
+.replace(/[^a-z0-9]/g,"");
+}
+
+/* Logo automatisch finden */
+
+function getLogo(team){
+
+const key = normalize(team);
+
+const files = fs.readdirSync("./logos");
+
+for(const file of files){
+
+if(key.includes(file.replace(".png",""))){
+return "logos/"+file;
+}
+
+}
+
+return "";
+}
 
 async function updateTable(){
 
@@ -59,7 +68,7 @@ const points=$(row).find("td").eq(9).text().trim();
 table.push({
 position:Number(position),
 team,
-logo:logos[team] || "",
+logo:getLogo(team),
 games:Number(games),
 wins:Number(wins),
 draws:Number(draws),
@@ -72,7 +81,7 @@ points:Number(points)
 
 fs.writeFileSync("table.json",JSON.stringify(table,null,2));
 
-console.log("Regionalliga West Teams:",table.length);
+console.log("Teams geladen:",table.length);
 
 }
 
