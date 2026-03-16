@@ -9,32 +9,29 @@ const LOGO_BASE =
 "https://grospitz-wreck-it.github.io/Regionalliga/logos/";
 
 /*
-Teamname → Dateiname
+Teamname → Logo-Datei
+(diese Namen entsprechen deinen Dateien im logos-Ordner)
 */
-function normalizeTeamName(name){
+const logos = {
 
-return name
-.toLowerCase()
-.replace(/ä/g,"ae")
-.replace(/ö/g,"oe")
-.replace(/ü/g,"ue")
-.replace(/ß/g,"ss")
-.replace(/[^a-z0-9 ]/g,"")
-.trim()
-.replace(/\s+/g,"-");
+"1. FC Bocholt": "bocholt.png",
+"1. FC Düren": "dueren.png",
+"1. FC Köln II": "koeln2.png",
+"Borussia Dortmund II": "bvb2.png",
+"Borussia Mönchengladbach II": "gladbach2.png",
+"FC Gütersloh": "guetersloh.png",
+"FC Schalke 04 II": "schalke2.png",
+"Fortuna Düsseldorf II": "f95.png",
+"Fortuna Köln": "fortuna-koeln.png",
+"Rot-Weiß Oberhausen": "rwo.png",
+"SC Paderborn II": "paderborn2.png",
+"Sportfreunde Lotte": "lotte.png",
+"SV Rödinghausen": "roedinghausen.png",
+"SV Wiedenbrück": "wiedenbrueck.png",
+"Wuppertaler SV": "wuppertal.png",
+"SSVg Velbert": "velbert.png"
 
-}
-
-/*
-Logo bestimmen
-*/
-function getLogo(team){
-
-const file=normalizeTeamName(team)+".png";
-
-return LOGO_BASE+file;
-
-}
+};
 
 async function updateTable(){
 
@@ -61,7 +58,9 @@ if(!position) return;
 
 const team=$(row).find(".hauptlink a").text().trim();
 
-const logo=getLogo(team);
+const logoFile=logos[team] || "default.png";
+
+const logo=LOGO_BASE + logoFile;
 
 const games=Number(cols.eq(3).text().trim());
 const wins=Number(cols.eq(4).text().trim());
