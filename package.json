@@ -1,19 +1,12 @@
 {
   "name": "regionalliga",
   "version": "1.0.0",
-  "description": "Regionalliga West table generator",
   "type": "module",
-  "main": "update.js",
   "scripts": {
     "update": "node update.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/grospitz-wreck-it/Regionalliga"
-  },
-  "license": "ISC",
   "dependencies": {
-    "axios": "1.13.6",
-    "cheerio": "1.2.0"
+    "axios": "^1.13.6",
+    "cheerio": "^1.2.0"
   }
 }
