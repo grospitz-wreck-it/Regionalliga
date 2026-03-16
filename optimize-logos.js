@@ -13,16 +13,29 @@ if(!file.endsWith(".png") && !file.endsWith(".jpg")) continue
 
 const input = `${folder}/${file}`
 
-const temp = `${folder}/temp-${file}`
+try{
 
 await sharp(input)
-.resize(40,40,{fit:"contain"})
-.png({quality:80})
-.toFile(temp)
+.resize({
+width:40,
+height:40,
+fit:"inside"
+})
+.png({
+compressionLevel:9,
+quality:80
+})
+.toFile(`${input}.tmp`)
 
-fs.renameSync(temp,input)
+fs.renameSync(`${input}.tmp`,input)
 
 console.log("✔ optimiert:",file)
+
+}catch(err){
+
+console.log("⚠ Fehler:",file)
+
+}
 
 }
 
