@@ -24,6 +24,8 @@ const logos = {
 "RW Oberhausen":"logos/rwo.png",
 "Schalke 04 II":"logos/schalke2.png",
 "Sprf. Siegen":"logos/siegen.png",
+"Spfr. Siegen":"logos/siegen.png",
+"Sportfreunde Siegen":"logos/siegen.png",
 "SSVg Velbert 02":"logos/velbert.png",
 "SC Wiedenbrück":"logos/wiedenbrueck.png",
 "Wuppertaler SV":"logos/wuppertal.png"
