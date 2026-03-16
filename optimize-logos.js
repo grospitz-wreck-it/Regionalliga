@@ -1,40 +1,28 @@
 import fs from "fs"
-import path from "path"
 import sharp from "sharp"
 
-const inputDir = "./logos"
-const outputDir = "./logos"
-
-const files = fs.readdirSync(inputDir)
+const folder = "./logos"
 
 async function optimize(){
+
+const files = fs.readdirSync(folder)
 
 for(const file of files){
 
 if(!file.endsWith(".png") && !file.endsWith(".jpg")) continue
 
-const inputPath = path.join(inputDir,file)
-const outputPath = path.join(outputDir,file)
+const input = `${folder}/${file}`
 
-try{
+const temp = `${folder}/temp-${file}`
 
-await sharp(inputPath)
-.resize(40,40,{
-fit:"contain",
-background:{r:255,g:255,b:255,alpha:0}
-})
+await sharp(input)
+.resize(40,40,{fit:"contain"})
 .png({quality:80})
-.toFile(outputPath + ".tmp")
+.toFile(temp)
 
-fs.renameSync(outputPath + ".tmp",outputPath)
+fs.renameSync(temp,input)
 
 console.log("✔ optimiert:",file)
-
-}catch(err){
-
-console.log("⚠ Fehler bei:",file)
-
-}
 
 }
 
