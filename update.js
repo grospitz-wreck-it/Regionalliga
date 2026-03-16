@@ -5,42 +5,37 @@ import fs from "fs";
 const url =
 "https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
 
-/* Teamnamen normalisieren */
+/* Logo Mapping basierend auf deinen Dateien */
 
-function normalize(name){
+const logos = {
 
-return name
-.toLowerCase()
-.replace(/ä/g,"ae")
-.replace(/ö/g,"oe")
-.replace(/ü/g,"ue")
-.replace(/ß/g,"ss")
-.replace(/[^a-z0-9]/g,"");
-}
+"1.FC Bocholt":"logos/bocholt.png",
+"VfL Bochum II":"logos/bochum.png",
+"Bonner SC":"logos/bonn.png",
+"B. Dortmund II":"logos/dortmund.png",
+"Düsseldorf II":"logos/duesseldorf.png",
+"1.FC Köln II":"logos/fckoeln.png",
+"Fortuna Köln":"logos/fortuna-koeln.png",
+"M'gladbach II":"logos/gladbach.png",
+"FC Gütersloh":"logos/guetersloh.png",
+"SF Lotte":"logos/lotte.png",
+"SC Paderborn II":"logos/paderborn.png",
+"SV Rödinghausen":"logos/roedinghausen.png",
+"RW Oberhausen":"logos/rwo.png",
+"Schalke 04 II":"logos/schalke2.png",
+"Sprf. Siegen":"logos/siege.png",
+"SSVg Velbert 02":"logos/velbert.png",
+"SC Wiedenbrück":"logos/wiedenbrueck.png",
+"Wuppertaler SV":"logos/wuppertal.png"
 
-/* Logo automatisch finden */
-
-function getLogo(team){
-
-const key = normalize(team);
-
-const files = fs.readdirSync("./logos");
-
-for(const file of files){
-
-if(key.includes(file.replace(".png",""))){
-return "logos/"+file;
-}
-
-}
-
-return "";
-}
+};
 
 async function updateTable(){
 
 const {data} = await axios.get(url,{
-headers:{ "User-Agent":"Mozilla/5.0" }
+headers:{
+"User-Agent":"Mozilla/5.0"
+}
 });
 
 const $ = cheerio.load(data);
@@ -66,22 +61,24 @@ const goals=$(row).find("td").eq(7).text().trim();
 const points=$(row).find("td").eq(9).text().trim();
 
 table.push({
+
 position:Number(position),
 team,
-logo:getLogo(team),
+logo:logos[team] || "",
 games:Number(games),
 wins:Number(wins),
 draws:Number(draws),
 losses:Number(losses),
 goals,
 points:Number(points)
+
 });
 
 });
 
 fs.writeFileSync("table.json",JSON.stringify(table,null,2));
 
-console.log("Teams geladen:",table.length);
+console.log("Regionalliga West Teams:",table.length);
 
 }
 
