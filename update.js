@@ -1,27 +1,24 @@
 import axios from "axios";
-import * as cheerio from "cheerio";
 import fs from "fs";
 
-const url =
-"https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
+const API_URL =
+"https://www.fussball.de/ajax.spielplan.page/-/mode/PAGE/staffel/02T93S3NHC000004VS5489BTVVQ0O654-G";
 
 const LOGO_BASE =
 "https://grospitz-wreck-it.github.io/Regionalliga/logos/";
 
 function normalize(text){
-
 return text
 .toLowerCase()
 .replace(/ä/g,"ae")
 .replace(/ö/g,"oe")
 .replace(/ü/g,"ue")
 .replace(/ß/g,"ss");
-
 }
 
 function findLogo(team){
 
-const t = normalize(team);
+const t=normalize(team);
 
 if(t.includes("wuppertal")) return "wuppertal.png";
 if(t.includes("oberhausen")) return "rwo.png";
@@ -31,7 +28,7 @@ if(t.includes("paderborn")) return "paderborn.png";
 if(t.includes("gladbach")) return "gladbach.png";
 if(t.includes("dortmund")) return "dortmund.png";
 if(t.includes("duesseldorf")) return "f95.png";
-if(t.includes("koeln ii")) return "fckoeln.png";
+if(t.includes("koeln")) return "fckoeln.png";
 if(t.includes("fortuna koeln")) return "fortuna-koeln.png";
 if(t.includes("guetersloh")) return "guetersloh.png";
 if(t.includes("wiedenbrueck")) return "wiedenbrueck.png";
@@ -47,47 +44,121 @@ return "tmp";
 
 async function updateTable(){
 
-const {data}=await axios.get(url,{
+const {data}=await axios.get(API_URL,{
 headers:{ "User-Agent":"Mozilla/5.0" }
 });
 
-const $=cheerio.load(data);
+/*
+API liefert HTML-Fragmente
+Wir extrahieren daraus die Spiele
+*/
 
-const table=[];
+const matchRegex =
+/data-home-team="([^"]+)".+?data-away-team="([^"]+)".+?data-result="([^"]+)"/g;
 
-$("table.items tbody tr").each((i,row)=>{
+const matches=[];
 
-const cols=$(row).find("td");
+let m;
 
-if(cols.length<9) return;
+while((m=matchRegex.exec(data))!==null){
 
-const position=cols.eq(0).text().trim();
-if(!position) return;
+const home=m[1];
+const away=m[2];
+const score=m[3];
 
-const team=$(row).find(".hauptlink a").text().trim();
+if(!score.includes(":")) continue;
 
-const logoFile=findLogo(team);
+const [homeGoals,awayGoals]=score.split(":");
 
-const logo=LOGO_BASE+logoFile;
-
-const games=Number(cols.eq(3).text().trim());
-const wins=Number(cols.eq(4).text().trim());
-const draws=Number(cols.eq(5).text().trim());
-const losses=Number(cols.eq(6).text().trim());
-const goals=cols.eq(7).text().trim();
-const points=Number(cols.eq(8).text().trim());
-
-table.push({
-position:Number(position),
-team,
-logo,
-games,
-wins,
-draws,
-losses,
-goals,
-points
+matches.push({
+home,
+away,
+homeGoals:Number(homeGoals),
+awayGoals:Number(awayGoals)
 });
+
+}
+
+const teams={};
+
+function init(team){
+
+if(!teams[team]){
+
+teams[team]={
+team,
+games:0,
+wins:0,
+draws:0,
+losses:0,
+goalsFor:0,
+goalsAgainst:0,
+points:0
+};
+
+}
+
+}
+
+matches.forEach(m=>{
+
+init(m.home);
+init(m.away);
+
+teams[m.home].games++;
+teams[m.away].games++;
+
+teams[m.home].goalsFor+=m.homeGoals;
+teams[m.home].goalsAgainst+=m.awayGoals;
+
+teams[m.away].goalsFor+=m.awayGoals;
+teams[m.away].goalsAgainst+=m.homeGoals;
+
+if(m.homeGoals>m.awayGoals){
+
+teams[m.home].wins++;
+teams[m.away].losses++;
+teams[m.home].points+=3;
+
+}
+
+else if(m.homeGoals<m.awayGoals){
+
+teams[m.away].wins++;
+teams[m.home].losses++;
+teams[m.away].points+=3;
+
+}
+
+else{
+
+teams[m.home].draws++;
+teams[m.away].draws++;
+
+teams[m.home].points++;
+teams[m.away].points++;
+
+}
+
+});
+
+const table=Object.values(teams).sort((a,b)=>{
+
+if(b.points!==a.points)
+return b.points-a.points;
+
+const diffA=a.goalsFor-a.goalsAgainst;
+const diffB=b.goalsFor-b.goalsAgainst;
+
+return diffB-diffA;
+
+});
+
+table.forEach((t,i)=>{
+
+t.position=i+1;
+t.logo=LOGO_BASE+findLogo(t.team);
+t.goals=`${t.goalsFor}:${t.goalsAgainst}`;
 
 });
 
@@ -96,7 +167,7 @@ fs.writeFileSync(
 JSON.stringify(table,null,2)
 );
 
-console.log("Regionalliga West Teams:",table.length);
+console.log("Teams:",table.length);
 
 }
 
