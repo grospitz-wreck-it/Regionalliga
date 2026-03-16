@@ -11,13 +11,9 @@ data.forEach((t,index)=>{
 
 const row=document.createElement("tr");
 
-/* Aufsteiger */
-
 if(t.position===1){
 row.classList.add("promoted");
 }
-
-/* Absteiger */
 
 if(index>=data.length-3){
 row.classList.add("relegated");
@@ -25,12 +21,10 @@ row.classList.add("relegated");
 
 row.innerHTML=`
 <td>${t.position}</td>
-
 <td class="team">
-<img src="${t.logo}" alt="">
-<span>${t.team}</span>
+<img src="${t.logo}">
+${t.team}
 </td>
-
 <td>${t.games}</td>
 <td>${t.wins}</td>
 <td>${t.draws}</td>
