@@ -8,6 +8,9 @@ const url =
 const LOGO_BASE =
 "https://grospitz-wreck-it.github.io/Regionalliga/logos/";
 
+/*
+Teamname → Dateiname
+*/
 function normalizeTeamName(name){
 
 return name
@@ -22,11 +25,14 @@ return name
 
 }
 
+/*
+Logo bestimmen
+*/
 function getLogo(team){
 
-const normalized=normalizeTeamName(team);
+const file=normalizeTeamName(team)+".png";
 
-return `${LOGO_BASE}${normalized}.png`;
+return LOGO_BASE+file;
 
 }
 
@@ -35,16 +41,16 @@ async function updateTable(){
 try{
 
 const {data}=await axios.get(url,{
-headers:{ "User-Agent":"Mozilla/5.0" }
+headers:{
+"User-Agent":"Mozilla/5.0"
+}
 });
 
 const $=cheerio.load(data);
 
-const rows=$("table.items tbody tr");
-
 const table=[];
 
-rows.each((i,row)=>{
+$("table.items tbody tr").each((i,row)=>{
 
 const cols=$(row).find("td");
 
@@ -78,33 +84,12 @@ points
 
 });
 
-let oldTable=[];
-
-if(fs.existsSync("table.json")){
-
-oldTable=JSON.parse(
-fs.readFileSync("table.json","utf8")
-);
-
-}
-
-const changed=
-JSON.stringify(oldTable)!==JSON.stringify(table);
-
-if(!changed){
-
-console.log("Keine Änderung der Tabelle");
-
-return;
-
-}
-
 fs.writeFileSync(
 "table.json",
 JSON.stringify(table,null,2)
 );
 
-console.log("Tabelle aktualisiert");
+console.log("Regionalliga West Teams:",table.length);
 
 }catch(err){
 
