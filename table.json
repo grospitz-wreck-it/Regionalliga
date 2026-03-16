@@ -2,7 +2,7 @@
   {
     "position": 1,
     "team": "Fortuna Köln",
-    "logo": "",
+    "logo": "logos/fortuna-koeln.png",
     "games": 25,
     "wins": 16,
     "draws": 8,
@@ -24,7 +24,7 @@
   {
     "position": 3,
     "team": "Schalke 04 II",
-    "logo": "",
+    "logo": "logos/schalke2.png",
     "games": 24,
     "wins": 14,
     "draws": 4,
@@ -68,7 +68,7 @@
   {
     "position": 7,
     "team": "Spfr. Siegen",
-    "logo": "logos/siegen.png",
+    "logo": "",
     "games": 23,
     "wins": 10,
     "draws": 9,
