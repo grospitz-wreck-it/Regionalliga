@@ -16,7 +16,7 @@ return text
 
 function logo(team){
 
-const t = normalize(team);
+const t=normalize(team);
 
 if(t.includes("wuppertal")) return "logos/wuppertal.png";
 if(t.includes("oberhausen")) return "logos/rwo.png";
@@ -42,13 +42,11 @@ return "logos/placeholder.png";
 
 async function updateTable(){
 
-const {data} = await axios.get(URL,{
-headers:{
-"User-Agent":"Mozilla/5.0"
-}
+const {data}=await axios.get(URL,{
+headers:{ "User-Agent":"Mozilla/5.0" }
 });
 
-const $ = cheerio.load(data);
+const $=cheerio.load(data);
 
 const table=[];
 
@@ -64,9 +62,7 @@ table.push({
 
 position:Number($(cols[0]).text().trim()),
 team,
-
 logo:logo(team),
-
 games:Number($(cols[3]).text().trim()),
 wins:Number($(cols[4]).text().trim()),
 draws:Number($(cols[5]).text().trim()),
@@ -78,7 +74,7 @@ points:Number($(cols[8]).text().trim())
 
 });
 
-if(table.length===0){
+if(table.length<10){
 
 console.log("ERROR: Tabelle leer");
 process.exit(1);
