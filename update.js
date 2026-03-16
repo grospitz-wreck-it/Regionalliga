@@ -2,116 +2,83 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import fs from "fs";
 
-const URL =
-"https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
+const url = "https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
 
-const LOGO_BASE =
-"https://grospitz-wreck-it.github.io/Regionalliga/logos/";
+/*
+Mapping: Teamname -> Logo-Datei
+Die Dateien müssen im Repo liegen:
+Regionalliga/logos/
+*/
+const logos = {
+  "Fortuna Köln": "fortuna-koeln.png",
+  "RW Oberhausen": "rwo.png",
+  "Wuppertaler SV": "wuppertal.png",
+  "Sportfreunde Lotte": "lotte.png",
+  "Borussia Mönchengladbach II": "gladbach.png",
+  "SC Paderborn II": "paderborn.png",
+  "SV Rödinghausen": "roedinghausen.png",
+  "1. FC Bocholt": "bocholt.png",
+  "Fortuna Düsseldorf II": "f95.png",
+  "FC Gütersloh": "guetersloh.png",
+  "Bonner SC": "bonn.png",
+  "Borussia Dortmund II": "dortmund.png",
+  "SSVg Velbert": "velbert.png",
+  "SV Wiedenbrück": "wiedenbrueck.png",
+  "FC Schalke 04 II": "schalke2.png",
+  "Sportfreunde Siegen": "siegen.png"
+};
 
-function normalize(text){
-return text
-.toLowerCase()
-.replace(/ä/g,"ae")
-.replace(/ö/g,"oe")
-.replace(/ü/g,"ue")
-.replace(/ß/g,"ss");
-}
+async function updateTable() {
 
-function findLogo(team){
+  const { data } = await axios.get(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0"
+    }
+  });
 
-const t=normalize(team);
+  const $ = cheerio.load(data);
 
-if(t.includes("wuppertal")) return "wuppertal.png";
-if(t.includes("oberhausen")) return "rwo.png";
-if(t.includes("roedinghausen")) return "roedinghausen.png";
-if(t.includes("lotte")) return "lotte.png";
-if(t.includes("paderborn")) return "paderborn.png";
-if(t.includes("gladbach")) return "gladbach.png";
-if(t.includes("dortmund")) return "dortmund.png";
-if(t.includes("duesseldorf")) return "f95.png";
-if(t.includes("koeln") && !t.includes("fortuna")) return "fckoeln.png";
-if(t.includes("fortuna koeln")) return "fortuna-koeln.png";
-if(t.includes("guetersloh")) return "guetersloh.png";
-if(t.includes("wiedenbrueck")) return "wiedenbrueck.png";
-if(t.includes("velbert")) return "velbert.png";
-if(t.includes("schalke")) return "schalke2.png";
-if(t.includes("siegen")) return "siegen.png";
-if(t.includes("bonn")) return "bonn.png";
-if(t.includes("bochum")) return "bochum.png";
-if(t.includes("bocholt")) return "bocholt.png";
+  const table = [];
 
-return "placeholder.png";
-}
+  $("table.items tbody tr").each((i, row) => {
 
-async function updateTable(){
+    const position = $(row).find("td").eq(0).text().trim();
+    if (!position) return;
 
-const {data} = await axios.get(URL,{
-headers:{
-"User-Agent":"Mozilla/5.0"
-}
-});
+    const team = $(row).find(".hauptlink a").text().trim();
 
-const $ = cheerio.load(data);
+    const logoFile = logos[team] || "default.png";
 
-const table=[];
+    const logo =
+      `https://grospitz-wreck-it.github.io/Regionalliga/logos/${logoFile}`;
 
-$("table.items tbody tr").each((i,row)=>{
+    const games = $(row).find("td").eq(3).text().trim();
+    const wins = $(row).find("td").eq(4).text().trim();
+    const draws = $(row).find("td").eq(5).text().trim();
+    const losses = $(row).find("td").eq(6).text().trim();
+    const goals = $(row).find("td").eq(7).text().trim();
+    const points = $(row).find("td").eq(8).text().trim();
 
-const position=$(row).find("td").eq(0).text().trim();
+    table.push({
+      position: Number(position),
+      team,
+      logo,
+      games: Number(games),
+      wins: Number(wins),
+      draws: Number(draws),
+      losses: Number(losses),
+      goals,
+      points: Number(points)
+    });
 
-const team=$(row).find(".hauptlink a").text().trim();
+  });
 
-const games=$(row).find("td").eq(3).text().trim();
+  fs.writeFileSync(
+    "table.json",
+    JSON.stringify(table, null, 2)
+  );
 
-const wins=$(row).find("td").eq(4).text().trim();
-
-const draws=$(row).find("td").eq(5).text().trim();
-
-const losses=$(row).find("td").eq(6).text().trim();
-
-const goals=$(row).find("td").eq(7).text().trim();
-
-const points=$(row).find("td").eq(8).text().trim();
-
-if(!team) return;
-
-table.push({
-
-position:Number(position),
-
-team,
-
-logo:LOGO_BASE+findLogo(team),
-
-games:Number(games),
-
-wins:Number(wins),
-
-draws:Number(draws),
-
-losses:Number(losses),
-
-goals,
-
-points:Number(points)
-
-});
-
-});
-
-if(table.length===0){
-
-console.log("ERROR: Tabelle leer");
-process.exit(1);
-
-}
-
-fs.writeFileSync(
-"table.json",
-JSON.stringify(table,null,2)
-);
-
-console.log("Teams:",table.length);
+  console.log("Regionalliga West Teams:", table.length);
 
 }
 
