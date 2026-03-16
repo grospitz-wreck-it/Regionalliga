@@ -13,7 +13,8 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Repository auschecken
+        uses: actions/checkout@v4
 
       - name: Node installieren
         uses: actions/setup-node@v4
@@ -21,7 +22,7 @@ jobs:
           node-version: 20
 
       - name: Dependencies installieren
-        run: npm install axios cheerio
+        run: npm install axios
 
       - name: Tabelle aktualisieren
         run: node update.js
