@@ -1,19 +1,20 @@
 import axios from "axios";
+import * as cheerio from "cheerio";
 import fs from "fs";
 
-const API =
-"https://www.fussball.de/ajax.tabelle/-/staffel/02T93S3NHC000004VS5489BTVVQ0O654-G";
+const URL =
+"https://www.fussball.de/spieltagsuebersicht/regionalliga-west-region-westdeutschland-regionalliga-herren-saison2526-region-westdeutschland/-/staffel/02T93S3NHC000004VS5489BTVVQ0O654-G";
 
 const LOGO_BASE =
 "https://grospitz-wreck-it.github.io/Regionalliga/logos/";
 
 function normalize(text){
   return text
-    .toLowerCase()
-    .replace(/ä/g,"ae")
-    .replace(/ö/g,"oe")
-    .replace(/ü/g,"ue")
-    .replace(/ß/g,"ss");
+  .toLowerCase()
+  .replace(/ä/g,"ae")
+  .replace(/ö/g,"oe")
+  .replace(/ü/g,"ue")
+  .replace(/ß/g,"ss");
 }
 
 function findLogo(team){
@@ -39,46 +40,47 @@ function findLogo(team){
   if(t.includes("bochum")) return "bochum.png";
   if(t.includes("bocholt")) return "bocholt.png";
 
-  return "tmp";
+  return "placeholder.png";
 }
 
 async function updateTable(){
 
-  const response = await axios.get(API,{
+  const {data} = await axios.get(URL,{
     headers:{
-      "User-Agent":"Mozilla/5.0",
-      "Accept":"application/json, text/javascript, */*; q=0.01",
-      "X-Requested-With":"XMLHttpRequest"
+      "User-Agent":"Mozilla/5.0"
     }
   });
 
-  const data=response.data;
-
-  if(!data || !data.rows){
-
-    console.log("API Antwort:",data);
-    console.log("ERROR: Tabelle nicht gefunden");
-    process.exit(1);
-
-  }
+  const $ = cheerio.load(data);
 
   const table=[];
 
-  data.rows.forEach((team,i)=>{
+  $(".table tbody tr").each((i,row)=>{
+
+    const cols=$(row).find("td");
+
+    if(cols.length<8) return;
+
+    const team=$(cols[1]).text().trim();
 
     table.push({
-      position:i+1,
-      team:team.teamName,
-      logo:LOGO_BASE+findLogo(team.teamName),
-      games:team.matches,
-      wins:team.wins,
-      draws:team.draws,
-      losses:team.losses,
-      goals:`${team.goalsFor}:${team.goalsAgainst}`,
-      points:team.points
+      position:Number($(cols[0]).text().trim()),
+      team,
+      logo:LOGO_BASE+findLogo(team),
+      games:Number($(cols[2]).text().trim()),
+      wins:Number($(cols[3]).text().trim()),
+      draws:Number($(cols[4]).text().trim()),
+      losses:Number($(cols[5]).text().trim()),
+      goals:$(cols[6]).text().trim(),
+      points:Number($(cols[7]).text().trim())
     });
 
   });
+
+  if(table.length===0){
+    console.log("ERROR: Tabelle nicht gefunden");
+    process.exit(1);
+  }
 
   fs.writeFileSync(
     "table.json",
