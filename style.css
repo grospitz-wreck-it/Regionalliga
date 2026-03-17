@@ -83,11 +83,6 @@ body {
   background: #eef7ef;
 }
 
-.relegation {
-  box-shadow: inset 5px 0 0 #fbc02d;
-  background: #fff8e1;
-}
-
 .relegated {
   box-shadow: inset 5px 0 0 #e3000f;
   background: #fdeeee;
@@ -111,7 +106,6 @@ body {
 }
 
 .lg.promoted { background: #2e7d32; }
-.lg.relegation { background: #fbc02d; }
 .lg.relegated { background: #e3000f; }
 
 /* Source */
