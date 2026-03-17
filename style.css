@@ -18,8 +18,6 @@ body {
   border-spacing: 0;
   background: #fff;
   border-radius: 12px;
-  overflow: hidden;
-  table-layout: auto; /* 🔥 wichtig */
 }
 
 /* Header */
@@ -34,13 +32,8 @@ body {
   text-align: center;
 }
 
-/* Runde Ecken oben */
-.rl-table thead th:first-child {
-  border-top-left-radius: 12px;
-}
-
-.rl-table thead th:last-child {
-  border-top-right-radius: 12px;
+.rl-table th:nth-child(2) {
+  text-align: left;
 }
 
 /* Cells */
@@ -51,19 +44,8 @@ body {
   text-align: center;
 }
 
-/* Team linksbündig */
-.rl-table td.team,
-.rl-table th:nth-child(2) {
+.rl-table td.team {
   text-align: left;
-}
-
-/* Runde Ecken unten */
-.rl-table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 12px;
-}
-
-.rl-table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 12px;
 }
 
 /* Zebra */
@@ -71,12 +53,7 @@ body {
   background: #fafafa;
 }
 
-/* Hover (stabil) */
-.rl-table tbody tr {
-  position: relative;
-  transition: background 0.2s ease;
-}
-
+/* Hover */
 .rl-table tbody tr:hover {
   background: #e8f0ff;
 }
@@ -91,7 +68,6 @@ body {
 .team img {
   width: 20px;
   height: 20px;
-  flex-shrink: 0;
 }
 
 /* Punkte fett */
@@ -99,38 +75,20 @@ body {
   font-weight: bold;
 }
 
-/* Balken links */
-.rl-table tbody tr::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 5px;
-}
-
-/* 🟢 Aufstieg */
-.promoted::before {
-  background: #2e7d32;
-}
+/* 🔥 Balken (OHNE ::before → stabil!) */
 .promoted {
-  background: linear-gradient(to right, #eef7ef, transparent);
+  box-shadow: inset 5px 0 0 #2e7d32;
+  background: #eef7ef;
 }
 
-/* 🟡 Relegation */
-.relegation::before {
-  background: #fbc02d;
-}
 .relegation {
-  background: linear-gradient(to right, #fff8e1, transparent);
+  box-shadow: inset 5px 0 0 #fbc02d;
+  background: #fff8e1;
 }
 
-/* 🔴 Abstieg */
-.relegated::before {
-  background: #e3000f;
-}
 .relegated {
-  background: linear-gradient(to right, #fdeeee, transparent);
+  box-shadow: inset 5px 0 0 #e3000f;
+  background: #fdeeee;
 }
 
 /* Legend */
