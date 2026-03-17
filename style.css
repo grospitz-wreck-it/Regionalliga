@@ -22,10 +22,12 @@ body {
 
 /* Header */
 .rl-table thead {
-  background: #e3000f;
   color: #fff;
 }
 
+.rl-table thead th {
+  background: #e3000f;
+}
 .rl-table th {
   padding: 12px;
   font-size: 14px;
