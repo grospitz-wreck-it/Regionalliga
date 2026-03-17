@@ -9,18 +9,10 @@ async function loadTable() {
     data.forEach(team => {
       const row = document.createElement("tr")
 
-      // 🔢 sichere Werte
       const pos = Number(team.position) || 0
-      const games = team.games ?? "-"
-      const wins = team.wins ?? "-"
-      const draws = team.draws ?? "-"
-      const losses = team.losses ?? "-"
-      const goals = team.goals ?? "-"
-      const points = team.points ?? "-"
-
-      // 🧠 Klassifizierung
       const total = data.length
 
+      // Klassifizierung
       if (pos === 1) {
         row.classList.add("promoted")
       } else if (pos === 2) {
@@ -29,28 +21,26 @@ async function loadTable() {
         row.classList.add("relegated")
       }
 
-      // 🧱 HTML
       row.innerHTML = `
         <td>${pos}</td>
         <td class="team">
           <img src="${team.logo}" onerror="this.style.display='none'">
           ${team.team}
         </td>
-        <td>${games}</td>
-        <td>${wins}</td>
-        <td>${draws}</td>
-        <td>${losses}</td>
-        <td>${goals}</td>
-        <td>${points}</td>
+        <td>${team.games ?? "-"}</td>
+        <td>${team.wins ?? "-"}</td>
+        <td>${team.draws ?? "-"}</td>
+        <td>${team.losses ?? "-"}</td>
+        <td>${team.goals ?? "-"}</td>
+        <td>${team.points ?? "-"}</td>
       `
 
       tbody.appendChild(row)
     })
 
   } catch (err) {
-    console.error("Fehler beim Laden der Tabelle:", err)
+    console.error("Fehler:", err)
   }
 }
 
-// 🚀 Start
 loadTable()
