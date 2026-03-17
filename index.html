@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regionalliga West Tabelle</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Regionalliga West Tabelle</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
 </head>
 
 <body>
 
 <div class="table-wrapper">
 
-<table class="rl-table">
+  <table class="rl-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Team</th>
+        <th>Sp</th>
+        <th>S</th>
+        <th>U</th>
+        <th>N</th>
+        <th>Tore</th>
+        <th>Pkt</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
 
-<thead>
-<tr>
-<th>#</th>
-<th>Team</th>
-<th>Sp</th>
-<th>S</th>
-<th>U</th>
-<th>N</th>
-<th>Tore</th>
-<th>Pkt</th>
-</tr>
-</thead>
+  <div class="legend">
+    <span class="lg promoted"></span> Aufstieg
+    <span class="lg relegation"></span> Relegation
+    <span class="lg relegated"></span> Abstieg
+  </div>
 
-<tbody id="table-body"></tbody>
-
-</table>
-
-<div class="source">
-Quelle: fussball.de • Logos: Vereine
-</div>
+  <div class="source">
+    Quelle: fussball.de • Logos: Vereine
+  </div>
 
 </div>
 
