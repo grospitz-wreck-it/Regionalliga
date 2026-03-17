@@ -1,50 +1,61 @@
 body {
   margin: 0;
-  font-family: system-ui;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
   background: #f5f7fa;
+  color: #222;
 }
 
 /* Wrapper */
 .table-wrapper {
   max-width: 720px;
   margin: 30px auto;
-  padding: 0 10px;
+  padding: 0 12px;
 }
 
 /* Table */
 .rl-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
+  background: #fff;
+  border-radius: 14px;
   overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
 /* Header */
 .rl-table thead {
-  background: #e3000f;
+  background: linear-gradient(90deg, #d50000, #ff1744);
   color: white;
 }
 
 .rl-table th {
-  padding: 10px;
+  padding: 11px 8px;
   text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 /* Cells */
 .rl-table td {
-  padding: 8px;
+  padding: 9px 8px;
   border-bottom: 1px solid #eee;
+  font-size: 13px;
 }
 
 /* Zebra */
 .rl-table tbody tr:nth-child(even) {
-  background: #f7f7f7;
+  background: #fafafa;
 }
 
 /* Hover */
+.rl-table tbody tr {
+  transition: all 0.2s ease;
+}
+
 .rl-table tbody tr:hover {
   background: #e8f0ff;
+  transform: scale(1.002);
 }
 
 /* Team */
@@ -52,33 +63,98 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-weight: 500;
 }
 
 .team img {
   width: 18px;
   height: 18px;
+  object-fit: contain;
 }
 
-/* Bold points */
+/* Punkte fett */
 .rl-table td:last-child {
-  font-weight: bold;
+  font-weight: 700;
+}
+
+/* =========================
+   STATUS MARKIERUNGEN
+========================= */
+
+/* 🟢 Aufstieg */
+.promoted {
+  position: relative;
+}
+
+.promoted::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: #2e7d32;
+}
+
+.promoted {
+  background: linear-gradient(to right, #eaf7ec, transparent);
+}
+
+/* 🟡 Relegation */
+.relegation {
+  position: relative;
+}
+
+.relegation::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: #f9a825;
+}
+
+.relegation {
+  background: linear-gradient(to right, #fff8e1, transparent);
+}
+
+/* 🔴 Abstieg */
+.relegated {
+  position: relative;
+}
+
+.relegated::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: #d50000;
+}
+
+.relegated {
+  background: linear-gradient(to right, #fdeaea, transparent);
+}
+
+/* Hover soll Status NICHT zerstören */
+.promoted:hover {
+  background: linear-gradient(to right, #dff3e2, #e8f0ff);
+}
+
+.relegation:hover {
+  background: linear-gradient(to right, #fff3cd, #e8f0ff);
+}
+
+.relegated:hover {
+  background: linear-gradient(to right, #fbdada, #e8f0ff);
 }
 
 /* Source */
 .source {
   font-size: 11px;
-  color: #777;
+  color: #888;
   margin-top: 8px;
   text-align: right;
-}
-/* Aufstieg */
-.promoted {
-  border-left: 4px solid #2e7d32;
-  background: #eef7ef;
-}
-
-/* Abstieg */
-.relegated {
-  border-left: 4px solid #e3000f;
-  background: #fdeeee;
 }
