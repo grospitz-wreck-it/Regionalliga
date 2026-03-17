@@ -2,8 +2,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import fs from "fs";
 
-const url =
-"https://www.transfermarkt.de/regionalliga-west/tabelle/wettbewerb/RLW3/saison_id/2025";
+const url = "https://www.fussball.de/ajax.table/-/staffel/02T93S3NHC000004VS5489BTVVQ0O654-G";
 
 /* verschiedene Browser simulieren */
 
@@ -11,10 +10,10 @@ const userAgents = [
 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/121 Safari/537.36",
 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36",
 "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/118 Safari/537.36"
-]
+];
 
 function randomAgent(){
-return userAgents[Math.floor(Math.random()*userAgents.length)]
+  return userAgents[Math.floor(Math.random()*userAgents.length)];
 }
 
 /* Logo-Erkennung */
@@ -59,9 +58,8 @@ const res = await axios.get(url,{
 timeout:15000,
 headers:{
 "User-Agent":randomAgent(),
-"Accept":"text/html,application/xhtml+xml",
-"Accept-Language":"de-DE,de;q=0.9",
-"Referer":"https://www.transfermarkt.de/"
+"Accept":"text/html",
+"Referer":"https://www.fussball.de/"
 }
 })
 
@@ -93,36 +91,33 @@ const $ = cheerio.load(html)
 
 const table=[]
 
-$("table.items tbody tr").each((i,row)=>{
+$("table tbody tr").each((i,row)=>{
 
-const position=$(row).find("td").eq(0).text().trim()
+const cols = $(row).find("td")
 
-const team=$(row).find(".hauptlink a").text().trim()
+if(cols.length < 9) return
 
-const games=$(row).find("td").eq(3).text().trim()
-
-const wins=$(row).find("td").eq(4).text().trim()
-
-const draws=$(row).find("td").eq(5).text().trim()
-
-const losses=$(row).find("td").eq(6).text().trim()
-
-const goals=$(row).find("td").eq(7).text().trim()
-
-const points=$(row).find("td").eq(9).text().trim()
+const position = $(cols[0]).text().trim()
+const team = $(cols[1]).text().replace(/\s+/g," ").trim()
+const games = $(cols[2]).text().trim()
+const wins = $(cols[3]).text().trim()
+const draws = $(cols[4]).text().trim()
+const losses = $(cols[5]).text().trim()
+const goals = $(cols[6]).text().trim()
+const diff = $(cols[7]).text().trim()
+const points = $(cols[8]).text().trim()
 
 table.push({
-
-position:Number(position),
+position: Number(position),
 team,
-logo:getLogo(team),
-games:Number(games),
-wins:Number(wins),
-draws:Number(draws),
-losses:Number(losses),
+logo: getLogo(team),
+games: Number(games),
+wins: Number(wins),
+draws: Number(draws),
+losses: Number(losses),
 goals,
-points:Number(points)
-
+diff,
+points: Number(points)
 })
 
 })
