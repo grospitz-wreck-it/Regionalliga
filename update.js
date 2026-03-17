@@ -69,18 +69,25 @@ const table=[]
 $("table tbody tr").each((i,row)=>{
 
   const cols = $(row).find("td")
+
+  // Debug: falsche Zeilen skippen
   if(cols.length < 10) return
 
-  const position = $(cols[0]).text().trim()
-  const team = $(cols[2]).find("a").text().trim()
+  // Platz (steht oft mit Punkt)
+  const positionRaw = $(cols[1]).text().trim()
+  const position = positionRaw.replace(".", "")
 
-  const games = $(cols[3]).text().trim()
-  const wins = $(cols[4]).text().trim()
-  const draws = $(cols[5]).text().trim()
-  const losses = $(cols[6]).text().trim()
-  const goals = $(cols[7]).text().trim()
-  const diff = $(cols[8]).text().trim()
-  const points = $(cols[9]).text().trim()
+  // Teamname (WICHTIG: aus Link holen)
+  const team = $(row).find("a").first().text().trim()
+
+  // Jetzt verschiebt sich alles um +1
+  const games = $(cols[4]).text().trim()
+  const wins = $(cols[5]).text().trim()
+  const draws = $(cols[6]).text().trim()
+  const losses = $(cols[7]).text().trim()
+  const goals = $(cols[8]).text().trim()
+  const diff = $(cols[9]).text().trim()
+  const points = $(cols[10]).text().trim()
 
   table.push({
     position: Number(position),
