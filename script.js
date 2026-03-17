@@ -17,7 +17,7 @@ async function loadTable() {
         row.classList.add("promoted")
       }
 
-      // 🔴 Abstieg (letzte 4 Teams)
+      // 🔴 Abstieg (letzte 4)
       else if (pos >= total - 3) {
         row.classList.add("relegated")
       }
@@ -39,7 +39,7 @@ async function loadTable() {
       tbody.appendChild(row)
     })
 
-    // 🔥 WICHTIG: Höhe erst NACH Rendern senden
+    // 🔥 AFTER RENDER → Höhe initial senden
     sendHeight()
 
   } catch (err) {
@@ -47,13 +47,17 @@ async function loadTable() {
   }
 }
 
-/* 🔥 iframe Höhe sauber senden */
+/* 🔥 BESTER HEIGHT FIX */
 function sendHeight() {
   const height = document.documentElement.scrollHeight
-  parent.postMessage({ height }, "*")
+  window.parent.postMessage({ height }, "*")
 }
 
-/* optional: bei Resize neu senden */
-window.addEventListener("resize", sendHeight)
+/* 🔥 AUTO UPDATE bei Änderungen */
+const observer = new ResizeObserver(() => {
+  sendHeight()
+})
+
+observer.observe(document.body)
 
 loadTable()
