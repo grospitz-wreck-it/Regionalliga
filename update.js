@@ -90,7 +90,7 @@ $("table tbody tr").each((i,row)=>{
   const points = $(cols[10]).text().trim()
 
   table.push({
-    position: Number(position),
+    position: i + 1,
     team,
     logo: getLogo(team),
     games: Number(games),
