@@ -43,17 +43,11 @@
 <script>
 function sendHeight() {
   const height = document.documentElement.scrollHeight
-  parent.postMessage({ height: height }, "*")
+  parent.postMessage({ height }, "*")
 }
 
-// mehrfach senden (wichtig!)
 window.addEventListener("load", sendHeight)
 window.addEventListener("resize", sendHeight)
-
-// 🔥 FIX: nochmal nach kurzer Zeit (Fonts / Images)
-setTimeout(sendHeight, 200)
-setTimeout(sendHeight, 500)
-setTimeout(sendHeight, 1000)
 </script>
 </body>
 </html>
