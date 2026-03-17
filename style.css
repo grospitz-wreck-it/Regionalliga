@@ -14,18 +14,18 @@ body {
 /* Table */
 .rl-table {
   width: 100%;
-  border-collapse: separate; /* 🔥 FIX */
-  border-spacing: 0;         /* 🔥 FIX */
-  background: white;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  table-layout: fixed;
+  table-layout: auto; /* 🔥 wichtig */
 }
 
 /* Header */
 .rl-table thead {
   background: #e3000f;
-  color: white;
+  color: #fff;
 }
 
 .rl-table th {
@@ -35,11 +35,11 @@ body {
 }
 
 /* Runde Ecken oben */
-.rl-table thead tr th:first-child {
+.rl-table thead th:first-child {
   border-top-left-radius: 12px;
 }
 
-.rl-table thead tr th:last-child {
+.rl-table thead th:last-child {
   border-top-right-radius: 12px;
 }
 
@@ -51,6 +51,7 @@ body {
   text-align: center;
 }
 
+/* Team linksbündig */
 .rl-table td.team,
 .rl-table th:nth-child(2) {
   text-align: left;
@@ -70,7 +71,7 @@ body {
   background: #fafafa;
 }
 
-/* Hover (stabil, kein Verziehen) */
+/* Hover (stabil) */
 .rl-table tbody tr {
   position: relative;
   transition: background 0.2s ease;
@@ -90,6 +91,7 @@ body {
 .team img {
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
 }
 
 /* Punkte fett */
@@ -97,7 +99,7 @@ body {
   font-weight: bold;
 }
 
-/* Balken links (perfekt fixiert) */
+/* Balken links */
 .rl-table tbody tr::before {
   content: "";
   position: absolute;
