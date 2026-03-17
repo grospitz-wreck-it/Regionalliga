@@ -71,3 +71,14 @@ body {
   margin-top: 8px;
   text-align: right;
 }
+/* Aufstieg */
+.promoted {
+  border-left: 4px solid #2e7d32;
+  background: #eef7ef;
+}
+
+/* Abstieg */
+.relegated {
+  border-left: 4px solid #e3000f;
+  background: #fdeeee;
+}
