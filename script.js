@@ -1,40 +1,16 @@
 async function loadTable() {
-
   try {
-
     const res = await fetch("table.json")
     const data = await res.json()
 
     const tbody = document.getElementById("table-body")
     tbody.innerHTML = ""
 
-    data.forEach((team, index) => {
-
+    data.forEach(team => {
       const row = document.createElement("tr")
 
-      // =========================
-      // STATUS LOGIK
-      // =========================
-
-      // 🟢 Platz 1 (Aufstieg)
-      if (team.position === 1) {
-        row.classList.add("promoted")
-      }
-
-      // 🟡 Platz 2 (Relegation)
-      else if (team.position === 2) {
-        row.classList.add("relegation")
-      }
-
-      // 🔴 letzte 3 (Abstieg)
-      else if (team.position >= data.length - 2) {
-        row.classList.add("relegated")
-      }
-
-      // =========================
-      // FALLBACKS (wichtig!)
-      // =========================
-
+      // 🔢 sichere Werte
+      const pos = Number(team.position) || 0
       const games = team.games ?? "-"
       const wins = team.wins ?? "-"
       const draws = team.draws ?? "-"
@@ -42,19 +18,24 @@ async function loadTable() {
       const goals = team.goals ?? "-"
       const points = team.points ?? "-"
 
-      // =========================
-      // HTML
-      // =========================
+      // 🧠 Klassifizierung
+      const total = data.length
 
+      if (pos === 1) {
+        row.classList.add("promoted")
+      } else if (pos === 2) {
+        row.classList.add("relegation")
+      } else if (pos >= total - 2) {
+        row.classList.add("relegated")
+      }
+
+      // 🧱 HTML
       row.innerHTML = `
-        <td>${team.position}</td>
-
+        <td>${pos}</td>
         <td class="team">
-          <img src="${team.logo || ""}" 
-               onerror="this.style.display='none'">
+          <img src="${team.logo}" onerror="this.style.display='none'">
           ${team.team}
         </td>
-
         <td>${games}</td>
         <td>${wins}</td>
         <td>${draws}</td>
@@ -64,22 +45,12 @@ async function loadTable() {
       `
 
       tbody.appendChild(row)
-
     })
 
   } catch (err) {
-
     console.error("Fehler beim Laden der Tabelle:", err)
-
-    document.getElementById("table-body").innerHTML = `
-      <tr>
-        <td colspan="8" style="text-align:center;padding:20px;">
-          ⚠ Fehler beim Laden der Tabelle
-        </td>
-      </tr>
-    `
   }
-
 }
 
+// 🚀 Start
 loadTable()
