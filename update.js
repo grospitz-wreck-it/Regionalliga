@@ -83,19 +83,17 @@ $("table tbody tr").each((i, row) => {
     .get()
     .find(v => v.includes(":"))
 
-  table.push({
-    position: i + 1,
-    team,
-    logo: getLogo(team),
+table.push({
+  position: i + 1,
+  team,
+  logo: getLogo(team),
 
-    games: Number(numbers[0]),
-    wins: Number(numbers[1]),
-    draws: Number(numbers[2]),
-    losses: Number(numbers[3]),   // ✅ jetzt korrekt
-    goals: goals,
-    points: Number(numbers[4])
-  })
-
+  games: Number(numbers[0]),
+  wins: Number(numbers[1]),
+  draws: Number(numbers[2]),
+  losses: Number(numbers[3]),
+  goals: goals,
+  points: Number(numbers[numbers.length - 1]) // ✅ FIX
 })
 
 fs.writeFileSync("table.json", JSON.stringify(table,null,2))
