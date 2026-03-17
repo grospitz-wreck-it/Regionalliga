@@ -95,7 +95,7 @@ table.push({
   goals: goals,
   points: Number(numbers[numbers.length - 1]) // ✅ FIX
 })
-
+})
 fs.writeFileSync("table.json", JSON.stringify(table,null,2))
 
 console.log("✔ Tabelle aktualisiert:", table.length)
