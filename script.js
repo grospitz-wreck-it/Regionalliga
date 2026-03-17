@@ -17,7 +17,7 @@ async function loadTable() {
         row.classList.add("promoted")
       }
 
-      // 🔴 Abstieg (letzte 4 Teams!)
+      // 🔴 Abstieg (letzte 4 Teams)
       else if (pos >= total - 3) {
         row.classList.add("relegated")
       }
@@ -39,9 +39,21 @@ async function loadTable() {
       tbody.appendChild(row)
     })
 
+    // 🔥 WICHTIG: Höhe erst NACH Rendern senden
+    sendHeight()
+
   } catch (err) {
     console.error("Fehler beim Laden:", err)
   }
 }
+
+/* 🔥 iframe Höhe sauber senden */
+function sendHeight() {
+  const height = document.documentElement.scrollHeight
+  parent.postMessage({ height }, "*")
+}
+
+/* optional: bei Resize neu senden */
+window.addEventListener("resize", sendHeight)
 
 loadTable()
