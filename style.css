@@ -16,21 +16,25 @@ body {
   width: 100%;
   border-collapse: collapse;
   background: white;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  table-layout: fixed; /* 🔥 WICHTIG */
 }
 
 /* Header */
 .rl-table thead {
-  background: linear-gradient(90deg, #e3000f, #ff1f2f);
+  background: #e3000f;
   color: white;
 }
 
 .rl-table th {
   padding: 12px;
-  text-align: left;
   font-size: 14px;
+  text-align: center;
+}
+
+.rl-table th:nth-child(2) {
+  text-align: left;
 }
 
 /* Cells */
@@ -38,6 +42,11 @@ body {
   padding: 10px;
   border-bottom: 1px solid #eee;
   font-size: 14px;
+  text-align: center;
+}
+
+.rl-table td.team {
+  text-align: left;
 }
 
 /* Zebra */
@@ -45,15 +54,14 @@ body {
   background: #fafafa;
 }
 
-/* Hover */
+/* Hover (OHNE SCALE!!!) */
 .rl-table tbody tr {
   position: relative;
-  transition: all 0.15s ease;
+  transition: background 0.2s ease;
 }
 
 .rl-table tbody tr:hover {
   background: #e8f0ff;
-  transform: scale(1.01);
 }
 
 /* Team */
@@ -73,7 +81,7 @@ body {
   font-weight: bold;
 }
 
-/* Balken (FIX!) */
+/* Balken FIX */
 .rl-table tbody tr::before {
   content: "";
   position: absolute;
@@ -81,10 +89,9 @@ body {
   top: 0;
   height: 100%;
   width: 5px;
-  border-radius: 3px;
 }
 
-/* 🟢 Aufstieg */
+/* 🟢 */
 .promoted::before {
   background: #2e7d32;
 }
@@ -92,7 +99,7 @@ body {
   background: linear-gradient(to right, #eef7ef, transparent);
 }
 
-/* 🟡 Relegation */
+/* 🟡 */
 .relegation::before {
   background: #fbc02d;
 }
@@ -100,7 +107,7 @@ body {
   background: linear-gradient(to right, #fff8e1, transparent);
 }
 
-/* 🔴 Abstieg */
+/* 🔴 */
 .relegated::before {
   background: #e3000f;
 }
