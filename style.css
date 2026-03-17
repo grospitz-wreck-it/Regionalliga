@@ -1,128 +1,73 @@
-/* Reset & Base */
-
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+  font-family: system-ui;
   background: #f5f7fa;
-  color: #222;
 }
 
 /* Wrapper */
-
 .table-wrapper {
   max-width: 720px;
   margin: 30px auto;
   padding: 0 10px;
 }
 
-/* Tabelle */
-
+/* Table */
 .rl-table {
   width: 100%;
   border-collapse: collapse;
-  background: #ffffff;
+  background: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  font-size: 14px;
 }
 
 /* Header */
-
 .rl-table thead {
   background: #e3000f;
   color: white;
 }
 
 .rl-table th {
-  padding: 10px 8px;
+  padding: 10px;
   text-align: left;
-  font-weight: 600;
-  font-size: 13px;
 }
 
-/* Zellen */
-
+/* Cells */
 .rl-table td {
-  padding: 9px 8px;
+  padding: 8px;
   border-bottom: 1px solid #eee;
-  font-size: 13px;
 }
 
 /* Zebra */
-
 .rl-table tbody tr:nth-child(even) {
-  background: #fafafa;
+  background: #f7f7f7;
 }
 
-/* 🔥 Hover (funktioniert jetzt sauber) */
-
-.rl-table tbody tr {
-  transition: background 0.2s ease, transform 0.1s ease;
-}
-
+/* Hover */
 .rl-table tbody tr:hover {
   background: #e8f0ff;
 }
 
-/* Team Spalte */
-
+/* Team */
 .team {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 500;
 }
 
 .team img {
   width: 18px;
   height: 18px;
-  object-fit: contain;
 }
 
-/* Tabellen-Zahlen */
-
+/* Bold points */
 .rl-table td:last-child {
-  font-weight: 700;
+  font-weight: bold;
 }
 
-/* Auf-/Abstieg */
-
-.promoted {
-  border-left: 4px solid #2e7d32;
-}
-
-.relegated {
-  border-left: 4px solid #e3000f;
-}
-
-/* Hover bleibt stärker */
-
-.rl-table tbody tr.promoted:hover,
-.rl-table tbody tr.relegated:hover {
-  background: #e8f0ff;
-}
-
-/* Quelle */
-
+/* Source */
 .source {
   font-size: 11px;
   color: #777;
   margin-top: 8px;
   text-align: right;
-}
-
-/* Mobile Optimierung */
-
-@media (max-width: 600px) {
-  .rl-table th,
-  .rl-table td {
-    padding: 7px 5px;
-    font-size: 12px;
-  }
-
-  .team img {
-    width: 16px;
-    height: 16px;
-  }
 }
