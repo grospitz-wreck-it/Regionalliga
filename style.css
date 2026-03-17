@@ -1,73 +1,128 @@
-body{
-margin:0;
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
-background:#ffffff;
-color:#333;
+/* Reset & Base */
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+  background: #f5f7fa;
+  color: #222;
 }
 
-.table-wrapper{
-max-width:720px;
-margin:auto;
+/* Wrapper */
+
+.table-wrapper {
+  max-width: 720px;
+  margin: 30px auto;
+  padding: 0 10px;
 }
 
-.rl-table{
-width:100%;
-border-collapse:collapse;
-font-size:14px;
+/* Tabelle */
+
+.rl-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  font-size: 14px;
 }
 
-.rl-table thead{
-background:#e3000f;
-color:white;
+/* Header */
+
+.rl-table thead {
+  background: #e3000f;
+  color: white;
 }
 
-.rl-table th{
-padding:9px 6px;
-text-align:left;
-font-weight:600;
-font-size:13px;
+.rl-table th {
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
 }
 
-.rl-table td{
-padding:8px 6px;
-border-bottom:1px solid #e6e6e6;
-font-size:13px;
+/* Zellen */
+
+.rl-table td {
+  padding: 9px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
 }
 
-.rl-table tbody tr:nth-child(even){
-background:#f3f3f3;
+/* Zebra */
+
+.rl-table tbody tr:nth-child(even) {
+  background: #fafafa;
 }
 
-.team{
-display:flex;
-align-items:center;
-gap:8px;
-font-weight:500;
+/* 🔥 Hover (funktioniert jetzt sauber) */
+
+.rl-table tbody tr {
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
-.team img{
-width:18px;
-height:18px;
-object-fit:contain;
+.rl-table tbody tr:hover {
+  background: #e8f0ff;
 }
 
-.promoted{
-border-left:4px solid #2e7d32;
-background:#eef7ef;
+/* Team Spalte */
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
 }
 
-.relegated{
-border-left:4px solid #e3000f;
-background:#fdeeee;
+.team img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
-.rl-table td:last-child{
-font-weight:700;
+/* Tabellen-Zahlen */
+
+.rl-table td:last-child {
+  font-weight: 700;
 }
 
-.source{
-font-size:10px;
-color:#888;
-margin-top:6px;
-text-align:right;
+/* Auf-/Abstieg */
+
+.promoted {
+  border-left: 4px solid #2e7d32;
+}
+
+.relegated {
+  border-left: 4px solid #e3000f;
+}
+
+/* Hover bleibt stärker */
+
+.rl-table tbody tr.promoted:hover,
+.rl-table tbody tr.relegated:hover {
+  background: #e8f0ff;
+}
+
+/* Quelle */
+
+.source {
+  font-size: 11px;
+  color: #777;
+  margin-top: 8px;
+  text-align: right;
+}
+
+/* Mobile Optimierung */
+
+@media (max-width: 600px) {
+  .rl-table th,
+  .rl-table td {
+    padding: 7px 5px;
+    font-size: 12px;
+  }
+
+  .team img {
+    width: 16px;
+    height: 16px;
+  }
 }
