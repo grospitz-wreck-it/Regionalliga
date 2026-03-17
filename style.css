@@ -4,14 +4,13 @@ body {
   background: #f5f7fa;
 }
 
-/* 🔥 WRAPPER HAT DIE RUNDUNG */
+/* Wrapper (für runde Ecken) */
 .table-wrapper {
   max-width: 720px;
   margin: 30px auto;
-  padding: 0;
   border-radius: 12px;
   overflow: hidden;
-  background: white;
+  background: #fff;
 }
 
 /* Table */
@@ -19,25 +18,39 @@ body {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  table-layout: fixed;
 }
 
 /* Header */
-.rl-table thead {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-}
-
 .rl-table thead th {
   background: linear-gradient(90deg, #e3000f, #ff1a2d);
-  color: white;
+  color: #fff;
   padding: 12px 10px;
-  text-align: left;
   font-size: 13px;
+  text-align: center;
 }
 
-/* Cells */
+/* Erste Spalte (#) */
+.rl-table th:first-child,
+.rl-table td:first-child {
+  text-align: center;
+  width: 40px;
+}
+
+/* Team-Spalte */
+.rl-table th:nth-child(2),
+.rl-table td:nth-child(2) {
+  text-align: left;
+  min-width: 180px;
+}
+
+/* Restliche Spalten */
+.rl-table th:not(:nth-child(2)),
+.rl-table td:not(:nth-child(2)) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Zellen */
 .rl-table td {
   padding: 10px;
   border-bottom: 1px solid #eee;
@@ -57,48 +70,74 @@ body {
   background: #eef4ff;
 }
 
-/* Team */
+/* Team Layout */
 .team {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .team img {
   width: 18px;
   height: 18px;
+  flex-shrink: 0;
 }
 
-/* Punkte */
+/* Punkte fett */
 .rl-table td:last-child {
   font-weight: 700;
 }
 
-/* 🔥 STATUS-BALKEN (OHNE BUGS) */
+/* 🟢 Aufstieg */
 .promoted td:first-child {
   border-left: 4px solid #2e7d32;
 }
-
-.relegation td:first-child {
-  border-left: 4px solid #f9a825;
-}
-
-.relegated td:first-child {
-  border-left: 4px solid #e3000f;
-}
-
-/* OPTIONALE HINTERGRÜNDE */
 .promoted {
   background: rgba(46,125,50,0.08);
 }
 
+/* 🟡 Relegation */
+.relegation td:first-child {
+  border-left: 4px solid #f9a825;
+}
+
+/* 🔴 Abstieg */
+.relegated td:first-child {
+  border-left: 4px solid #e3000f;
+}
 .relegated {
   background: rgba(227,0,15,0.08);
 }
 
-/* Source */
+/* Quelle */
 .source {
   font-size: 11px;
   color: #777;
-  margin-top: 10px;
+  margin: 10px;
   text-align: right;
 }
+
+/* Legende */
+.legend {
+  display: flex;
+  gap: 15px;
+  font-size: 12px;
+  margin: 10px;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend i {
+  width: 12px;
+  height: 3px;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.legend .up i { background: #2e7d32; }
+.legend .rel i { background: #f9a825; }
+.legend .down i { background: #e3000f; }
