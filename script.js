@@ -12,12 +12,18 @@ async function loadTable() {
       const pos = Number(team.position) || 0
       const total = data.length
 
-      // Klassen setzen
+      // 🟢 Aufstieg
       if (pos === 1) {
         row.classList.add("promoted")
-      } else if (pos === 2) {
+      }
+
+      // 🟡 Relegation
+      else if (pos === 2) {
         row.classList.add("relegation")
-      } else if (pos >= total - 2) {
+      }
+
+      // 🔴 Abstieg (letzte 4 Teams!)
+      else if (pos >= total - 3) {
         row.classList.add("relegated")
       }
 
@@ -25,7 +31,7 @@ async function loadTable() {
         <td>${pos}</td>
         <td class="team">
           <img src="${team.logo}" onerror="this.style.display='none'">
-          ${team.team}
+          <span>${team.team}</span>
         </td>
         <td>${team.games ?? "-"}</td>
         <td>${team.wins ?? "-"}</td>
