@@ -12,7 +12,7 @@ async function loadTable() {
       const pos = Number(team.position) || 0
       const total = data.length
 
-      // Klassifizierung
+      // Klassen setzen
       if (pos === 1) {
         row.classList.add("promoted")
       } else if (pos === 2) {
@@ -39,7 +39,7 @@ async function loadTable() {
     })
 
   } catch (err) {
-    console.error("Fehler:", err)
+    console.error("Fehler beim Laden:", err)
   }
 }
 
