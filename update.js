@@ -66,28 +66,25 @@ const $ = cheerio.load(html)
 
 const table=[]
 
-$("table tbody tr").each((i,row)=>{
-
+$("table tbody tr").each((i, row) => {
   const cols = $(row).find("td")
 
-  // Debug: falsche Zeilen skippen
-  if(cols.length < 10) return
+  if (cols.length < 8) return
 
-  // Platz (steht oft mit Punkt)
-  const positionRaw = $(cols[1]).text().trim()
-  const position = positionRaw.replace(".", "")
+  const values = cols.map((i, el) => $(el).text().trim()).get()
 
-  // Teamname (WICHTIG: aus Link holen)
+  // DEBUG (optional)
+  // console.log(values)
+
   const team = $(row).find("a").first().text().trim()
 
-  // Jetzt verschiebt sich alles um +1
-  const games = $(cols[4]).text().trim()
-  const wins = $(cols[5]).text().trim()
-  const draws = $(cols[6]).text().trim()
-  const losses = $(cols[7]).text().trim()
-  const goals = $(cols[8]).text().trim()
-  const diff = $(cols[9]).text().trim()
-  const points = $(cols[10]).text().trim()
+  // Jetzt greifen wir von HINTEN (stabil!)
+  const points = values[values.length - 1]
+  const goals = values[values.length - 2]
+  const losses = values[values.length - 3]
+  const draws = values[values.length - 4]
+  const wins = values[values.length - 5]
+  const games = values[values.length - 6]
 
   table.push({
     position: i + 1,
@@ -98,10 +95,8 @@ $("table tbody tr").each((i,row)=>{
     draws: Number(draws),
     losses: Number(losses),
     goals,
-    diff,
     points: Number(points)
   })
-
 })
 
 fs.writeFileSync("table.json", JSON.stringify(table,null,2))
