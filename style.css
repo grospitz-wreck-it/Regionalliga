@@ -1,14 +1,17 @@
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui;
   background: #f5f7fa;
 }
 
-/* Wrapper */
+/* 🔥 WRAPPER HAT DIE RUNDUNG */
 .table-wrapper {
-  max-width: 750px;
-  margin: 40px auto;
-  padding: 0 12px;
+  max-width: 720px;
+  margin: 30px auto;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
 }
 
 /* Table */
@@ -16,38 +19,29 @@ body {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background: #fff;
-  border-radius: 12px;
+  table-layout: fixed;
 }
 
 /* Header */
 .rl-table thead {
-  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 
 .rl-table thead th {
-  background: #e3000f;
-}
-.rl-table th {
-  padding: 12px;
-  font-size: 14px;
-  text-align: center;
-}
-
-.rl-table th:nth-child(2) {
+  background: linear-gradient(90deg, #e3000f, #ff1a2d);
+  color: white;
+  padding: 12px 10px;
   text-align: left;
+  font-size: 13px;
 }
 
 /* Cells */
 .rl-table td {
   padding: 10px;
   border-bottom: 1px solid #eee;
-  font-size: 14px;
-  text-align: center;
-}
-
-.rl-table td.team {
-  text-align: left;
+  font-size: 13px;
 }
 
 /* Zebra */
@@ -56,75 +50,55 @@ body {
 }
 
 /* Hover */
+.rl-table tbody tr {
+  transition: background 0.2s ease;
+}
 .rl-table tbody tr:hover {
-  background: #e8f0ff;
+  background: #eef4ff;
 }
 
 /* Team */
 .team {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
-
 .team img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
-/* Punkte fett */
+/* Punkte */
 .rl-table td:last-child {
-  font-weight: bold;
+  font-weight: 700;
 }
 
-/* 🔥 Balken (OHNE ::before → stabil!) */
+/* 🔥 STATUS-BALKEN (OHNE BUGS) */
+.promoted td:first-child {
+  border-left: 4px solid #2e7d32;
+}
+
+.relegation td:first-child {
+  border-left: 4px solid #f9a825;
+}
+
+.relegated td:first-child {
+  border-left: 4px solid #e3000f;
+}
+
+/* OPTIONALE HINTERGRÜNDE */
 .promoted {
-  box-shadow: inset 5px 0 0 #2e7d32;
-  background: #eef7ef;
-}
-
-.relegation {
-  box-shadow: inset 5px 0 0 #fbc02d;
-  background: #fff8e1;
+  background: rgba(46,125,50,0.08);
 }
 
 .relegated {
-  box-shadow: inset 5px 0 0 #e3000f;
-  background: #fdeeee;
+  background: rgba(227,0,15,0.08);
 }
-
-/* Legend */
-.legend {
-  margin-top: 12px;
-  font-size: 13px;
-  color: #555;
-  display: flex;
-  gap: 15px;
-}
-
-.lg {
-  display: inline-block;
-  width: 14px;
-  height: 4px;
-  border-radius: 2px;
-  margin-right: 5px;
-}
-
-.lg.promoted { background: #2e7d32; }
-.lg.relegation { background: #fbc02d; }
-.lg.relegated { background: #e3000f; }
 
 /* Source */
 .source {
   font-size: 11px;
   color: #777;
-  margin-top: 8px;
+  margin-top: 10px;
   text-align: right;
-}
-.rl-table thead th:first-child {
-  border-top-left-radius: 12px;
-}
-
-.rl-table thead th:last-child {
-  border-top-right-radius: 12px;
 }
