@@ -67,24 +67,32 @@ const $ = cheerio.load(html)
 const table=[]
 
 $("table tbody tr").each((i, row) => {
+
   const cols = $(row).find("td")
 
   if (cols.length < 8) return
 
-  const values = cols.map((i, el) => $(el).text().trim()).get()
+  // ALLE Texte holen
+  const raw = cols.map((i, el) => $(el).text().trim()).get()
 
-  // DEBUG (optional)
-  // console.log(values)
+  // 👉 Nur sinnvolle Werte behalten (Zahlen + Tore)
+  const values = raw.filter(v => v !== "" && v !== "-" && v !== " ")
 
+  // Teamname sauber holen
   const team = $(row).find("a").first().text().trim()
 
-  // Jetzt greifen wir von HINTEN (stabil!)
-  const points = values[values.length - 1]
-  const goals = values[values.length - 2]
-  const losses = values[values.length - 3]
-  const draws = values[values.length - 4]
-  const wins = values[values.length - 5]
-  const games = values[values.length - 6]
+  // DEBUG (einmal aktivieren wenn nötig)
+  // console.log(values)
+
+  // Struktur ist jetzt IMMER:
+  // [ "1.", "Teamname", "25", "16", "8", "1", "57:19", "56" ]
+
+  const games = values[2]
+  const wins = values[3]
+  const draws = values[4]
+  const losses = values[5]
+  const goals = values[6]
+  const points = values[7]
 
   table.push({
     position: i + 1,
@@ -97,6 +105,7 @@ $("table tbody tr").each((i, row) => {
     goals,
     points: Number(points)
   })
+
 })
 
 fs.writeFileSync("table.json", JSON.stringify(table,null,2))
