@@ -119,3 +119,10 @@ body {
   margin-top: 8px;
   text-align: right;
 }
+.rl-table thead th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.rl-table thead th:last-child {
+  border-top-right-radius: 12px;
+}
