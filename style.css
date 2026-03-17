@@ -1,16 +1,14 @@
 body {
   margin: 0;
-  font-family: system-ui;
+  font-family: system-ui, sans-serif;
   background: #f5f7fa;
 }
 
-/* Wrapper (für runde Ecken) */
+/* Wrapper */
 .table-wrapper {
-  max-width: 720px;
-  margin: 30px auto;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #fff;
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 0 12px;
 }
 
 /* Table */
@@ -18,43 +16,38 @@ body {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  background: #fff;
+  border-radius: 12px;
 }
 
 /* Header */
-.rl-table thead th {
-  background: linear-gradient(90deg, #e3000f, #ff1a2d);
+.rl-table thead {
   color: #fff;
-  padding: 12px 10px;
-  font-size: 13px;
+}
+
+.rl-table thead th {
+  background: #e3000f;
+}
+.rl-table th {
+  padding: 12px;
+  font-size: 14px;
   text-align: center;
 }
 
-/* Erste Spalte (#) */
-.rl-table th:first-child,
-.rl-table td:first-child {
-  text-align: center;
-  width: 40px;
-}
-
-/* Team-Spalte */
-.rl-table th:nth-child(2),
-.rl-table td:nth-child(2) {
+.rl-table th:nth-child(2) {
   text-align: left;
-  min-width: 180px;
 }
 
-/* Restliche Spalten */
-.rl-table th:not(:nth-child(2)),
-.rl-table td:not(:nth-child(2)) {
-  text-align: center;
-  white-space: nowrap;
-}
-
-/* Zellen */
+/* Cells */
 .rl-table td {
   padding: 10px;
   border-bottom: 1px solid #eee;
-  font-size: 13px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.rl-table td.team {
+  text-align: left;
 }
 
 /* Zebra */
@@ -63,81 +56,75 @@ body {
 }
 
 /* Hover */
-.rl-table tbody tr {
-  transition: background 0.2s ease;
-}
 .rl-table tbody tr:hover {
-  background: #eef4ff;
+  background: #e8f0ff;
 }
 
-/* Team Layout */
+/* Team */
 .team {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .team img {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
 }
 
 /* Punkte fett */
 .rl-table td:last-child {
-  font-weight: 700;
+  font-weight: bold;
 }
 
-/* 🟢 Aufstieg */
-.promoted td:first-child {
-  border-left: 4px solid #2e7d32;
-}
+/* 🔥 Balken (OHNE ::before → stabil!) */
 .promoted {
-  background: rgba(46,125,50,0.08);
+  box-shadow: inset 5px 0 0 #2e7d32;
+  background: #eef7ef;
 }
 
-/* 🟡 Relegation */
-.relegation td:first-child {
-  border-left: 4px solid #f9a825;
+.relegation {
+  box-shadow: inset 5px 0 0 #fbc02d;
+  background: #fff8e1;
 }
 
-/* 🔴 Abstieg */
-.relegated td:first-child {
-  border-left: 4px solid #e3000f;
-}
 .relegated {
-  background: rgba(227,0,15,0.08);
+  box-shadow: inset 5px 0 0 #e3000f;
+  background: #fdeeee;
 }
 
-/* Quelle */
+/* Legend */
+.legend {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  gap: 15px;
+}
+
+.lg {
+  display: inline-block;
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  margin-right: 5px;
+}
+
+.lg.promoted { background: #2e7d32; }
+.lg.relegation { background: #fbc02d; }
+.lg.relegated { background: #e3000f; }
+
+/* Source */
 .source {
   font-size: 11px;
   color: #777;
-  margin: 10px;
+  margin-top: 8px;
   text-align: right;
 }
-
-/* Legende */
-.legend {
-  display: flex;
-  gap: 15px;
-  font-size: 12px;
-  margin: 10px;
+.rl-table thead th:first-child {
+  border-top-left-radius: 12px;
 }
 
-.legend span {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.rl-table thead th:last-child {
+  border-top-right-radius: 12px;
 }
-
-.legend i {
-  width: 12px;
-  height: 3px;
-  display: inline-block;
-  border-radius: 2px;
-}
-
-.legend .up i { background: #2e7d32; }
-.legend .rel i { background: #f9a825; }
-.legend .down i { background: #e3000f; }
