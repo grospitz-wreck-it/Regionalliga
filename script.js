@@ -17,11 +17,6 @@ async function loadTable() {
         row.classList.add("promoted")
       }
 
-      // 🟡 Relegation
-      else if (pos === 2) {
-        row.classList.add("relegation")
-      }
-
       // 🔴 Abstieg (letzte 4 Teams!)
       else if (pos >= total - 3) {
         row.classList.add("relegated")
