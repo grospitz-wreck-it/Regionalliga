@@ -69,41 +69,31 @@ const table=[]
 $("table tbody tr").each((i, row) => {
 
   const cols = $(row).find("td")
-
   if (cols.length < 8) return
 
-  // ALLE Texte holen
-  const raw = cols.map((i, el) => $(el).text().trim()).get()
-
-  // 👉 Nur sinnvolle Werte behalten (Zahlen + Tore)
-  const values = raw.filter(v => v !== "" && v !== "-" && v !== " ")
-
-  // Teamname sauber holen
   const team = $(row).find("a").first().text().trim()
 
-  // DEBUG (einmal aktivieren wenn nötig)
-  // console.log(values)
+  // 👉 Nur Zahlen extrahieren
+  const numbers = cols.map((i, el) => $(el).text().trim())
+    .get()
+    .filter(v => /^[0-9]+$/.test(v))
 
-  // Struktur ist jetzt IMMER:
-  // [ "1.", "Teamname", "25", "16", "8", "1", "57:19", "56" ]
-
-  const games = values[2]
-  const wins = values[3]
-  const draws = values[4]
-  const losses = values[5]
-  const goals = values[6]
-  const points = values[7]
+  // 👉 Tore separat holen (enthält :)
+  const goals = cols.map((i, el) => $(el).text().trim())
+    .get()
+    .find(v => v.includes(":"))
 
   table.push({
     position: i + 1,
     team,
     logo: getLogo(team),
-    games: Number(games),
-    wins: Number(wins),
-    draws: Number(draws),
-    losses: Number(losses),
-    goals,
-    points: Number(points)
+
+    games: Number(numbers[0]),
+    wins: Number(numbers[1]),
+    draws: Number(numbers[2]),
+    losses: Number(numbers[3]),   // ✅ jetzt korrekt
+    goals: goals,
+    points: Number(numbers[4])
   })
 
 })
