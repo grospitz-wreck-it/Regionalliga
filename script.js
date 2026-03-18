@@ -1,7 +1,12 @@
 async function loadTable() {
   try {
-    const res = await fetch("table.json")
-    const data = await res.json()
+    const res = await fetch("table.json?cache=" + Date.now())
+    const json = await res.json()
+
+    // 👉 NEU: unterstützt alte + neue Struktur
+    const data = json.table || json
+    const updated = json.updated || null
+    const matchday = json.matchday || null
 
     const tbody = document.getElementById("table-body")
     tbody.innerHTML = ""
@@ -39,7 +44,9 @@ async function loadTable() {
       tbody.appendChild(row)
     })
 
-    // 🔥 AFTER RENDER → Höhe initial senden
+    // 🔥 NEU: Meta setzen
+    setMeta(updated, matchday)
+
     sendHeight()
 
   } catch (err) {
@@ -47,13 +54,35 @@ async function loadTable() {
   }
 }
 
-/* 🔥 BESTER HEIGHT FIX */
+/* 🔥 Meta Anzeige */
+function setMeta(updated, matchday) {
+  const el = document.getElementById("meta")
+  if (!el) return
+
+  let text = ""
+
+  if (matchday) {
+    text += `Spieltag ${matchday}`
+  }
+
+  if (updated) {
+    const date = new Date(updated)
+    const formatted = date.toLocaleDateString("de-DE")
+
+    if (text) text += " • "
+    text += `Stand: ${formatted}`
+  }
+
+  el.textContent = text
+}
+
+/* 🔥 HEIGHT FIX */
 function sendHeight() {
   const height = document.documentElement.scrollHeight
   window.parent.postMessage({ height }, "*")
 }
 
-/* 🔥 AUTO UPDATE bei Änderungen */
+/* 🔥 AUTO HEIGHT UPDATE */
 const observer = new ResizeObserver(() => {
   sendHeight()
 })
