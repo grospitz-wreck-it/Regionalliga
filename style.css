@@ -54,6 +54,58 @@ body {
 .rl-table tbody tr:nth-child(even) {
   background: #fafafa;
 }
+@media (max-width: 600px) {
+
+  .table-wrapper {
+    padding: 0 6px;
+  }
+
+  .rl-table {
+    font-size: 12px;
+    table-layout: fixed;
+  }
+
+  .rl-table th,
+  .rl-table td {
+    padding: 6px 4px;
+  }
+
+  .rl-table th:nth-child(1),
+  .rl-table td:nth-child(1) {
+    width: 28px;
+    text-align: center;
+  }
+
+  .rl-table th:nth-child(2),
+  .rl-table td:nth-child(2) {
+    width: auto;
+  }
+
+  .rl-table th:nth-child(n+3),
+  .rl-table td:nth-child(n+3) {
+    width: 36px;
+    text-align: center;
+  }
+
+  .team {
+    gap: 6px;
+  }
+
+  .team img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .team span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  td:nth-child(7) {
+    font-size: 11px;
+  }
+}
 
 /* Hover */
 .rl-table tbody tr:hover {
