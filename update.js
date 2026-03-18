@@ -96,6 +96,13 @@ table.push({
   points: Number(numbers[numbers.length - 1]) // ✅ FIX
 })
 })
+const output = {
+  updated: new Date().toISOString(),
+  matchday: Math.ceil(table[0]?.games / 1), // einfacher Spieltag (Spiele = Spieltag)
+  table
+}
+
+fs.writeFileSync("table.json", JSON.stringify(output, null, 2))
 fs.writeFileSync("table.json", JSON.stringify(table,null,2))
 
 console.log("✔ Tabelle aktualisiert:", table.length)
