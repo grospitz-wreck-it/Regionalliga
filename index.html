@@ -13,6 +13,13 @@
 
 <div class="table-wrapper">
 
+  <!-- 🔥 HEADER -->
+  <div class="header">
+    <h1 class="headline">Tabelle Regionalliga West</h1>
+    <div id="meta" class="meta"></div>
+  </div>
+
+  <!-- 🔥 TABELLE -->
   <table class="rl-table">
     <thead>
       <tr>
@@ -29,30 +36,21 @@
     <tbody id="table-body"></tbody>
   </table>
 
+  <!-- 🔥 LEGENDE -->
   <div class="legend">
     <span class="lg promoted"></span> Aufstieg
     <span class="lg relegated"></span> Abstieg
   </div>
 
+  <!-- 🔥 QUELLE -->
   <div class="source">
     Quelle: fussball.de • Logos: Vereine
   </div>
 
 </div>
 
-<!-- 🔥 DEIN SCRIPT FEHLT HIER -->
+<!-- 🔥 SCRIPT -->
 <script src="script.js"></script>
-
-<!-- iframe height -->
-<script>
-function sendHeight() {
-  const height = document.documentElement.scrollHeight
-  parent.postMessage({ height }, "*")
-}
-
-window.addEventListener("load", sendHeight)
-window.addEventListener("resize", sendHeight)
-</script>
 
 </body>
 </html>
