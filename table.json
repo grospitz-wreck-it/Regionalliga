@@ -157,23 +157,23 @@
     "position": 15,
     "team": "SV Rödinghausen",
     "logo": "logos/roedinghausen.png",
-    "games": 24,
+    "games": 25,
     "wins": 6,
-    "draws": 4,
+    "draws": 5,
     "losses": 14,
     "goals": "34 : 47",
-    "points": 22
+    "points": 23
   },
   {
     "position": 16,
     "team": "Wuppertaler SV",
     "logo": "logos/wuppertal.png",
-    "games": 25,
+    "games": 26,
     "wins": 5,
-    "draws": 6,
+    "draws": 7,
     "losses": 14,
     "goals": "30 : 55",
-    "points": 21
+    "points": 22
   },
   {
     "position": 17,
