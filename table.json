@@ -69,12 +69,12 @@
     "position": 7,
     "team": "Sportfreunde Siegen",
     "logo": "logos/siegen.png",
-    "games": 23,
+    "games": 24,
     "wins": 10,
-    "draws": 9,
+    "draws": 10,
     "losses": 4,
     "goals": "44 : 29",
-    "points": 39
+    "points": 40
   },
   {
     "position": 8,
@@ -124,12 +124,12 @@
     "position": 12,
     "team": "VfL Bochum 1848 U23",
     "logo": "logos/bochum.png",
-    "games": 25,
+    "games": 26,
     "wins": 7,
-    "draws": 7,
+    "draws": 8,
     "losses": 11,
     "goals": "34 : 41",
-    "points": 28
+    "points": 29
   },
   {
     "position": 13,
