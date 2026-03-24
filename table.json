@@ -25,12 +25,12 @@
     "position": 3,
     "team": "FC Schalke 04 U23",
     "logo": "logos/schalke2.png",
-    "games": 25,
+    "games": 26,
     "wins": 14,
-    "draws": 5,
+    "draws": 6,
     "losses": 6,
-    "goals": "54 : 33",
-    "points": 47
+    "goals": "55 : 34",
+    "points": 48
   },
   {
     "position": 4,
@@ -102,12 +102,12 @@
     "position": 10,
     "team": "SC Paderborn 07 U23",
     "logo": "logos/paderborn.png",
-    "games": 26,
+    "games": 27,
     "wins": 8,
-    "draws": 7,
+    "draws": 8,
     "losses": 11,
-    "goals": "38 : 31",
-    "points": 31
+    "goals": "39 : 32",
+    "points": 32
   },
   {
     "position": 11,
