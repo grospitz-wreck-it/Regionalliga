@@ -111,6 +111,17 @@
   },
   {
     "position": 11,
+    "team": "Bonner SC",
+    "logo": "logos/bonn.png",
+    "games": 25,
+    "wins": 8,
+    "draws": 7,
+    "losses": 10,
+    "goals": "25 : 31",
+    "points": 31
+  },
+  {
+    "position": 12,
     "team": "1. FC Bocholt",
     "logo": "logos/bocholt.png",
     "games": 25,
@@ -121,26 +132,15 @@
     "points": 30
   },
   {
-    "position": 12,
-    "team": "Bonner SC",
-    "logo": "logos/bonn.png",
-    "games": 24,
-    "wins": 8,
-    "draws": 6,
-    "losses": 10,
-    "goals": "23 : 29",
-    "points": 30
-  },
-  {
     "position": 13,
     "team": "VfL Bochum 1848 U23",
     "logo": "logos/bochum.png",
-    "games": 26,
+    "games": 27,
     "wins": 7,
-    "draws": 8,
+    "draws": 9,
     "losses": 11,
-    "goals": "34 : 41",
-    "points": 29
+    "goals": "36 : 43",
+    "points": 30
   },
   {
     "position": 14,
