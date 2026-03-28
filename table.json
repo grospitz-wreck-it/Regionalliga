@@ -3,12 +3,12 @@
     "position": 1,
     "team": "SC Fortuna Köln",
     "logo": "logos/fckoeln.png",
-    "games": 26,
-    "wins": 16,
+    "games": 27,
+    "wins": 17,
     "draws": 9,
     "losses": 1,
-    "goals": "58 : 20",
-    "points": 57
+    "goals": "60 : 20",
+    "points": 60
   },
   {
     "position": 2,
@@ -34,6 +34,17 @@
   },
   {
     "position": 4,
+    "team": "FC Gütersloh",
+    "logo": "logos/guetersloh.png",
+    "games": 27,
+    "wins": 13,
+    "draws": 8,
+    "losses": 6,
+    "goals": "39 : 30",
+    "points": 47
+  },
+  {
+    "position": 5,
     "team": "Borussia Dortmund U23",
     "logo": "logos/dortmund.png",
     "games": 25,
@@ -44,7 +55,7 @@
     "points": 44
   },
   {
-    "position": 5,
+    "position": 6,
     "team": "Borussia Mönchengladbach U23",
     "logo": "logos/gladbach.png",
     "games": 26,
@@ -52,17 +63,6 @@
     "draws": 5,
     "losses": 8,
     "goals": "45 : 36",
-    "points": 44
-  },
-  {
-    "position": 6,
-    "team": "FC Gütersloh",
-    "logo": "logos/guetersloh.png",
-    "games": 26,
-    "wins": 12,
-    "draws": 8,
-    "losses": 6,
-    "goals": "37 : 29",
     "points": 44
   },
   {
@@ -113,11 +113,11 @@
     "position": 11,
     "team": "Bonner SC",
     "logo": "logos/bonn.png",
-    "games": 25,
+    "games": 26,
     "wins": 8,
     "draws": 7,
-    "losses": 10,
-    "goals": "25 : 31",
+    "losses": 11,
+    "goals": "26 : 33",
     "points": 31
   },
   {
@@ -146,11 +146,11 @@
     "position": 14,
     "team": "Fortuna Düsseldorf U23",
     "logo": "logos/duesseldorf.png",
-    "games": 26,
+    "games": 27,
     "wins": 8,
     "draws": 4,
-    "losses": 14,
-    "goals": "36 : 50",
+    "losses": 15,
+    "goals": "36 : 52",
     "points": 28
   },
   {
