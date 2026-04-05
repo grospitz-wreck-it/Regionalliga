@@ -14,11 +14,11 @@
     "position": 2,
     "team": "SC Rot-Weiß Oberhausen",
     "logo": "logos/rwo.png",
-    "games": 26,
+    "games": 27,
     "wins": 15,
     "draws": 6,
-    "losses": 5,
-    "goals": "45 : 29",
+    "losses": 6,
+    "goals": "45 : 32",
     "points": 51
   },
   {
@@ -100,6 +100,17 @@
   },
   {
     "position": 10,
+    "team": "SC Paderborn 07 U23",
+    "logo": "logos/paderborn.png",
+    "games": 28,
+    "wins": 9,
+    "draws": 8,
+    "losses": 11,
+    "goals": "42 : 32",
+    "points": 35
+  },
+  {
+    "position": 11,
     "team": "Bonner SC",
     "logo": "logos/bonn.png",
     "games": 27,
@@ -110,7 +121,7 @@
     "points": 34
   },
   {
-    "position": 11,
+    "position": 12,
     "team": "1. FC Bocholt",
     "logo": "logos/bocholt.png",
     "games": 26,
@@ -119,17 +130,6 @@
     "losses": 11,
     "goals": "41 : 42",
     "points": 33
-  },
-  {
-    "position": 12,
-    "team": "SC Paderborn 07 U23",
-    "logo": "logos/paderborn.png",
-    "games": 27,
-    "wins": 8,
-    "draws": 8,
-    "losses": 11,
-    "goals": "39 : 32",
-    "points": 32
   },
   {
     "position": 13,
