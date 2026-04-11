@@ -122,6 +122,17 @@
   },
   {
     "position": 12,
+    "team": "VfL Bochum 1848 U23",
+    "logo": "logos/bochum.png",
+    "games": 29,
+    "wins": 8,
+    "draws": 10,
+    "losses": 11,
+    "goals": "42 : 46",
+    "points": 34
+  },
+  {
+    "position": 13,
     "team": "Bonner SC",
     "logo": "logos/bonn.png",
     "games": 27,
@@ -130,17 +141,6 @@
     "losses": 11,
     "goals": "29 : 35",
     "points": 34
-  },
-  {
-    "position": 13,
-    "team": "VfL Bochum 1848 U23",
-    "logo": "logos/bochum.png",
-    "games": 28,
-    "wins": 7,
-    "draws": 10,
-    "losses": 11,
-    "goals": "38 : 45",
-    "points": 31
   },
   {
     "position": 14,
@@ -168,11 +168,11 @@
     "position": 16,
     "team": "Wuppertaler SV",
     "logo": "logos/wuppertal.png",
-    "games": 28,
+    "games": 29,
     "wins": 5,
     "draws": 8,
-    "losses": 15,
-    "goals": "30 : 57",
+    "losses": 16,
+    "goals": "31 : 61",
     "points": 23
   },
   {
