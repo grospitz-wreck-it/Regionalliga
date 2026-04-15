@@ -23,17 +23,28 @@
   },
   {
     "position": 3,
-    "team": "Borussia Dortmund U23",
-    "logo": "logos/dortmund.png",
-    "games": 27,
-    "wins": 14,
-    "draws": 8,
-    "losses": 5,
-    "goals": "58 : 37",
-    "points": 50
+    "team": "Borussia Mönchengladbach U23",
+    "logo": "logos/gladbach.png",
+    "games": 29,
+    "wins": 15,
+    "draws": 6,
+    "losses": 8,
+    "goals": "52 : 40",
+    "points": 51
   },
   {
     "position": 4,
+    "team": "Borussia Dortmund U23",
+    "logo": "logos/dortmund.png",
+    "games": 28,
+    "wins": 14,
+    "draws": 8,
+    "losses": 6,
+    "goals": "59 : 39",
+    "points": 50
+  },
+  {
+    "position": 5,
     "team": "FC Gütersloh",
     "logo": "logos/guetersloh.png",
     "games": 29,
@@ -44,7 +55,7 @@
     "points": 49
   },
   {
-    "position": 5,
+    "position": 6,
     "team": "FC Schalke 04 U23",
     "logo": "logos/schalke2.png",
     "games": 28,
@@ -52,17 +63,6 @@
     "draws": 6,
     "losses": 8,
     "goals": "58 : 41",
-    "points": 48
-  },
-  {
-    "position": 6,
-    "team": "Borussia Mönchengladbach U23",
-    "logo": "logos/gladbach.png",
-    "games": 28,
-    "wins": 14,
-    "draws": 6,
-    "losses": 8,
-    "goals": "50 : 39",
     "points": 48
   },
   {
