@@ -23,6 +23,17 @@
   },
   {
     "position": 3,
+    "team": "Borussia Dortmund U23",
+    "logo": "logos/dortmund.png",
+    "games": 30,
+    "wins": 16,
+    "draws": 8,
+    "losses": 6,
+    "goals": "64 : 42",
+    "points": 56
+  },
+  {
+    "position": 4,
     "team": "Borussia Mönchengladbach U23",
     "logo": "logos/gladbach.png",
     "games": 30,
@@ -31,17 +42,6 @@
     "losses": 8,
     "goals": "55 : 40",
     "points": 54
-  },
-  {
-    "position": 4,
-    "team": "Borussia Dortmund U23",
-    "logo": "logos/dortmund.png",
-    "games": 29,
-    "wins": 15,
-    "draws": 8,
-    "losses": 6,
-    "goals": "62 : 41",
-    "points": 53
   },
   {
     "position": 5,
@@ -168,11 +168,11 @@
     "position": 16,
     "team": "SSVg Velbert 02",
     "logo": "logos/velbert.png",
-    "games": 29,
+    "games": 30,
     "wins": 6,
     "draws": 6,
-    "losses": 17,
-    "goals": "29 : 60",
+    "losses": 18,
+    "goals": "30 : 62",
     "points": 24
   },
   {
