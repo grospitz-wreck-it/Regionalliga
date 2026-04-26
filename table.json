@@ -25,12 +25,12 @@
     "position": 3,
     "team": "Borussia Dortmund U23",
     "logo": "logos/dortmund.png",
-    "games": 30,
+    "games": 31,
     "wins": 16,
-    "draws": 8,
+    "draws": 9,
     "losses": 6,
-    "goals": "64 : 42",
-    "points": 56
+    "goals": "65 : 43",
+    "points": 57
   },
   {
     "position": 4,
@@ -45,6 +45,17 @@
   },
   {
     "position": 5,
+    "team": "FC Schalke 04 U23",
+    "logo": "logos/schalke2.png",
+    "games": 31,
+    "wins": 15,
+    "draws": 7,
+    "losses": 9,
+    "goals": "67 : 49",
+    "points": 52
+  },
+  {
+    "position": 6,
     "team": "FC Gütersloh",
     "logo": "logos/guetersloh.png",
     "games": 31,
@@ -53,17 +64,6 @@
     "losses": 7,
     "goals": "44 : 37",
     "points": 52
-  },
-  {
-    "position": 6,
-    "team": "FC Schalke 04 U23",
-    "logo": "logos/schalke2.png",
-    "games": 30,
-    "wins": 15,
-    "draws": 6,
-    "losses": 9,
-    "goals": "64 : 46",
-    "points": 51
   },
   {
     "position": 7,
@@ -133,6 +133,17 @@
   },
   {
     "position": 13,
+    "team": "1. FC Bocholt",
+    "logo": "logos/bocholt.png",
+    "games": 30,
+    "wins": 10,
+    "draws": 7,
+    "losses": 13,
+    "goals": "46 : 50",
+    "points": 37
+  },
+  {
+    "position": 14,
     "team": "VfL Sportfreunde Lotte",
     "logo": "logos/lotte.png",
     "games": 30,
@@ -143,26 +154,15 @@
     "points": 37
   },
   {
-    "position": 14,
-    "team": "1. FC Bocholt",
-    "logo": "logos/bocholt.png",
-    "games": 29,
-    "wins": 10,
-    "draws": 6,
-    "losses": 13,
-    "goals": "45 : 49",
-    "points": 36
-  },
-  {
     "position": 15,
     "team": "SV Rödinghausen",
     "logo": "logos/roedinghausen.png",
-    "games": 30,
+    "games": 31,
     "wins": 7,
-    "draws": 7,
+    "draws": 8,
     "losses": 16,
-    "goals": "42 : 55",
-    "points": 28
+    "goals": "45 : 58",
+    "points": 29
   },
   {
     "position": 16,
