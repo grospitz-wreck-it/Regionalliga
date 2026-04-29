@@ -14,12 +14,12 @@
     "position": 2,
     "team": "SC Rot-Weiß Oberhausen",
     "logo": "logos/rwo.png",
-    "games": 30,
+    "games": 31,
     "wins": 17,
-    "draws": 7,
+    "draws": 8,
     "losses": 6,
-    "goals": "51 : 35",
-    "points": 58
+    "goals": "52 : 36",
+    "points": 59
   },
   {
     "position": 3,
@@ -91,12 +91,12 @@
     "position": 9,
     "team": "Bonner SC",
     "logo": "logos/bonn.png",
-    "games": 30,
+    "games": 31,
     "wins": 10,
-    "draws": 9,
+    "draws": 10,
     "losses": 11,
-    "goals": "33 : 38",
-    "points": 39
+    "goals": "34 : 39",
+    "points": 40
   },
   {
     "position": 10,
