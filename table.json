@@ -69,12 +69,12 @@
     "position": 7,
     "team": "Sportfreunde Siegen",
     "logo": "logos/siegen.png",
-    "games": 30,
-    "wins": 12,
+    "games": 31,
+    "wins": 13,
     "draws": 12,
     "losses": 6,
-    "goals": "54 : 36",
-    "points": 48
+    "goals": "57 : 38",
+    "points": 51
   },
   {
     "position": 8,
@@ -111,6 +111,17 @@
   },
   {
     "position": 11,
+    "team": "1. FC Bocholt",
+    "logo": "logos/bocholt.png",
+    "games": 31,
+    "wins": 10,
+    "draws": 8,
+    "losses": 13,
+    "goals": "47 : 51",
+    "points": 38
+  },
+  {
+    "position": 12,
     "team": "Fortuna Düsseldorf U23",
     "logo": "logos/duesseldorf.png",
     "games": 31,
@@ -121,7 +132,18 @@
     "points": 38
   },
   {
-    "position": 12,
+    "position": 13,
+    "team": "VfL Sportfreunde Lotte",
+    "logo": "logos/lotte.png",
+    "games": 31,
+    "wins": 9,
+    "draws": 11,
+    "losses": 11,
+    "goals": "40 : 52",
+    "points": 38
+  },
+  {
+    "position": 14,
     "team": "SC Paderborn 07 U23",
     "logo": "logos/paderborn.png",
     "games": 31,
@@ -129,28 +151,6 @@
     "draws": 10,
     "losses": 12,
     "goals": "45 : 36",
-    "points": 37
-  },
-  {
-    "position": 13,
-    "team": "1. FC Bocholt",
-    "logo": "logos/bocholt.png",
-    "games": 30,
-    "wins": 10,
-    "draws": 7,
-    "losses": 13,
-    "goals": "46 : 50",
-    "points": 37
-  },
-  {
-    "position": 14,
-    "team": "VfL Sportfreunde Lotte",
-    "logo": "logos/lotte.png",
-    "games": 30,
-    "wins": 9,
-    "draws": 10,
-    "losses": 11,
-    "goals": "39 : 51",
     "points": 37
   },
   {
@@ -190,11 +190,11 @@
     "position": 18,
     "team": "SC Wiedenbrück",
     "logo": "logos/wiedenbrueck.png",
-    "games": 30,
+    "games": 31,
     "wins": 4,
     "draws": 8,
-    "losses": 18,
-    "goals": "33 : 62",
+    "losses": 19,
+    "goals": "35 : 65",
     "points": 20
   }
 ]
