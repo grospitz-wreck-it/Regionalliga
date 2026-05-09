@@ -3,37 +3,48 @@
     "position": 1,
     "team": "SC Fortuna Köln",
     "logo": "logos/fckoeln.png",
-    "games": 32,
-    "wins": 19,
+    "games": 33,
+    "wins": 20,
     "draws": 9,
     "losses": 4,
-    "goals": "67 : 27",
-    "points": 66
+    "goals": "69 : 28",
+    "points": 69
   },
   {
     "position": 2,
     "team": "SC Rot-Weiß Oberhausen",
     "logo": "logos/rwo.png",
-    "games": 32,
-    "wins": 18,
+    "games": 33,
+    "wins": 19,
     "draws": 8,
     "losses": 6,
-    "goals": "57 : 38",
-    "points": 62
+    "goals": "58 : 38",
+    "points": 65
   },
   {
     "position": 3,
-    "team": "Borussia Mönchengladbach U23",
-    "logo": "logos/gladbach.png",
-    "games": 32,
+    "team": "FC Schalke 04 U23",
+    "logo": "logos/schalke2.png",
+    "games": 33,
     "wins": 17,
     "draws": 7,
-    "losses": 8,
-    "goals": "59 : 41",
+    "losses": 9,
+    "goals": "72 : 49",
     "points": 58
   },
   {
     "position": 4,
+    "team": "Borussia Mönchengladbach U23",
+    "logo": "logos/gladbach.png",
+    "games": 33,
+    "wins": 17,
+    "draws": 7,
+    "losses": 9,
+    "goals": "59 : 42",
+    "points": 58
+  },
+  {
+    "position": 5,
     "team": "Borussia Dortmund U23",
     "logo": "logos/dortmund.png",
     "games": 32,
@@ -44,7 +55,7 @@
     "points": 57
   },
   {
-    "position": 5,
+    "position": 6,
     "team": "FC Gütersloh",
     "logo": "logos/guetersloh.png",
     "games": 33,
@@ -55,25 +66,14 @@
     "points": 56
   },
   {
-    "position": 6,
-    "team": "FC Schalke 04 U23",
-    "logo": "logos/schalke2.png",
-    "games": 32,
-    "wins": 16,
-    "draws": 7,
-    "losses": 9,
-    "goals": "71 : 49",
-    "points": 55
-  },
-  {
     "position": 7,
     "team": "Sportfreunde Siegen",
     "logo": "logos/siegen.png",
-    "games": 32,
+    "games": 33,
     "wins": 13,
     "draws": 12,
-    "losses": 7,
-    "goals": "58 : 40",
+    "losses": 8,
+    "goals": "59 : 42",
     "points": 51
   },
   {
@@ -89,6 +89,17 @@
   },
   {
     "position": 9,
+    "team": "VfL Sportfreunde Lotte",
+    "logo": "logos/lotte.png",
+    "games": 33,
+    "wins": 11,
+    "draws": 11,
+    "losses": 11,
+    "goals": "43 : 53",
+    "points": 44
+  },
+  {
+    "position": 10,
     "team": "SC Paderborn 07 U23",
     "logo": "logos/paderborn.png",
     "games": 33,
@@ -99,47 +110,36 @@
     "points": 43
   },
   {
-    "position": 10,
+    "position": 11,
     "team": "Bonner SC",
     "logo": "logos/bonn.png",
-    "games": 32,
+    "games": 33,
     "wins": 11,
     "draws": 10,
-    "losses": 11,
-    "goals": "36 : 40",
+    "losses": 12,
+    "goals": "37 : 42",
     "points": 43
   },
   {
-    "position": 11,
-    "team": "VfL Sportfreunde Lotte",
-    "logo": "logos/lotte.png",
-    "games": 32,
-    "wins": 10,
-    "draws": 11,
-    "losses": 11,
-    "goals": "41 : 52",
-    "points": 41
-  },
-  {
     "position": 12,
-    "team": "1. FC Bocholt",
-    "logo": "logos/bocholt.png",
-    "games": 32,
-    "wins": 10,
-    "draws": 8,
-    "losses": 14,
-    "goals": "47 : 54",
-    "points": 38
+    "team": "Fortuna Düsseldorf U23",
+    "logo": "logos/duesseldorf.png",
+    "games": 33,
+    "wins": 11,
+    "draws": 6,
+    "losses": 16,
+    "goals": "45 : 56",
+    "points": 39
   },
   {
     "position": 13,
-    "team": "Fortuna Düsseldorf U23",
-    "logo": "logos/duesseldorf.png",
-    "games": 32,
-    "wins": 11,
-    "draws": 5,
-    "losses": 16,
-    "goals": "43 : 54",
+    "team": "1. FC Bocholt",
+    "logo": "logos/bocholt.png",
+    "games": 33,
+    "wins": 10,
+    "draws": 8,
+    "losses": 15,
+    "goals": "47 : 55",
     "points": 38
   },
   {
@@ -157,26 +157,37 @@
     "position": 15,
     "team": "SV Rödinghausen",
     "logo": "logos/roedinghausen.png",
-    "games": 32,
+    "games": 33,
     "wins": 7,
     "draws": 8,
-    "losses": 17,
-    "goals": "46 : 60",
+    "losses": 18,
+    "goals": "46 : 61",
     "points": 29
   },
   {
     "position": 16,
-    "team": "Wuppertaler SV",
-    "logo": "logos/wuppertal.png",
-    "games": 32,
-    "wins": 5,
-    "draws": 10,
-    "losses": 17,
-    "goals": "34 : 67",
-    "points": 25
+    "team": "SC Wiedenbrück",
+    "logo": "logos/wiedenbrueck.png",
+    "games": 33,
+    "wins": 6,
+    "draws": 8,
+    "losses": 19,
+    "goals": "37 : 65",
+    "points": 26
   },
   {
     "position": 17,
+    "team": "Wuppertaler SV",
+    "logo": "logos/wuppertal.png",
+    "games": 33,
+    "wins": 5,
+    "draws": 11,
+    "losses": 17,
+    "goals": "36 : 69",
+    "points": 26
+  },
+  {
+    "position": 18,
     "team": "SSVg Velbert 02",
     "logo": "logos/velbert.png",
     "games": 33,
@@ -185,16 +196,5 @@
     "losses": 20,
     "goals": "34 : 69",
     "points": 25
-  },
-  {
-    "position": 18,
-    "team": "SC Wiedenbrück",
-    "logo": "logos/wiedenbrueck.png",
-    "games": 32,
-    "wins": 5,
-    "draws": 8,
-    "losses": 19,
-    "goals": "36 : 65",
-    "points": 23
   }
 ]
