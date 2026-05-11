@@ -34,6 +34,17 @@
   },
   {
     "position": 4,
+    "team": "Borussia Dortmund U23",
+    "logo": "logos/dortmund.png",
+    "games": 33,
+    "wins": 16,
+    "draws": 10,
+    "losses": 7,
+    "goals": "66 : 48",
+    "points": 58
+  },
+  {
+    "position": 5,
     "team": "Borussia Mönchengladbach U23",
     "logo": "logos/gladbach.png",
     "games": 33,
@@ -42,17 +53,6 @@
     "losses": 9,
     "goals": "59 : 42",
     "points": 58
-  },
-  {
-    "position": 5,
-    "team": "Borussia Dortmund U23",
-    "logo": "logos/dortmund.png",
-    "games": 32,
-    "wins": 16,
-    "draws": 9,
-    "losses": 7,
-    "goals": "65 : 47",
-    "points": 57
   },
   {
     "position": 6,
@@ -80,12 +80,12 @@
     "position": 8,
     "team": "1. FC Köln U23",
     "logo": "logos/fckoeln.png",
-    "games": 32,
+    "games": 33,
     "wins": 13,
-    "draws": 5,
+    "draws": 6,
     "losses": 14,
-    "goals": "53 : 57",
-    "points": 44
+    "goals": "54 : 58",
+    "points": 45
   },
   {
     "position": 9,
